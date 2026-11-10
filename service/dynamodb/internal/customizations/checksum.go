@@ -60,10 +60,13 @@ func (m *Checksum) HandleDeserialize(
 	if err != nil {
 		return output, metadata, &smithy.DeserializationError{Err: err}
 	}
+	if !ok {
+		return output, metadata, nil
+	}
 
 	resp.Body = wrapCRC32ChecksumValidate(expectChecksum, resp.Body)
 
-	return output, metadata, err
+	return output, metadata, nil
 }
 
 const crc32ChecksumHeader = "X-Amz-Crc32"
@@ -82,11 +85,11 @@ func getCRC32Checksum(header http.Header) (uint32, bool, error) {
 	return uint32(c), true, nil
 }
 
-// crc32ChecksumValidate provides wrapping of an io.Reader to validate the CRC32
-// checksum of the bytes read against the expected checksum.
+// crc32ChecksumValidate wraps a response body and fails the read that reaches
+// EOF if the CRC32 checksum of the bytes read does not match the expected
+// checksum.
 type crc32ChecksumValidate struct {
-	io.Reader
-
+	reader io.Reader
 	closer io.Closer
 	expect uint32
 	hash   hash.Hash32
@@ -98,22 +101,42 @@ func wrapCRC32ChecksumValidate(checksum uint32, reader io.ReadCloser) *crc32Chec
 	hash := crc32.NewIEEE()
 	return &crc32ChecksumValidate{
 		expect: checksum,
-		Reader: io.TeeReader(reader, hash),
+		reader: io.TeeReader(reader, hash),
 		closer: reader,
 		hash:   hash,
 	}
 }
 
-// Close validates the wrapped reader's CRC32 checksum. Returns an error if
-// the read checksum does not match the expected checksum.
-//
-// May return an error if the wrapped io.Reader's close returns an error, if it
-// implements close.
-func (c *crc32ChecksumValidate) Close() error {
-	if actual := c.hash.Sum32(); actual != c.expect {
-		c.closer.Close()
-		return fmt.Errorf("response did not match expected checksum, %d, %d", c.expect, actual)
+// Read reads from the wrapped body. At EOF it returns a
+// checksumMismatchError instead of io.EOF if the checksum does not match.
+func (c *crc32ChecksumValidate) Read(p []byte) (int, error) {
+	n, err := c.reader.Read(p)
+	if err != io.EOF {
+		return n, err
 	}
 
+	if actual := c.hash.Sum32(); actual != c.expect {
+		return n, &checksumMismatchError{expect: c.expect, actual: actual}
+	}
+
+	return n, io.EOF
+}
+
+// Close closes the wrapped body.
+func (c *crc32ChecksumValidate) Close() error {
 	return c.closer.Close()
 }
+
+// checksumMismatchError is returned when the CRC32 checksum of a response
+// body does not match the X-Amz-Crc32 header.
+type checksumMismatchError struct {
+	expect, actual uint32
+}
+
+func (e *checksumMismatchError) Error() string {
+	return fmt.Sprintf("response did not match expected checksum, %d, %d", e.expect, e.actual)
+}
+
+// RetryableError marks the error as retryable. The body was likely corrupted
+// in transit.
+func (*checksumMismatchError) RetryableError() bool { return true }

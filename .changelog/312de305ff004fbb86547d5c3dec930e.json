@@ -1,0 +1,8 @@
+{
+    "id": "312de305-ff00-4fbb-8654-7d5c3dec930e",
+    "type": "bugfix",
+    "description": "Fail DynamoDB operations, and retry them, when the response body does not match the `X-Amz-Crc32` header instead of returning the corrupted output.",
+    "modules": [
+        "service/dynamodb"
+    ]
+}
