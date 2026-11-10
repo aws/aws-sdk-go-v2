@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -49,6 +51,18 @@ type DescribeStackDriftDetectionStatusInput struct {
 	StackDriftDetectionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeStackDriftDetectionStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStackDriftDetectionStatusInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStackDriftDetectionStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StackDriftDetectionId != nil {
+		s.WriteString(schemas.DescribeStackDriftDetectionStatusInput_StackDriftDetectionId, *v.StackDriftDetectionId)
+	}
 }
 
 type DescribeStackDriftDetectionStatusOutput struct {
@@ -123,13 +137,76 @@ type DescribeStackDriftDetectionStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStackDriftDetectionStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStackDriftDetectionStatusOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStackDriftDetectionStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectionStatus != "" {
+		s.WriteString(schemas.DescribeStackDriftDetectionStatusOutput_DetectionStatus, string(v.DetectionStatus))
+	}
+	if v.DetectionStatusReason != nil {
+		s.WriteString(schemas.DescribeStackDriftDetectionStatusOutput_DetectionStatusReason, *v.DetectionStatusReason)
+	}
+	if v.DriftedStackResourceCount != nil {
+		s.WriteInt32(schemas.DescribeStackDriftDetectionStatusOutput_DriftedStackResourceCount, *v.DriftedStackResourceCount)
+	}
+	if v.StackDriftDetectionId != nil {
+		s.WriteString(schemas.DescribeStackDriftDetectionStatusOutput_StackDriftDetectionId, *v.StackDriftDetectionId)
+	}
+	if v.StackDriftStatus != "" {
+		s.WriteString(schemas.DescribeStackDriftDetectionStatusOutput_StackDriftStatus, string(v.StackDriftStatus))
+	}
+	if v.StackId != nil {
+		s.WriteString(schemas.DescribeStackDriftDetectionStatusOutput_StackId, *v.StackId)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.DescribeStackDriftDetectionStatusOutput_Timestamp, *v.Timestamp)
+	}
+}
+func (v *DescribeStackDriftDetectionStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeStackDriftDetectionStatusOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeStackDriftDetectionStatusOutput_DetectionStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeStackDriftDetectionStatusOutput_DetectionStatus, &ev); err != nil {
+				return err
+			}
+			v.DetectionStatus = types.StackDriftDetectionStatus(ev)
+			return nil
+		case schemas.DescribeStackDriftDetectionStatusOutput_DetectionStatusReason:
+			v.DetectionStatusReason = new(string)
+			return d.ReadString(schemas.DescribeStackDriftDetectionStatusOutput_DetectionStatusReason, v.DetectionStatusReason)
+		case schemas.DescribeStackDriftDetectionStatusOutput_DriftedStackResourceCount:
+			v.DriftedStackResourceCount = new(int32)
+			return d.ReadInt32(schemas.DescribeStackDriftDetectionStatusOutput_DriftedStackResourceCount, v.DriftedStackResourceCount)
+		case schemas.DescribeStackDriftDetectionStatusOutput_StackDriftDetectionId:
+			v.StackDriftDetectionId = new(string)
+			return d.ReadString(schemas.DescribeStackDriftDetectionStatusOutput_StackDriftDetectionId, v.StackDriftDetectionId)
+		case schemas.DescribeStackDriftDetectionStatusOutput_StackDriftStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeStackDriftDetectionStatusOutput_StackDriftStatus, &ev); err != nil {
+				return err
+			}
+			v.StackDriftStatus = types.StackDriftStatus(ev)
+			return nil
+		case schemas.DescribeStackDriftDetectionStatusOutput_StackId:
+			v.StackId = new(string)
+			return d.ReadString(schemas.DescribeStackDriftDetectionStatusOutput_StackId, v.StackId)
+		case schemas.DescribeStackDriftDetectionStatusOutput_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.DescribeStackDriftDetectionStatusOutput_Timestamp, v.Timestamp)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeStackDriftDetectionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeStackDriftDetectionStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStackDriftDetectionStatus, schemas.DescribeStackDriftDetectionStatusInput, schemas.DescribeStackDriftDetectionStatusOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeStackDriftDetectionStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStackDriftDetectionStatus, schemas.DescribeStackDriftDetectionStatusInput, schemas.DescribeStackDriftDetectionStatusOutput), output: &DescribeStackDriftDetectionStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

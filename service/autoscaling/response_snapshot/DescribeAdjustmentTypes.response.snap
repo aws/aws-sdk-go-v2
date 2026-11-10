@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeAdjustmentTypesResponse><DescribeAdjustmentTypesResult><AdjustmentTypes><member><AdjustmentType>__AdjustmentType__</AdjustmentType></member><member><AdjustmentType>__AdjustmentType__</AdjustmentType></member></AdjustmentTypes></DescribeAdjustmentTypesResult></DescribeAdjustmentTypesResponse>

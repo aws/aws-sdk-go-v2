@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,24 @@ type BatchModifyClusterSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchModifyClusterSnapshotsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchModifyClusterSnapshotsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchModifyClusterSnapshotsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Force != nil {
+		s.WriteBool(schemas.BatchModifyClusterSnapshotsMessage_Force, *v.Force)
+	}
+	if v.ManualSnapshotRetentionPeriod != nil {
+		s.WriteInt32(schemas.BatchModifyClusterSnapshotsMessage_ManualSnapshotRetentionPeriod, *v.ManualSnapshotRetentionPeriod)
+	}
+	if v.SnapshotIdentifierList != nil {
+		serializeSnapshotIdentifierList(s, schemas.BatchModifyClusterSnapshotsMessage_SnapshotIdentifierList, v.SnapshotIdentifierList)
+	}
+}
+
 type BatchModifyClusterSnapshotsOutput struct {
 
 	// A list of any errors returned.
@@ -63,13 +83,36 @@ type BatchModifyClusterSnapshotsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchModifyClusterSnapshotsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchModifyClusterSnapshotsOutputMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchModifyClusterSnapshotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Errors != nil {
+		serializeBatchSnapshotOperationErrors(s, schemas.BatchModifyClusterSnapshotsOutputMessage_Errors, v.Errors)
+	}
+	if v.Resources != nil {
+		serializeSnapshotIdentifierList(s, schemas.BatchModifyClusterSnapshotsOutputMessage_Resources, v.Resources)
+	}
+}
+func (v *BatchModifyClusterSnapshotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchModifyClusterSnapshotsOutputMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchModifyClusterSnapshotsOutputMessage_Errors:
+			return deserializeBatchSnapshotOperationErrors(d, schemas.BatchModifyClusterSnapshotsOutputMessage_Errors, &v.Errors)
+		case schemas.BatchModifyClusterSnapshotsOutputMessage_Resources:
+			return deserializeSnapshotIdentifierList(d, schemas.BatchModifyClusterSnapshotsOutputMessage_Resources, &v.Resources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchModifyClusterSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpBatchModifyClusterSnapshots{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchModifyClusterSnapshots, schemas.BatchModifyClusterSnapshotsMessage, schemas.BatchModifyClusterSnapshotsOutputMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpBatchModifyClusterSnapshots{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchModifyClusterSnapshots, schemas.BatchModifyClusterSnapshotsMessage, schemas.BatchModifyClusterSnapshotsOutputMessage), output: &BatchModifyClusterSnapshotsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

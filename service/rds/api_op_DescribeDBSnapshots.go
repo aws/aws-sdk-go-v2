@@ -6,6 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
@@ -144,6 +145,42 @@ type DescribeDBSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBSnapshotsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDBSnapshotsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBSnapshotsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstanceIdentifier != nil {
+		s.WriteString(schemas.DescribeDBSnapshotsMessage_DBInstanceIdentifier, *v.DBInstanceIdentifier)
+	}
+	if v.DBSnapshotIdentifier != nil {
+		s.WriteString(schemas.DescribeDBSnapshotsMessage_DBSnapshotIdentifier, *v.DBSnapshotIdentifier)
+	}
+	if v.DbiResourceId != nil {
+		s.WriteString(schemas.DescribeDBSnapshotsMessage_DbiResourceId, *v.DbiResourceId)
+	}
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeDBSnapshotsMessage_Filters, v.Filters)
+	}
+	if v.IncludePublic != nil {
+		s.WriteBool(schemas.DescribeDBSnapshotsMessage_IncludePublic, *v.IncludePublic)
+	}
+	if v.IncludeShared != nil {
+		s.WriteBool(schemas.DescribeDBSnapshotsMessage_IncludeShared, *v.IncludeShared)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDBSnapshotsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeDBSnapshotsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.SnapshotType != nil {
+		s.WriteString(schemas.DescribeDBSnapshotsMessage_SnapshotType, *v.SnapshotType)
+	}
+}
+
 // Contains the result of a successful invocation of the DescribeDBSnapshots
 // action.
 type DescribeDBSnapshotsOutput struct {
@@ -162,13 +199,37 @@ type DescribeDBSnapshotsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBSnapshotsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DBSnapshotMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBSnapshotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBSnapshots != nil {
+		serializeDBSnapshotList(s, schemas.DBSnapshotMessage_DBSnapshots, v.DBSnapshots)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DBSnapshotMessage_Marker, *v.Marker)
+	}
+}
+func (v *DescribeDBSnapshotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DBSnapshotMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DBSnapshotMessage_DBSnapshots:
+			return deserializeDBSnapshotList(d, schemas.DBSnapshotMessage_DBSnapshots, &v.DBSnapshots)
+		case schemas.DBSnapshotMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DBSnapshotMessage_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDBSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBSnapshots{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBSnapshots, schemas.DescribeDBSnapshotsMessage, schemas.DBSnapshotMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeDBSnapshots{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBSnapshots, schemas.DescribeDBSnapshotsMessage, schemas.DBSnapshotMessage), output: &DescribeDBSnapshotsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

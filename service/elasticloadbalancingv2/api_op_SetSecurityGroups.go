@@ -4,7 +4,9 @@ package elasticloadbalancingv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,24 @@ type SetSecurityGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetSecurityGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetSecurityGroupsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetSecurityGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic != "" {
+		s.WriteString(schemas.SetSecurityGroupsInput_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic, string(v.EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic))
+	}
+	if v.LoadBalancerArn != nil {
+		s.WriteString(schemas.SetSecurityGroupsInput_LoadBalancerArn, *v.LoadBalancerArn)
+	}
+	if v.SecurityGroups != nil {
+		serializeSecurityGroups(s, schemas.SetSecurityGroupsInput_SecurityGroups, v.SecurityGroups)
+	}
+}
+
 type SetSecurityGroupsOutput struct {
 
 	// Indicates whether to evaluate inbound security group rules for traffic sent to
@@ -66,13 +86,41 @@ type SetSecurityGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetSecurityGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetSecurityGroupsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetSecurityGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic != "" {
+		s.WriteString(schemas.SetSecurityGroupsOutput_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic, string(v.EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic))
+	}
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroups(s, schemas.SetSecurityGroupsOutput_SecurityGroupIds, v.SecurityGroupIds)
+	}
+}
+func (v *SetSecurityGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetSecurityGroupsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetSecurityGroupsOutput_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic:
+			var ev string
+			if err := d.ReadString(schemas.SetSecurityGroupsOutput_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic, &ev); err != nil {
+				return err
+			}
+			v.EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic = types.EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum(ev)
+			return nil
+		case schemas.SetSecurityGroupsOutput_SecurityGroupIds:
+			return deserializeSecurityGroups(d, schemas.SetSecurityGroupsOutput_SecurityGroupIds, &v.SecurityGroupIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetSecurityGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetSecurityGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetSecurityGroups, schemas.SetSecurityGroupsInput, schemas.SetSecurityGroupsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSetSecurityGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetSecurityGroups, schemas.SetSecurityGroupsInput, schemas.SetSecurityGroupsOutput), output: &SetSecurityGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

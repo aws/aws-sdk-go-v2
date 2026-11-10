@@ -4,7 +4,9 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,18 @@ type ListTagsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagsForResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagsForResourceMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagsForResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ListTagsForResourceMessage_ResourceArn, *v.ResourceArn)
+	}
+}
+
 type ListTagsForResourceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the resource for which a tag list was
@@ -72,13 +86,37 @@ type ListTagsForResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagsForResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceTagsDescriptionMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagsForResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ResourceTagsDescriptionMessage_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourceTags != nil {
+		serializeTagList(s, schemas.ResourceTagsDescriptionMessage_ResourceTags, v.ResourceTags)
+	}
+}
+func (v *ListTagsForResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceTagsDescriptionMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceTagsDescriptionMessage_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.ResourceTagsDescriptionMessage_ResourceArn, v.ResourceArn)
+		case schemas.ResourceTagsDescriptionMessage_ResourceTags:
+			return deserializeTagList(d, schemas.ResourceTagsDescriptionMessage_ResourceTags, &v.ResourceTags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListTagsForResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.ListTagsForResourceMessage, schemas.ResourceTagsDescriptionMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListTagsForResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.ListTagsForResourceMessage, schemas.ResourceTagsDescriptionMessage), output: &ListTagsForResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

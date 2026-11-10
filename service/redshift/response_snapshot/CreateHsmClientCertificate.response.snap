@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<CreateHsmClientCertificateResponse><CreateHsmClientCertificateResult><HsmClientCertificate><HsmClientCertificateIdentifier>__HsmClientCertificateIdentifier__</HsmClientCertificateIdentifier><HsmClientCertificatePublicKey>__HsmClientCertificatePublicKey__</HsmClientCertificatePublicKey><Tags><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag></Tags></HsmClientCertificate></CreateHsmClientCertificateResult></CreateHsmClientCertificateResponse>

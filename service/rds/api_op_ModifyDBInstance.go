@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -1186,6 +1188,215 @@ type ModifyDBInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyDBInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyDBInstanceMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyDBInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalStorageVolumes != nil {
+		serializeModifyAdditionalStorageVolumesList(s, schemas.ModifyDBInstanceMessage_AdditionalStorageVolumes, v.AdditionalStorageVolumes)
+	}
+	if v.AllocatedStorage != nil {
+		s.WriteInt32(schemas.ModifyDBInstanceMessage_AllocatedStorage, *v.AllocatedStorage)
+	}
+	if v.AllowMajorVersionUpgrade != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_AllowMajorVersionUpgrade, *v.AllowMajorVersionUpgrade)
+	}
+	if v.ApplyImmediately != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_ApplyImmediately, *v.ApplyImmediately)
+	}
+	if v.AutoMinorVersionUpgrade != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_AutoMinorVersionUpgrade, *v.AutoMinorVersionUpgrade)
+	}
+	if v.AutomationMode != "" {
+		s.WriteString(schemas.ModifyDBInstanceMessage_AutomationMode, string(v.AutomationMode))
+	}
+	if v.AwsBackupRecoveryPointArn != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_AwsBackupRecoveryPointArn, *v.AwsBackupRecoveryPointArn)
+	}
+	if v.BackupRetentionPeriod != nil {
+		s.WriteInt32(schemas.ModifyDBInstanceMessage_BackupRetentionPeriod, *v.BackupRetentionPeriod)
+	}
+	if v.CACertificateIdentifier != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_CACertificateIdentifier, *v.CACertificateIdentifier)
+	}
+	if v.CertificateRotationRestart != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_CertificateRotationRestart, *v.CertificateRotationRestart)
+	}
+	if v.CloudwatchLogsExportConfiguration != nil {
+		s.WriteStruct(schemas.ModifyDBInstanceMessage_CloudwatchLogsExportConfiguration)
+		v.CloudwatchLogsExportConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CopyTagsToSnapshot != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_CopyTagsToSnapshot, *v.CopyTagsToSnapshot)
+	}
+	if v.DBCapacityReservationIdentifier != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_DBCapacityReservationIdentifier, *v.DBCapacityReservationIdentifier)
+	}
+	if v.DBInstanceClass != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_DBInstanceClass, *v.DBInstanceClass)
+	}
+	if v.DBInstanceIdentifier != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_DBInstanceIdentifier, *v.DBInstanceIdentifier)
+	}
+	if v.DBParameterGroupName != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_DBParameterGroupName, *v.DBParameterGroupName)
+	}
+	if v.DBPortNumber != nil {
+		s.WriteInt32(schemas.ModifyDBInstanceMessage_DBPortNumber, *v.DBPortNumber)
+	}
+	if v.DBSecurityGroups != nil {
+		serializeDBSecurityGroupNameList(s, schemas.ModifyDBInstanceMessage_DBSecurityGroups, v.DBSecurityGroups)
+	}
+	if v.DBSubnetGroupName != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_DBSubnetGroupName, *v.DBSubnetGroupName)
+	}
+	if v.DatabaseInsightsMode != "" {
+		s.WriteString(schemas.ModifyDBInstanceMessage_DatabaseInsightsMode, string(v.DatabaseInsightsMode))
+	}
+	if v.DedicatedLogVolume != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_DedicatedLogVolume, *v.DedicatedLogVolume)
+	}
+	if v.DeletionProtection != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_DeletionProtection, *v.DeletionProtection)
+	}
+	if v.DisableDomain != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_DisableDomain, *v.DisableDomain)
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_Domain, *v.Domain)
+	}
+	if v.DomainAuthSecretArn != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_DomainAuthSecretArn, *v.DomainAuthSecretArn)
+	}
+	if v.DomainDnsIps != nil {
+		serializeStringList(s, schemas.ModifyDBInstanceMessage_DomainDnsIps, v.DomainDnsIps)
+	}
+	if v.DomainFqdn != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_DomainFqdn, *v.DomainFqdn)
+	}
+	if v.DomainIAMRoleName != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_DomainIAMRoleName, *v.DomainIAMRoleName)
+	}
+	if v.DomainOu != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_DomainOu, *v.DomainOu)
+	}
+	if v.EnableCustomerOwnedIp != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_EnableCustomerOwnedIp, *v.EnableCustomerOwnedIp)
+	}
+	if v.EnableIAMDatabaseAuthentication != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_EnableIAMDatabaseAuthentication, *v.EnableIAMDatabaseAuthentication)
+	}
+	if v.EnablePerformanceInsights != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_EnablePerformanceInsights, *v.EnablePerformanceInsights)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_Engine, *v.Engine)
+	}
+	if v.EngineLifecycleSupport != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_EngineLifecycleSupport, *v.EngineLifecycleSupport)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_EngineVersion, *v.EngineVersion)
+	}
+	if v.Iops != nil {
+		s.WriteInt32(schemas.ModifyDBInstanceMessage_Iops, *v.Iops)
+	}
+	if v.LicenseModel != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_LicenseModel, *v.LicenseModel)
+	}
+	if v.ManageMasterUserPassword != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_ManageMasterUserPassword, *v.ManageMasterUserPassword)
+	}
+	if v.MasterUserAuthenticationType != "" {
+		s.WriteString(schemas.ModifyDBInstanceMessage_MasterUserAuthenticationType, string(v.MasterUserAuthenticationType))
+	}
+	if v.MasterUserPassword != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_MasterUserPassword, *v.MasterUserPassword)
+	}
+	if v.MasterUserSecretKmsKeyId != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_MasterUserSecretKmsKeyId, *v.MasterUserSecretKmsKeyId)
+	}
+	if v.MaxAllocatedStorage != nil {
+		s.WriteInt32(schemas.ModifyDBInstanceMessage_MaxAllocatedStorage, *v.MaxAllocatedStorage)
+	}
+	if v.MonitoringInterval != nil {
+		s.WriteInt32(schemas.ModifyDBInstanceMessage_MonitoringInterval, *v.MonitoringInterval)
+	}
+	if v.MonitoringRoleArn != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_MonitoringRoleArn, *v.MonitoringRoleArn)
+	}
+	if v.MultiAZ != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_MultiAZ, *v.MultiAZ)
+	}
+	if v.MultiTenant != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_MultiTenant, *v.MultiTenant)
+	}
+	if v.NetworkType != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_NetworkType, *v.NetworkType)
+	}
+	if v.NewDBInstanceIdentifier != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_NewDBInstanceIdentifier, *v.NewDBInstanceIdentifier)
+	}
+	if v.OptionGroupName != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_OptionGroupName, *v.OptionGroupName)
+	}
+	if v.PerformanceInsightsKMSKeyId != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_PerformanceInsightsKMSKeyId, *v.PerformanceInsightsKMSKeyId)
+	}
+	if v.PerformanceInsightsRetentionPeriod != nil {
+		s.WriteInt32(schemas.ModifyDBInstanceMessage_PerformanceInsightsRetentionPeriod, *v.PerformanceInsightsRetentionPeriod)
+	}
+	if v.PreferredBackupWindow != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_PreferredBackupWindow, *v.PreferredBackupWindow)
+	}
+	if v.PreferredMaintenanceWindow != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_PreferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
+	}
+	if v.ProcessorFeatures != nil {
+		serializeProcessorFeatureList(s, schemas.ModifyDBInstanceMessage_ProcessorFeatures, v.ProcessorFeatures)
+	}
+	if v.PromotionTier != nil {
+		s.WriteInt32(schemas.ModifyDBInstanceMessage_PromotionTier, *v.PromotionTier)
+	}
+	if v.PubliclyAccessible != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_PubliclyAccessible, *v.PubliclyAccessible)
+	}
+	if v.ReplicaMode != "" {
+		s.WriteString(schemas.ModifyDBInstanceMessage_ReplicaMode, string(v.ReplicaMode))
+	}
+	if v.ResumeFullAutomationModeMinutes != nil {
+		s.WriteInt32(schemas.ModifyDBInstanceMessage_ResumeFullAutomationModeMinutes, *v.ResumeFullAutomationModeMinutes)
+	}
+	if v.RotateMasterUserPassword != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_RotateMasterUserPassword, *v.RotateMasterUserPassword)
+	}
+	if v.StorageThroughput != nil {
+		s.WriteInt32(schemas.ModifyDBInstanceMessage_StorageThroughput, *v.StorageThroughput)
+	}
+	if v.StorageType != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_StorageType, *v.StorageType)
+	}
+	if v.TagSpecifications != nil {
+		serializeTagSpecificationList(s, schemas.ModifyDBInstanceMessage_TagSpecifications, v.TagSpecifications)
+	}
+	if v.TdeCredentialArn != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_TdeCredentialArn, *v.TdeCredentialArn)
+	}
+	if v.TdeCredentialPassword != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_TdeCredentialPassword, *v.TdeCredentialPassword)
+	}
+	if v.UseDefaultProcessorFeatures != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_UseDefaultProcessorFeatures, *v.UseDefaultProcessorFeatures)
+	}
+	if v.VpcSecurityGroupIds != nil {
+		serializeVpcSecurityGroupIdList(s, schemas.ModifyDBInstanceMessage_VpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
+}
+
 type ModifyDBInstanceOutput struct {
 
 	// Contains the details of an Amazon RDS DB instance.
@@ -1203,13 +1414,34 @@ type ModifyDBInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyDBInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyDBInstanceResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyDBInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstance != nil {
+		s.WriteStruct(schemas.ModifyDBInstanceResult_DBInstance)
+		v.DBInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModifyDBInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyDBInstanceResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyDBInstanceResult_DBInstance:
+			v.DBInstance = &types.DBInstance{}
+			return v.DBInstance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyDBInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBInstance, schemas.ModifyDBInstanceMessage, schemas.ModifyDBInstanceResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyDBInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBInstance, schemas.ModifyDBInstanceMessage, schemas.ModifyDBInstanceResult), output: &ModifyDBInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

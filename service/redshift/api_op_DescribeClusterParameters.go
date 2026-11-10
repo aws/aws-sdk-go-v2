@@ -5,7 +5,9 @@ package redshift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,27 @@ type DescribeClusterParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClusterParametersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClusterParametersMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClusterParametersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeClusterParametersMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeClusterParametersMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.ParameterGroupName != nil {
+		s.WriteString(schemas.DescribeClusterParametersMessage_ParameterGroupName, *v.ParameterGroupName)
+	}
+	if v.Source != nil {
+		s.WriteString(schemas.DescribeClusterParametersMessage_Source, *v.Source)
+	}
+}
+
 // Contains the output from the DescribeClusterParameters action.
 type DescribeClusterParametersOutput struct {
 
@@ -93,13 +116,37 @@ type DescribeClusterParametersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClusterParametersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterParameterGroupDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClusterParametersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ClusterParameterGroupDetails_Marker, *v.Marker)
+	}
+	if v.Parameters != nil {
+		serializeParametersList(s, schemas.ClusterParameterGroupDetails_Parameters, v.Parameters)
+	}
+}
+func (v *DescribeClusterParametersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterParameterGroupDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterParameterGroupDetails_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ClusterParameterGroupDetails_Marker, v.Marker)
+		case schemas.ClusterParameterGroupDetails_Parameters:
+			return deserializeParametersList(d, schemas.ClusterParameterGroupDetails_Parameters, &v.Parameters)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeClusterParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeClusterParameters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClusterParameters, schemas.DescribeClusterParametersMessage, schemas.ClusterParameterGroupDetails)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeClusterParameters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClusterParameters, schemas.DescribeClusterParametersMessage, schemas.ClusterParameterGroupDetails), output: &DescribeClusterParametersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

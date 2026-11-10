@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -104,6 +106,62 @@ type CreateServerlessCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServerlessCacheInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServerlessCacheRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServerlessCacheInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheUsageLimits != nil {
+		s.WriteStruct(schemas.CreateServerlessCacheRequest_CacheUsageLimits)
+		v.CacheUsageLimits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConnectionType != "" {
+		s.WriteString(schemas.CreateServerlessCacheRequest_ConnectionType, string(v.ConnectionType))
+	}
+	if v.DailySnapshotTime != nil {
+		s.WriteString(schemas.CreateServerlessCacheRequest_DailySnapshotTime, *v.DailySnapshotTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateServerlessCacheRequest_Description, *v.Description)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.CreateServerlessCacheRequest_Engine, *v.Engine)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateServerlessCacheRequest_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.MajorEngineVersion != nil {
+		s.WriteString(schemas.CreateServerlessCacheRequest_MajorEngineVersion, *v.MajorEngineVersion)
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.CreateServerlessCacheRequest_NetworkType, string(v.NetworkType))
+	}
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdsList(s, schemas.CreateServerlessCacheRequest_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.ServerlessCacheName != nil {
+		s.WriteString(schemas.CreateServerlessCacheRequest_ServerlessCacheName, *v.ServerlessCacheName)
+	}
+	if v.SnapshotArnsToRestore != nil {
+		serializeSnapshotArnsList(s, schemas.CreateServerlessCacheRequest_SnapshotArnsToRestore, v.SnapshotArnsToRestore)
+	}
+	if v.SnapshotRetentionLimit != nil {
+		s.WriteInt32(schemas.CreateServerlessCacheRequest_SnapshotRetentionLimit, *v.SnapshotRetentionLimit)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIdsList(s, schemas.CreateServerlessCacheRequest_SubnetIds, v.SubnetIds)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateServerlessCacheRequest_Tags, v.Tags)
+	}
+	if v.UserGroupId != nil {
+		s.WriteString(schemas.CreateServerlessCacheRequest_UserGroupId, *v.UserGroupId)
+	}
+}
+
 type CreateServerlessCacheOutput struct {
 
 	// The response for the attempt to create the serverless cache.
@@ -115,13 +173,34 @@ type CreateServerlessCacheOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServerlessCacheOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServerlessCacheResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServerlessCacheOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServerlessCache != nil {
+		s.WriteStruct(schemas.CreateServerlessCacheResponse_ServerlessCache)
+		v.ServerlessCache.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateServerlessCacheOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateServerlessCacheResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateServerlessCacheResponse_ServerlessCache:
+			v.ServerlessCache = &types.ServerlessCache{}
+			return v.ServerlessCache.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateServerlessCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateServerlessCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServerlessCache, schemas.CreateServerlessCacheRequest, schemas.CreateServerlessCacheResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateServerlessCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServerlessCache, schemas.CreateServerlessCacheRequest, schemas.CreateServerlessCacheResponse), output: &CreateServerlessCacheOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

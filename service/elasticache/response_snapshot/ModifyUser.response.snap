@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ModifyUserResponse><ModifyUserResult><ARN>__ARN__</ARN><AccessString>__AccessString__</AccessString><Authentication><PasswordCount>1</PasswordCount><Type>password</Type></Authentication><Engine>__Engine__</Engine><MinimumEngineVersion>__MinimumEngineVersion__</MinimumEngineVersion><Status>__Status__</Status><UserGroupIds><member>__Member__</member><member>__Member__</member></UserGroupIds><UserId>__UserId__</UserId><UserName>__UserName__</UserName></ModifyUserResult></ModifyUserResponse>

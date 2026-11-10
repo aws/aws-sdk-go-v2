@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,36 @@ type RecordHandlerProgressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecordHandlerProgressInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecordHandlerProgressInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecordHandlerProgressInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BearerToken != nil {
+		s.WriteString(schemas.RecordHandlerProgressInput_BearerToken, *v.BearerToken)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.RecordHandlerProgressInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.CurrentOperationStatus != "" {
+		s.WriteString(schemas.RecordHandlerProgressInput_CurrentOperationStatus, string(v.CurrentOperationStatus))
+	}
+	if v.ErrorCode != "" {
+		s.WriteString(schemas.RecordHandlerProgressInput_ErrorCode, string(v.ErrorCode))
+	}
+	if v.OperationStatus != "" {
+		s.WriteString(schemas.RecordHandlerProgressInput_OperationStatus, string(v.OperationStatus))
+	}
+	if v.ResourceModel != nil {
+		s.WriteString(schemas.RecordHandlerProgressInput_ResourceModel, *v.ResourceModel)
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.RecordHandlerProgressInput_StatusMessage, *v.StatusMessage)
+	}
+}
+
 type RecordHandlerProgressOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -79,13 +111,26 @@ type RecordHandlerProgressOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecordHandlerProgressOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecordHandlerProgressOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecordHandlerProgressOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RecordHandlerProgressOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecordHandlerProgressOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRecordHandlerProgressMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRecordHandlerProgress{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RecordHandlerProgress, schemas.RecordHandlerProgressInput, schemas.RecordHandlerProgressOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRecordHandlerProgress{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RecordHandlerProgress, schemas.RecordHandlerProgressInput, schemas.RecordHandlerProgressOutput), output: &RecordHandlerProgressOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

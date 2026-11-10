@@ -4,7 +4,9 @@ package cloudsearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,23 @@ type DefineExpressionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DefineExpressionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DefineExpressionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DefineExpressionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DefineExpressionRequest_DomainName, *v.DomainName)
+	}
+	if v.Expression != nil {
+		s.WriteStruct(schemas.DefineExpressionRequest_Expression)
+		v.Expression.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // The result of a DefineExpression request. Contains the status of the
 // newly-configured expression.
 type DefineExpressionOutput struct {
@@ -65,13 +84,34 @@ type DefineExpressionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DefineExpressionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DefineExpressionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DefineExpressionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Expression != nil {
+		s.WriteStruct(schemas.DefineExpressionResponse_Expression)
+		v.Expression.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DefineExpressionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DefineExpressionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DefineExpressionResponse_Expression:
+			v.Expression = &types.ExpressionStatus{}
+			return v.Expression.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDefineExpressionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDefineExpression{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DefineExpression, schemas.DefineExpressionRequest, schemas.DefineExpressionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDefineExpression{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DefineExpression, schemas.DefineExpressionRequest, schemas.DefineExpressionResponse), output: &DefineExpressionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

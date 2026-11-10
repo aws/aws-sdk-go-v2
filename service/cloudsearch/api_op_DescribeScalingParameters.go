@@ -4,7 +4,9 @@ package cloudsearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,18 @@ type DescribeScalingParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeScalingParametersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeScalingParametersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeScalingParametersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DescribeScalingParametersRequest_DomainName, *v.DomainName)
+	}
+}
+
 // The result of a DescribeScalingParameters request. Contains the scaling
 // parameters configured for the domain specified in the request.
 type DescribeScalingParametersOutput struct {
@@ -58,13 +72,34 @@ type DescribeScalingParametersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeScalingParametersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeScalingParametersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeScalingParametersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScalingParameters != nil {
+		s.WriteStruct(schemas.DescribeScalingParametersResponse_ScalingParameters)
+		v.ScalingParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeScalingParametersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeScalingParametersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeScalingParametersResponse_ScalingParameters:
+			v.ScalingParameters = &types.ScalingParametersStatus{}
+			return v.ScalingParameters.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeScalingParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeScalingParameters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeScalingParameters, schemas.DescribeScalingParametersRequest, schemas.DescribeScalingParametersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeScalingParameters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeScalingParameters, schemas.DescribeScalingParametersRequest, schemas.DescribeScalingParametersResponse), output: &DescribeScalingParametersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

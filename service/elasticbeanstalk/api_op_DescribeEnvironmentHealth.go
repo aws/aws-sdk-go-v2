@@ -4,7 +4,9 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -63,6 +65,24 @@ type DescribeEnvironmentHealthInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEnvironmentHealthInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEnvironmentHealthRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEnvironmentHealthInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeNames != nil {
+		serializeEnvironmentHealthAttributes(s, schemas.DescribeEnvironmentHealthRequest_AttributeNames, v.AttributeNames)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.DescribeEnvironmentHealthRequest_EnvironmentId, *v.EnvironmentId)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.DescribeEnvironmentHealthRequest_EnvironmentName, *v.EnvironmentName)
+	}
+}
+
 // Health details for an Elastic Beanstalk environment.
 type DescribeEnvironmentHealthOutput struct {
 
@@ -102,13 +122,81 @@ type DescribeEnvironmentHealthOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEnvironmentHealthOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEnvironmentHealthResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEnvironmentHealthOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationMetrics != nil {
+		s.WriteStruct(schemas.DescribeEnvironmentHealthResult_ApplicationMetrics)
+		v.ApplicationMetrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Causes != nil {
+		serializeCauses(s, schemas.DescribeEnvironmentHealthResult_Causes, v.Causes)
+	}
+	if v.Color != nil {
+		s.WriteString(schemas.DescribeEnvironmentHealthResult_Color, *v.Color)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.DescribeEnvironmentHealthResult_EnvironmentName, *v.EnvironmentName)
+	}
+	if v.HealthStatus != nil {
+		s.WriteString(schemas.DescribeEnvironmentHealthResult_HealthStatus, *v.HealthStatus)
+	}
+	if v.InstancesHealth != nil {
+		s.WriteStruct(schemas.DescribeEnvironmentHealthResult_InstancesHealth)
+		v.InstancesHealth.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RefreshedAt != nil {
+		s.WriteTime(schemas.DescribeEnvironmentHealthResult_RefreshedAt, *v.RefreshedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeEnvironmentHealthResult_Status, string(v.Status))
+	}
+}
+func (v *DescribeEnvironmentHealthOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEnvironmentHealthResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEnvironmentHealthResult_ApplicationMetrics:
+			v.ApplicationMetrics = &types.ApplicationMetrics{}
+			return v.ApplicationMetrics.Deserialize(d)
+		case schemas.DescribeEnvironmentHealthResult_Causes:
+			return deserializeCauses(d, schemas.DescribeEnvironmentHealthResult_Causes, &v.Causes)
+		case schemas.DescribeEnvironmentHealthResult_Color:
+			v.Color = new(string)
+			return d.ReadString(schemas.DescribeEnvironmentHealthResult_Color, v.Color)
+		case schemas.DescribeEnvironmentHealthResult_EnvironmentName:
+			v.EnvironmentName = new(string)
+			return d.ReadString(schemas.DescribeEnvironmentHealthResult_EnvironmentName, v.EnvironmentName)
+		case schemas.DescribeEnvironmentHealthResult_HealthStatus:
+			v.HealthStatus = new(string)
+			return d.ReadString(schemas.DescribeEnvironmentHealthResult_HealthStatus, v.HealthStatus)
+		case schemas.DescribeEnvironmentHealthResult_InstancesHealth:
+			v.InstancesHealth = &types.InstanceHealthSummary{}
+			return v.InstancesHealth.Deserialize(d)
+		case schemas.DescribeEnvironmentHealthResult_RefreshedAt:
+			v.RefreshedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeEnvironmentHealthResult_RefreshedAt, v.RefreshedAt)
+		case schemas.DescribeEnvironmentHealthResult_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeEnvironmentHealthResult_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.EnvironmentHealth(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEnvironmentHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeEnvironmentHealth{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEnvironmentHealth, schemas.DescribeEnvironmentHealthRequest, schemas.DescribeEnvironmentHealthResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeEnvironmentHealth{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEnvironmentHealth, schemas.DescribeEnvironmentHealthRequest, schemas.DescribeEnvironmentHealthResult), output: &DescribeEnvironmentHealthOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

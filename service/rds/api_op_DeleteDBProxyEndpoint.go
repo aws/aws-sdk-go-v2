@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DeleteDBProxyEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDBProxyEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDBProxyEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDBProxyEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBProxyEndpointName != nil {
+		s.WriteString(schemas.DeleteDBProxyEndpointRequest_DBProxyEndpointName, *v.DBProxyEndpointName)
+	}
+}
+
 type DeleteDBProxyEndpointOutput struct {
 
 	// The data structure representing the details of the DB proxy endpoint that you
@@ -49,13 +63,34 @@ type DeleteDBProxyEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDBProxyEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDBProxyEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDBProxyEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBProxyEndpoint != nil {
+		s.WriteStruct(schemas.DeleteDBProxyEndpointResponse_DBProxyEndpoint)
+		v.DBProxyEndpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteDBProxyEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDBProxyEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDBProxyEndpointResponse_DBProxyEndpoint:
+			v.DBProxyEndpoint = &types.DBProxyEndpoint{}
+			return v.DBProxyEndpoint.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDBProxyEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteDBProxyEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDBProxyEndpoint, schemas.DeleteDBProxyEndpointRequest, schemas.DeleteDBProxyEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteDBProxyEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDBProxyEndpoint, schemas.DeleteDBProxyEndpointRequest, schemas.DeleteDBProxyEndpointResponse), output: &DeleteDBProxyEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,34 @@ type DeleteWarmPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWarmPoolInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWarmPoolType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWarmPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.DeleteWarmPoolType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.ForceDelete != nil {
+		s.WriteBool(schemas.DeleteWarmPoolType_ForceDelete, *v.ForceDelete)
+	}
+}
+func (v *DeleteWarmPoolInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWarmPoolType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteWarmPoolType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.DeleteWarmPoolType_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.DeleteWarmPoolType_ForceDelete:
+			v.ForceDelete = new(bool)
+			return d.ReadBool(schemas.DeleteWarmPoolType_ForceDelete, v.ForceDelete)
+		}
+		return nil
+	})
+}
+
 type DeleteWarmPoolOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +80,26 @@ type DeleteWarmPoolOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWarmPoolOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWarmPoolAnswer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWarmPoolOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteWarmPoolOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWarmPoolAnswer, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWarmPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteWarmPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWarmPool, schemas.DeleteWarmPoolType, schemas.DeleteWarmPoolAnswer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteWarmPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWarmPool, schemas.DeleteWarmPoolType, schemas.DeleteWarmPoolAnswer), output: &DeleteWarmPoolOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

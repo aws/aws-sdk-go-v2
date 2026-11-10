@@ -4,6 +4,8 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,15 @@ type GetAccountPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountPropertiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountPropertiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountPropertiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetAccountPropertiesOutput struct {
 
 	// A map of account property key-value pairs. Keys are in the format
@@ -47,13 +58,31 @@ type GetAccountPropertiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountPropertiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountPropertiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountPropertiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Properties != nil {
+		serializeaccountPropertiesMapType(s, schemas.GetAccountPropertiesResponse_Properties, v.Properties)
+	}
+}
+func (v *GetAccountPropertiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccountPropertiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccountPropertiesResponse_Properties:
+			return deserializeaccountPropertiesMapType(d, schemas.GetAccountPropertiesResponse_Properties, &v.Properties)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAccountPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetAccountProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountProperties, schemas.GetAccountPropertiesRequest, schemas.GetAccountPropertiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetAccountProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountProperties, schemas.GetAccountPropertiesRequest, schemas.GetAccountPropertiesResponse), output: &GetAccountPropertiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

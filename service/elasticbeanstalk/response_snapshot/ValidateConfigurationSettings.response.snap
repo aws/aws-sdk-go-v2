@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ValidateConfigurationSettingsResponse><ValidateConfigurationSettingsResult><Messages><member><Message>__Message__</Message><Namespace>__Namespace__</Namespace><OptionName>__OptionName__</OptionName><Severity>error</Severity></member><member><Message>__Message__</Message><Namespace>__Namespace__</Namespace><OptionName>__OptionName__</OptionName><Severity>error</Severity></member></Messages></ValidateConfigurationSettingsResult></ValidateConfigurationSettingsResponse>

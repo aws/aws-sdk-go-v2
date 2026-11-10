@@ -5,7 +5,9 @@ package rds
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,30 @@ type DescribeDBProxyTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBProxyTargetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDBProxyTargetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBProxyTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBProxyName != nil {
+		s.WriteString(schemas.DescribeDBProxyTargetsRequest_DBProxyName, *v.DBProxyName)
+	}
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeDBProxyTargetsRequest_Filters, v.Filters)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDBProxyTargetsRequest_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeDBProxyTargetsRequest_MaxRecords, *v.MaxRecords)
+	}
+	if v.TargetGroupName != nil {
+		s.WriteString(schemas.DescribeDBProxyTargetsRequest_TargetGroupName, *v.TargetGroupName)
+	}
+}
+
 type DescribeDBProxyTargetsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -72,13 +98,37 @@ type DescribeDBProxyTargetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBProxyTargetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDBProxyTargetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBProxyTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDBProxyTargetsResponse_Marker, *v.Marker)
+	}
+	if v.Targets != nil {
+		serializeTargetList(s, schemas.DescribeDBProxyTargetsResponse_Targets, v.Targets)
+	}
+}
+func (v *DescribeDBProxyTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDBProxyTargetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDBProxyTargetsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeDBProxyTargetsResponse_Marker, v.Marker)
+		case schemas.DescribeDBProxyTargetsResponse_Targets:
+			return deserializeTargetList(d, schemas.DescribeDBProxyTargetsResponse_Targets, &v.Targets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDBProxyTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBProxyTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBProxyTargets, schemas.DescribeDBProxyTargetsRequest, schemas.DescribeDBProxyTargetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeDBProxyTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBProxyTargets, schemas.DescribeDBProxyTargetsRequest, schemas.DescribeDBProxyTargetsResponse), output: &DescribeDBProxyTargetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

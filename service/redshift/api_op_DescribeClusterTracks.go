@@ -5,7 +5,9 @@ package redshift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type DescribeClusterTracksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClusterTracksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClusterTracksMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClusterTracksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaintenanceTrackName != nil {
+		s.WriteString(schemas.DescribeClusterTracksMessage_MaintenanceTrackName, *v.MaintenanceTrackName)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeClusterTracksMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeClusterTracksMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type DescribeClusterTracksOutput struct {
 
 	// A list of maintenance tracks output by the DescribeClusterTracks operation.
@@ -60,13 +80,37 @@ type DescribeClusterTracksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClusterTracksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrackListMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClusterTracksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaintenanceTracks != nil {
+		serializeTrackList(s, schemas.TrackListMessage_MaintenanceTracks, v.MaintenanceTracks)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.TrackListMessage_Marker, *v.Marker)
+	}
+}
+func (v *DescribeClusterTracksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrackListMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrackListMessage_MaintenanceTracks:
+			return deserializeTrackList(d, schemas.TrackListMessage_MaintenanceTracks, &v.MaintenanceTracks)
+		case schemas.TrackListMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.TrackListMessage_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeClusterTracksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeClusterTracks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClusterTracks, schemas.DescribeClusterTracksMessage, schemas.TrackListMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeClusterTracks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClusterTracks, schemas.DescribeClusterTracksMessage, schemas.TrackListMessage), output: &DescribeClusterTracksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

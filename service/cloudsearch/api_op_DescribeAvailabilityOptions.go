@@ -4,7 +4,9 @@ package cloudsearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type DescribeAvailabilityOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAvailabilityOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAvailabilityOptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAvailabilityOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Deployed != nil {
+		s.WriteBool(schemas.DescribeAvailabilityOptionsRequest_Deployed, *v.Deployed)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.DescribeAvailabilityOptionsRequest_DomainName, *v.DomainName)
+	}
+}
+
 // The result of a DescribeAvailabilityOptions request. Indicates whether or not
 // the Multi-AZ option is enabled for the domain specified in the request.
 type DescribeAvailabilityOptionsOutput struct {
@@ -60,13 +77,34 @@ type DescribeAvailabilityOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAvailabilityOptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAvailabilityOptionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAvailabilityOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityOptions != nil {
+		s.WriteStruct(schemas.DescribeAvailabilityOptionsResponse_AvailabilityOptions)
+		v.AvailabilityOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAvailabilityOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAvailabilityOptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAvailabilityOptionsResponse_AvailabilityOptions:
+			v.AvailabilityOptions = &types.AvailabilityOptionsStatus{}
+			return v.AvailabilityOptions.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAvailabilityOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeAvailabilityOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAvailabilityOptions, schemas.DescribeAvailabilityOptionsRequest, schemas.DescribeAvailabilityOptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeAvailabilityOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAvailabilityOptions, schemas.DescribeAvailabilityOptionsRequest, schemas.DescribeAvailabilityOptionsResponse), output: &DescribeAvailabilityOptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

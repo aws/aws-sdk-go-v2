@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type FailoverGlobalReplicationGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FailoverGlobalReplicationGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailoverGlobalReplicationGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailoverGlobalReplicationGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalReplicationGroupId != nil {
+		s.WriteString(schemas.FailoverGlobalReplicationGroupMessage_GlobalReplicationGroupId, *v.GlobalReplicationGroupId)
+	}
+	if v.PrimaryRegion != nil {
+		s.WriteString(schemas.FailoverGlobalReplicationGroupMessage_PrimaryRegion, *v.PrimaryRegion)
+	}
+	if v.PrimaryReplicationGroupId != nil {
+		s.WriteString(schemas.FailoverGlobalReplicationGroupMessage_PrimaryReplicationGroupId, *v.PrimaryReplicationGroupId)
+	}
+}
+
 type FailoverGlobalReplicationGroupOutput struct {
 
 	// Consists of a primary cluster that accepts writes and an associated secondary
@@ -62,13 +82,34 @@ type FailoverGlobalReplicationGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FailoverGlobalReplicationGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailoverGlobalReplicationGroupResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailoverGlobalReplicationGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalReplicationGroup != nil {
+		s.WriteStruct(schemas.FailoverGlobalReplicationGroupResult_GlobalReplicationGroup)
+		v.GlobalReplicationGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FailoverGlobalReplicationGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FailoverGlobalReplicationGroupResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FailoverGlobalReplicationGroupResult_GlobalReplicationGroup:
+			v.GlobalReplicationGroup = &types.GlobalReplicationGroup{}
+			return v.GlobalReplicationGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationFailoverGlobalReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpFailoverGlobalReplicationGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.FailoverGlobalReplicationGroup, schemas.FailoverGlobalReplicationGroupMessage, schemas.FailoverGlobalReplicationGroupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpFailoverGlobalReplicationGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.FailoverGlobalReplicationGroup, schemas.FailoverGlobalReplicationGroupMessage, schemas.FailoverGlobalReplicationGroupResult), output: &FailoverGlobalReplicationGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

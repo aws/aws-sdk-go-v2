@@ -5,7 +5,9 @@ package rds
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,30 @@ type DescribeDBClusterAutomatedBackupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBClusterAutomatedBackupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDBClusterAutomatedBackupsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBClusterAutomatedBackupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBClusterIdentifier != nil {
+		s.WriteString(schemas.DescribeDBClusterAutomatedBackupsMessage_DBClusterIdentifier, *v.DBClusterIdentifier)
+	}
+	if v.DbClusterResourceId != nil {
+		s.WriteString(schemas.DescribeDBClusterAutomatedBackupsMessage_DbClusterResourceId, *v.DbClusterResourceId)
+	}
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeDBClusterAutomatedBackupsMessage_Filters, v.Filters)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDBClusterAutomatedBackupsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeDBClusterAutomatedBackupsMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type DescribeDBClusterAutomatedBackupsOutput struct {
 
 	// A list of DBClusterAutomatedBackup backups.
@@ -92,13 +118,37 @@ type DescribeDBClusterAutomatedBackupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBClusterAutomatedBackupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DBClusterAutomatedBackupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBClusterAutomatedBackupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBClusterAutomatedBackups != nil {
+		serializeDBClusterAutomatedBackupList(s, schemas.DBClusterAutomatedBackupMessage_DBClusterAutomatedBackups, v.DBClusterAutomatedBackups)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DBClusterAutomatedBackupMessage_Marker, *v.Marker)
+	}
+}
+func (v *DescribeDBClusterAutomatedBackupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DBClusterAutomatedBackupMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DBClusterAutomatedBackupMessage_DBClusterAutomatedBackups:
+			return deserializeDBClusterAutomatedBackupList(d, schemas.DBClusterAutomatedBackupMessage_DBClusterAutomatedBackups, &v.DBClusterAutomatedBackups)
+		case schemas.DBClusterAutomatedBackupMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DBClusterAutomatedBackupMessage_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDBClusterAutomatedBackupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBClusterAutomatedBackups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBClusterAutomatedBackups, schemas.DescribeDBClusterAutomatedBackupsMessage, schemas.DBClusterAutomatedBackupMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeDBClusterAutomatedBackups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBClusterAutomatedBackups, schemas.DescribeDBClusterAutomatedBackupsMessage, schemas.DBClusterAutomatedBackupMessage), output: &DescribeDBClusterAutomatedBackupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

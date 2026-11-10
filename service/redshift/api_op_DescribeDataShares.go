@@ -5,7 +5,9 @@ package redshift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type DescribeDataSharesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataSharesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataSharesMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataSharesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataShareArn != nil {
+		s.WriteString(schemas.DescribeDataSharesMessage_DataShareArn, *v.DataShareArn)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDataSharesMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeDataSharesMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type DescribeDataSharesOutput struct {
 
 	// The results returned from describing datashares.
@@ -65,13 +85,37 @@ type DescribeDataSharesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataSharesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataSharesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataSharesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataShares != nil {
+		serializeDataShareList(s, schemas.DescribeDataSharesResult_DataShares, v.DataShares)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDataSharesResult_Marker, *v.Marker)
+	}
+}
+func (v *DescribeDataSharesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDataSharesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDataSharesResult_DataShares:
+			return deserializeDataShareList(d, schemas.DescribeDataSharesResult_DataShares, &v.DataShares)
+		case schemas.DescribeDataSharesResult_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeDataSharesResult_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDataSharesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDataShares{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataShares, schemas.DescribeDataSharesMessage, schemas.DescribeDataSharesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeDataShares{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataShares, schemas.DescribeDataSharesMessage, schemas.DescribeDataSharesResult), output: &DescribeDataSharesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

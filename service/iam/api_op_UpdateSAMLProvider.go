@@ -4,7 +4,9 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,30 @@ type UpdateSAMLProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSAMLProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSAMLProviderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSAMLProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddPrivateKey != nil {
+		s.WriteString(schemas.UpdateSAMLProviderRequest_AddPrivateKey, *v.AddPrivateKey)
+	}
+	if v.AssertionEncryptionMode != "" {
+		s.WriteString(schemas.UpdateSAMLProviderRequest_AssertionEncryptionMode, string(v.AssertionEncryptionMode))
+	}
+	if v.RemovePrivateKey != nil {
+		s.WriteString(schemas.UpdateSAMLProviderRequest_RemovePrivateKey, *v.RemovePrivateKey)
+	}
+	if v.SAMLMetadataDocument != nil {
+		s.WriteString(schemas.UpdateSAMLProviderRequest_SAMLMetadataDocument, *v.SAMLMetadataDocument)
+	}
+	if v.SAMLProviderArn != nil {
+		s.WriteString(schemas.UpdateSAMLProviderRequest_SAMLProviderArn, *v.SAMLProviderArn)
+	}
+}
+
 // Contains the response to a successful [UpdateSAMLProvider] request.
 //
 // [UpdateSAMLProvider]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateSAMLProvider.html
@@ -73,13 +99,32 @@ type UpdateSAMLProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSAMLProviderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSAMLProviderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSAMLProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SAMLProviderArn != nil {
+		s.WriteString(schemas.UpdateSAMLProviderResponse_SAMLProviderArn, *v.SAMLProviderArn)
+	}
+}
+func (v *UpdateSAMLProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSAMLProviderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSAMLProviderResponse_SAMLProviderArn:
+			v.SAMLProviderArn = new(string)
+			return d.ReadString(schemas.UpdateSAMLProviderResponse_SAMLProviderArn, v.SAMLProviderArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSAMLProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateSAMLProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSAMLProvider, schemas.UpdateSAMLProviderRequest, schemas.UpdateSAMLProviderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpUpdateSAMLProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSAMLProvider, schemas.UpdateSAMLProviderRequest, schemas.UpdateSAMLProviderResponse), output: &UpdateSAMLProviderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

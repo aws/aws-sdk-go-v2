@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeClusterVersionsResponse><DescribeClusterVersionsResult><ClusterVersions><ClusterVersion><ClusterParameterGroupFamily>__ClusterParameterGroupFamily__</ClusterParameterGroupFamily><ClusterVersion>__ClusterVersion__</ClusterVersion><Description>__Description__</Description></ClusterVersion><ClusterVersion><ClusterParameterGroupFamily>__ClusterParameterGroupFamily__</ClusterParameterGroupFamily><ClusterVersion>__ClusterVersion__</ClusterVersion><Description>__Description__</Description></ClusterVersion></ClusterVersions><Marker>__Marker__</Marker></DescribeClusterVersionsResult></DescribeClusterVersionsResponse>

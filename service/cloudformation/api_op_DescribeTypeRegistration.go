@@ -5,7 +5,9 @@ package cloudformation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -48,6 +50,18 @@ type DescribeTypeRegistrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTypeRegistrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTypeRegistrationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTypeRegistrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistrationToken != nil {
+		s.WriteString(schemas.DescribeTypeRegistrationInput_RegistrationToken, *v.RegistrationToken)
+	}
+}
+
 type DescribeTypeRegistrationOutput struct {
 
 	// The description of the extension registration request.
@@ -75,13 +89,54 @@ type DescribeTypeRegistrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTypeRegistrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTypeRegistrationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTypeRegistrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeTypeRegistrationOutput_Description, *v.Description)
+	}
+	if v.ProgressStatus != "" {
+		s.WriteString(schemas.DescribeTypeRegistrationOutput_ProgressStatus, string(v.ProgressStatus))
+	}
+	if v.TypeArn != nil {
+		s.WriteString(schemas.DescribeTypeRegistrationOutput_TypeArn, *v.TypeArn)
+	}
+	if v.TypeVersionArn != nil {
+		s.WriteString(schemas.DescribeTypeRegistrationOutput_TypeVersionArn, *v.TypeVersionArn)
+	}
+}
+func (v *DescribeTypeRegistrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTypeRegistrationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTypeRegistrationOutput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeTypeRegistrationOutput_Description, v.Description)
+		case schemas.DescribeTypeRegistrationOutput_ProgressStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeTypeRegistrationOutput_ProgressStatus, &ev); err != nil {
+				return err
+			}
+			v.ProgressStatus = types.RegistrationStatus(ev)
+			return nil
+		case schemas.DescribeTypeRegistrationOutput_TypeArn:
+			v.TypeArn = new(string)
+			return d.ReadString(schemas.DescribeTypeRegistrationOutput_TypeArn, v.TypeArn)
+		case schemas.DescribeTypeRegistrationOutput_TypeVersionArn:
+			v.TypeVersionArn = new(string)
+			return d.ReadString(schemas.DescribeTypeRegistrationOutput_TypeVersionArn, v.TypeVersionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTypeRegistrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeTypeRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTypeRegistration, schemas.DescribeTypeRegistrationInput, schemas.DescribeTypeRegistrationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeTypeRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTypeRegistration, schemas.DescribeTypeRegistrationInput, schemas.DescribeTypeRegistrationOutput), output: &DescribeTypeRegistrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

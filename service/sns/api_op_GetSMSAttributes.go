@@ -4,6 +4,8 @@ package sns
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sns/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,18 @@ type GetSMSAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSMSAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSMSAttributesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSMSAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attributes != nil {
+		serializeListString(s, schemas.GetSMSAttributesInput_attributes, v.Attributes)
+	}
+}
+
 // The response from the GetSMSAttributes request.
 type GetSMSAttributesOutput struct {
 
@@ -54,13 +68,31 @@ type GetSMSAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSMSAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSMSAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSMSAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attributes != nil {
+		serializeMapStringToString(s, schemas.GetSMSAttributesResponse_attributes, v.Attributes)
+	}
+}
+func (v *GetSMSAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSMSAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSMSAttributesResponse_attributes:
+			return deserializeMapStringToString(d, schemas.GetSMSAttributesResponse_attributes, &v.Attributes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSMSAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetSMSAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSMSAttributes, schemas.GetSMSAttributesInput, schemas.GetSMSAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetSMSAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSMSAttributes, schemas.GetSMSAttributesInput, schemas.GetSMSAttributesResponse), output: &GetSMSAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

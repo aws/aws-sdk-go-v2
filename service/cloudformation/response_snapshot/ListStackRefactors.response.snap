@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListStackRefactorsResponse><ListStackRefactorsResult><NextToken>__NextToken__</NextToken><StackRefactorSummaries><member><Description>__Description__</Description><ExecutionStatus>UNAVAILABLE</ExecutionStatus><ExecutionStatusReason>__ExecutionStatusReason__</ExecutionStatusReason><StackRefactorId>__StackRefactorId__</StackRefactorId><Status>CREATE_IN_PROGRESS</Status><StatusReason>__StatusReason__</StatusReason></member><member><Description>__Description__</Description><ExecutionStatus>UNAVAILABLE</ExecutionStatus><ExecutionStatusReason>__ExecutionStatusReason__</ExecutionStatusReason><StackRefactorId>__StackRefactorId__</StackRefactorId><Status>CREATE_IN_PROGRESS</Status><StatusReason>__StatusReason__</StatusReason></member></StackRefactorSummaries></ListStackRefactorsResult></ListStackRefactorsResponse>

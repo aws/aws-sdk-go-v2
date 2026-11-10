@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ConfigureHealthCheckResponse><ConfigureHealthCheckResult><HealthCheck><HealthyThreshold>1</HealthyThreshold><Interval>1</Interval><Target>__Target__</Target><Timeout>1</Timeout><UnhealthyThreshold>1</UnhealthyThreshold></HealthCheck></ConfigureHealthCheckResult></ConfigureHealthCheckResponse>

@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -311,6 +313,85 @@ type CreateChangeSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateChangeSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateChangeSetInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateChangeSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Capabilities != nil {
+		serializeCapabilities(s, schemas.CreateChangeSetInput_Capabilities, v.Capabilities)
+	}
+	if v.ChangeSetName != nil {
+		s.WriteString(schemas.CreateChangeSetInput_ChangeSetName, *v.ChangeSetName)
+	}
+	if v.ChangeSetType != "" {
+		s.WriteString(schemas.CreateChangeSetInput_ChangeSetType, string(v.ChangeSetType))
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateChangeSetInput_ClientToken, *v.ClientToken)
+	}
+	if v.DeploymentConfig != nil {
+		s.WriteStruct(schemas.CreateChangeSetInput_DeploymentConfig)
+		v.DeploymentConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeploymentMode != "" {
+		s.WriteString(schemas.CreateChangeSetInput_DeploymentMode, string(v.DeploymentMode))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateChangeSetInput_Description, *v.Description)
+	}
+	if v.DisableValidation != nil {
+		s.WriteBool(schemas.CreateChangeSetInput_DisableValidation, *v.DisableValidation)
+	}
+	if v.ImportExistingResources != nil {
+		s.WriteBool(schemas.CreateChangeSetInput_ImportExistingResources, *v.ImportExistingResources)
+	}
+	if v.IncludeNestedStacks != nil {
+		s.WriteBool(schemas.CreateChangeSetInput_IncludeNestedStacks, *v.IncludeNestedStacks)
+	}
+	if v.NotificationARNs != nil {
+		serializeNotificationARNs(s, schemas.CreateChangeSetInput_NotificationARNs, v.NotificationARNs)
+	}
+	if v.OnStackFailure != "" {
+		s.WriteString(schemas.CreateChangeSetInput_OnStackFailure, string(v.OnStackFailure))
+	}
+	if v.Parameters != nil {
+		serializeParameters(s, schemas.CreateChangeSetInput_Parameters, v.Parameters)
+	}
+	if v.ResourceTypes != nil {
+		serializeResourceTypes(s, schemas.CreateChangeSetInput_ResourceTypes, v.ResourceTypes)
+	}
+	if v.ResourcesToImport != nil {
+		serializeResourcesToImport(s, schemas.CreateChangeSetInput_ResourcesToImport, v.ResourcesToImport)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.CreateChangeSetInput_RoleARN, *v.RoleARN)
+	}
+	if v.RollbackConfiguration != nil {
+		s.WriteStruct(schemas.CreateChangeSetInput_RollbackConfiguration)
+		v.RollbackConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.CreateChangeSetInput_StackName, *v.StackName)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateChangeSetInput_Tags, v.Tags)
+	}
+	if v.TemplateBody != nil {
+		s.WriteString(schemas.CreateChangeSetInput_TemplateBody, *v.TemplateBody)
+	}
+	if v.TemplateURL != nil {
+		s.WriteString(schemas.CreateChangeSetInput_TemplateURL, *v.TemplateURL)
+	}
+	if v.UsePreviousTemplate != nil {
+		s.WriteBool(schemas.CreateChangeSetInput_UsePreviousTemplate, *v.UsePreviousTemplate)
+	}
+}
+
 // The output for the CreateChangeSet action.
 type CreateChangeSetOutput struct {
 
@@ -326,13 +407,38 @@ type CreateChangeSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateChangeSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateChangeSetOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateChangeSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.CreateChangeSetOutput_Id, *v.Id)
+	}
+	if v.StackId != nil {
+		s.WriteString(schemas.CreateChangeSetOutput_StackId, *v.StackId)
+	}
+}
+func (v *CreateChangeSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateChangeSetOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateChangeSetOutput_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateChangeSetOutput_Id, v.Id)
+		case schemas.CreateChangeSetOutput_StackId:
+			v.StackId = new(string)
+			return d.ReadString(schemas.CreateChangeSetOutput_StackId, v.StackId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateChangeSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChangeSet, schemas.CreateChangeSetInput, schemas.CreateChangeSetOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateChangeSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChangeSet, schemas.CreateChangeSetInput, schemas.CreateChangeSetOutput), output: &CreateChangeSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

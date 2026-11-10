@@ -4,7 +4,9 @@ package cloudsearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type DescribeDomainEndpointOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDomainEndpointOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDomainEndpointOptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDomainEndpointOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Deployed != nil {
+		s.WriteBool(schemas.DescribeDomainEndpointOptionsRequest_Deployed, *v.Deployed)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.DescribeDomainEndpointOptionsRequest_DomainName, *v.DomainName)
+	}
+}
+
 // The result of a DescribeDomainEndpointOptions request. Contains the status and
 // configuration of a search domain's endpoint options.
 type DescribeDomainEndpointOptionsOutput struct {
@@ -58,13 +75,34 @@ type DescribeDomainEndpointOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDomainEndpointOptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDomainEndpointOptionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDomainEndpointOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainEndpointOptions != nil {
+		s.WriteStruct(schemas.DescribeDomainEndpointOptionsResponse_DomainEndpointOptions)
+		v.DomainEndpointOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeDomainEndpointOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDomainEndpointOptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDomainEndpointOptionsResponse_DomainEndpointOptions:
+			v.DomainEndpointOptions = &types.DomainEndpointOptionsStatus{}
+			return v.DomainEndpointOptions.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDomainEndpointOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDomainEndpointOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDomainEndpointOptions, schemas.DescribeDomainEndpointOptionsRequest, schemas.DescribeDomainEndpointOptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeDomainEndpointOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDomainEndpointOptions, schemas.DescribeDomainEndpointOptionsRequest, schemas.DescribeDomainEndpointOptionsResponse), output: &DescribeDomainEndpointOptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

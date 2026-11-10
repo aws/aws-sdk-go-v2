@@ -4,7 +4,9 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,24 @@ type SetIdentityNotificationTopicInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetIdentityNotificationTopicInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetIdentityNotificationTopicRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetIdentityNotificationTopicInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identity != nil {
+		s.WriteString(schemas.SetIdentityNotificationTopicRequest_Identity, *v.Identity)
+	}
+	if v.NotificationType != "" {
+		s.WriteString(schemas.SetIdentityNotificationTopicRequest_NotificationType, string(v.NotificationType))
+	}
+	if v.SnsTopic != nil {
+		s.WriteString(schemas.SetIdentityNotificationTopicRequest_SnsTopic, *v.SnsTopic)
+	}
+}
+
 // An empty element returned on a successful request.
 type SetIdentityNotificationTopicOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -75,13 +95,26 @@ type SetIdentityNotificationTopicOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetIdentityNotificationTopicOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetIdentityNotificationTopicResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetIdentityNotificationTopicOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SetIdentityNotificationTopicOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetIdentityNotificationTopicResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetIdentityNotificationTopicMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetIdentityNotificationTopic{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetIdentityNotificationTopic, schemas.SetIdentityNotificationTopicRequest, schemas.SetIdentityNotificationTopicResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSetIdentityNotificationTopic{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetIdentityNotificationTopic, schemas.SetIdentityNotificationTopicRequest, schemas.SetIdentityNotificationTopicResponse), output: &SetIdentityNotificationTopicOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

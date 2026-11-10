@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GenerateOrganizationsAccessReportResponse><GenerateOrganizationsAccessReportResult><JobId>__JobId__</JobId></GenerateOrganizationsAccessReportResult></GenerateOrganizationsAccessReportResponse>

@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,24 @@ type CreateDBClusterSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDBClusterSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDBClusterSnapshotMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDBClusterSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBClusterIdentifier != nil {
+		s.WriteString(schemas.CreateDBClusterSnapshotMessage_DBClusterIdentifier, *v.DBClusterIdentifier)
+	}
+	if v.DBClusterSnapshotIdentifier != nil {
+		s.WriteString(schemas.CreateDBClusterSnapshotMessage_DBClusterSnapshotIdentifier, *v.DBClusterSnapshotIdentifier)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDBClusterSnapshotMessage_Tags, v.Tags)
+	}
+}
+
 type CreateDBClusterSnapshotOutput struct {
 
 	// Contains the details for an Amazon RDS DB cluster snapshot
@@ -81,13 +101,34 @@ type CreateDBClusterSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDBClusterSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDBClusterSnapshotResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDBClusterSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBClusterSnapshot != nil {
+		s.WriteStruct(schemas.CreateDBClusterSnapshotResult_DBClusterSnapshot)
+		v.DBClusterSnapshot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateDBClusterSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDBClusterSnapshotResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDBClusterSnapshotResult_DBClusterSnapshot:
+			v.DBClusterSnapshot = &types.DBClusterSnapshot{}
+			return v.DBClusterSnapshot.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDBClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateDBClusterSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDBClusterSnapshot, schemas.CreateDBClusterSnapshotMessage, schemas.CreateDBClusterSnapshotResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateDBClusterSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDBClusterSnapshot, schemas.CreateDBClusterSnapshotMessage, schemas.CreateDBClusterSnapshotResult), output: &CreateDBClusterSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -6,7 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -61,6 +63,24 @@ type DescribeReplicationGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReplicationGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReplicationGroupsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReplicationGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeReplicationGroupsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeReplicationGroupsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.ReplicationGroupId != nil {
+		s.WriteString(schemas.DescribeReplicationGroupsMessage_ReplicationGroupId, *v.ReplicationGroupId)
+	}
+}
+
 // Represents the output of a DescribeReplicationGroups operation.
 type DescribeReplicationGroupsOutput struct {
 
@@ -77,13 +97,37 @@ type DescribeReplicationGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReplicationGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicationGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReplicationGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ReplicationGroupMessage_Marker, *v.Marker)
+	}
+	if v.ReplicationGroups != nil {
+		serializeReplicationGroupList(s, schemas.ReplicationGroupMessage_ReplicationGroups, v.ReplicationGroups)
+	}
+}
+func (v *DescribeReplicationGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicationGroupMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicationGroupMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ReplicationGroupMessage_Marker, v.Marker)
+		case schemas.ReplicationGroupMessage_ReplicationGroups:
+			return deserializeReplicationGroupList(d, schemas.ReplicationGroupMessage_ReplicationGroups, &v.ReplicationGroups)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReplicationGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeReplicationGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReplicationGroups, schemas.DescribeReplicationGroupsMessage, schemas.ReplicationGroupMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeReplicationGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReplicationGroups, schemas.DescribeReplicationGroupsMessage, schemas.ReplicationGroupMessage), output: &DescribeReplicationGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

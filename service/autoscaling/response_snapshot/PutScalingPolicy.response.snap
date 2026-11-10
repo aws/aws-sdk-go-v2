@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<PutScalingPolicyResponse><PutScalingPolicyResult><Alarms><member><AlarmARN>__AlarmARN__</AlarmARN><AlarmName>__AlarmName__</AlarmName></member><member><AlarmARN>__AlarmARN__</AlarmARN><AlarmName>__AlarmName__</AlarmName></member></Alarms><PolicyARN>__PolicyARN__</PolicyARN></PutScalingPolicyResult></PutScalingPolicyResponse>

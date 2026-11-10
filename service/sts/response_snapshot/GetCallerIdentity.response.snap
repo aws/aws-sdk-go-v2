@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetCallerIdentityResponse><GetCallerIdentityResult><Account>__Account__</Account><Arn>__Arn__</Arn><UserId>__UserId__</UserId></GetCallerIdentityResult></GetCallerIdentityResponse>

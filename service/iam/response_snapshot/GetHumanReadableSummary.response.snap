@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetHumanReadableSummaryResponse><GetHumanReadableSummaryResult><Locale>__Locale__</Locale><SummaryContent>__SummaryContent__</SummaryContent><SummaryState>AVAILABLE</SummaryState></GetHumanReadableSummaryResult></GetHumanReadableSummaryResponse>

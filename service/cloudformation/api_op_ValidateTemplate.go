@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,21 @@ type ValidateTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidateTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidateTemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidateTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateBody != nil {
+		s.WriteString(schemas.ValidateTemplateInput_TemplateBody, *v.TemplateBody)
+	}
+	if v.TemplateURL != nil {
+		s.WriteString(schemas.ValidateTemplateInput_TemplateURL, *v.TemplateURL)
+	}
+}
+
 // The output for ValidateTemplate action.
 type ValidateTemplateOutput struct {
 
@@ -79,13 +96,53 @@ type ValidateTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidateTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidateTemplateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidateTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Capabilities != nil {
+		serializeCapabilities(s, schemas.ValidateTemplateOutput_Capabilities, v.Capabilities)
+	}
+	if v.CapabilitiesReason != nil {
+		s.WriteString(schemas.ValidateTemplateOutput_CapabilitiesReason, *v.CapabilitiesReason)
+	}
+	if v.DeclaredTransforms != nil {
+		serializeTransformsList(s, schemas.ValidateTemplateOutput_DeclaredTransforms, v.DeclaredTransforms)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ValidateTemplateOutput_Description, *v.Description)
+	}
+	if v.Parameters != nil {
+		serializeTemplateParameters(s, schemas.ValidateTemplateOutput_Parameters, v.Parameters)
+	}
+}
+func (v *ValidateTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidateTemplateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidateTemplateOutput_Capabilities:
+			return deserializeCapabilities(d, schemas.ValidateTemplateOutput_Capabilities, &v.Capabilities)
+		case schemas.ValidateTemplateOutput_CapabilitiesReason:
+			v.CapabilitiesReason = new(string)
+			return d.ReadString(schemas.ValidateTemplateOutput_CapabilitiesReason, v.CapabilitiesReason)
+		case schemas.ValidateTemplateOutput_DeclaredTransforms:
+			return deserializeTransformsList(d, schemas.ValidateTemplateOutput_DeclaredTransforms, &v.DeclaredTransforms)
+		case schemas.ValidateTemplateOutput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ValidateTemplateOutput_Description, v.Description)
+		case schemas.ValidateTemplateOutput_Parameters:
+			return deserializeTemplateParameters(d, schemas.ValidateTemplateOutput_Parameters, &v.Parameters)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationValidateTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpValidateTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidateTemplate, schemas.ValidateTemplateInput, schemas.ValidateTemplateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpValidateTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidateTemplate, schemas.ValidateTemplateInput, schemas.ValidateTemplateOutput), output: &ValidateTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

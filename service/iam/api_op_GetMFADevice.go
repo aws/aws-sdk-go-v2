@@ -4,6 +4,8 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -40,6 +42,21 @@ type GetMFADeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMFADeviceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMFADeviceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMFADeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SerialNumber != nil {
+		s.WriteString(schemas.GetMFADeviceRequest_SerialNumber, *v.SerialNumber)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.GetMFADeviceRequest_UserName, *v.UserName)
+	}
+}
+
 type GetMFADeviceOutput struct {
 
 	// Serial number that uniquely identifies the MFA device. For this API, we only
@@ -68,13 +85,49 @@ type GetMFADeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMFADeviceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMFADeviceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMFADeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Certifications != nil {
+		serializeCertificationMapType(s, schemas.GetMFADeviceResponse_Certifications, v.Certifications)
+	}
+	if v.EnableDate != nil {
+		s.WriteTime(schemas.GetMFADeviceResponse_EnableDate, *v.EnableDate)
+	}
+	if v.SerialNumber != nil {
+		s.WriteString(schemas.GetMFADeviceResponse_SerialNumber, *v.SerialNumber)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.GetMFADeviceResponse_UserName, *v.UserName)
+	}
+}
+func (v *GetMFADeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMFADeviceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMFADeviceResponse_Certifications:
+			return deserializeCertificationMapType(d, schemas.GetMFADeviceResponse_Certifications, &v.Certifications)
+		case schemas.GetMFADeviceResponse_EnableDate:
+			v.EnableDate = new(time.Time)
+			return d.ReadTime(schemas.GetMFADeviceResponse_EnableDate, v.EnableDate)
+		case schemas.GetMFADeviceResponse_SerialNumber:
+			v.SerialNumber = new(string)
+			return d.ReadString(schemas.GetMFADeviceResponse_SerialNumber, v.SerialNumber)
+		case schemas.GetMFADeviceResponse_UserName:
+			v.UserName = new(string)
+			return d.ReadString(schemas.GetMFADeviceResponse_UserName, v.UserName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMFADeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetMFADevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMFADevice, schemas.GetMFADeviceRequest, schemas.GetMFADeviceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetMFADevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMFADevice, schemas.GetMFADeviceRequest, schemas.GetMFADeviceResponse), output: &GetMFADeviceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

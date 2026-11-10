@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,30 @@ type AssociateDataShareConsumerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateDataShareConsumerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateDataShareConsumerMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateDataShareConsumerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowWrites != nil {
+		s.WriteBool(schemas.AssociateDataShareConsumerMessage_AllowWrites, *v.AllowWrites)
+	}
+	if v.AssociateEntireAccount != nil {
+		s.WriteBool(schemas.AssociateDataShareConsumerMessage_AssociateEntireAccount, *v.AssociateEntireAccount)
+	}
+	if v.ConsumerArn != nil {
+		s.WriteString(schemas.AssociateDataShareConsumerMessage_ConsumerArn, *v.ConsumerArn)
+	}
+	if v.ConsumerRegion != nil {
+		s.WriteString(schemas.AssociateDataShareConsumerMessage_ConsumerRegion, *v.ConsumerRegion)
+	}
+	if v.DataShareArn != nil {
+		s.WriteString(schemas.AssociateDataShareConsumerMessage_DataShareArn, *v.DataShareArn)
+	}
+}
+
 type AssociateDataShareConsumerOutput struct {
 
 	// A value that specifies whether the datashare can be shared to a publicly
@@ -79,13 +105,65 @@ type AssociateDataShareConsumerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateDataShareConsumerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataShare)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateDataShareConsumerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowPubliclyAccessibleConsumers != nil {
+		s.WriteBool(schemas.DataShare_AllowPubliclyAccessibleConsumers, *v.AllowPubliclyAccessibleConsumers)
+	}
+	if v.DataShareArn != nil {
+		s.WriteString(schemas.DataShare_DataShareArn, *v.DataShareArn)
+	}
+	if v.DataShareAssociations != nil {
+		serializeDataShareAssociationList(s, schemas.DataShare_DataShareAssociations, v.DataShareAssociations)
+	}
+	if v.DataShareType != "" {
+		s.WriteString(schemas.DataShare_DataShareType, string(v.DataShareType))
+	}
+	if v.ManagedBy != nil {
+		s.WriteString(schemas.DataShare_ManagedBy, *v.ManagedBy)
+	}
+	if v.ProducerArn != nil {
+		s.WriteString(schemas.DataShare_ProducerArn, *v.ProducerArn)
+	}
+}
+func (v *AssociateDataShareConsumerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataShare, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataShare_AllowPubliclyAccessibleConsumers:
+			v.AllowPubliclyAccessibleConsumers = new(bool)
+			return d.ReadBool(schemas.DataShare_AllowPubliclyAccessibleConsumers, v.AllowPubliclyAccessibleConsumers)
+		case schemas.DataShare_DataShareArn:
+			v.DataShareArn = new(string)
+			return d.ReadString(schemas.DataShare_DataShareArn, v.DataShareArn)
+		case schemas.DataShare_DataShareAssociations:
+			return deserializeDataShareAssociationList(d, schemas.DataShare_DataShareAssociations, &v.DataShareAssociations)
+		case schemas.DataShare_DataShareType:
+			var ev string
+			if err := d.ReadString(schemas.DataShare_DataShareType, &ev); err != nil {
+				return err
+			}
+			v.DataShareType = types.DataShareType(ev)
+			return nil
+		case schemas.DataShare_ManagedBy:
+			v.ManagedBy = new(string)
+			return d.ReadString(schemas.DataShare_ManagedBy, v.ManagedBy)
+		case schemas.DataShare_ProducerArn:
+			v.ProducerArn = new(string)
+			return d.ReadString(schemas.DataShare_ProducerArn, v.ProducerArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateDataShareConsumerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpAssociateDataShareConsumer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateDataShareConsumer, schemas.AssociateDataShareConsumerMessage, schemas.DataShare)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpAssociateDataShareConsumer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateDataShareConsumer, schemas.AssociateDataShareConsumerMessage, schemas.DataShare), output: &AssociateDataShareConsumerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

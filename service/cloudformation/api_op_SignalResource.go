@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,27 @@ type SignalResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SignalResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SignalResourceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SignalResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogicalResourceId != nil {
+		s.WriteString(schemas.SignalResourceInput_LogicalResourceId, *v.LogicalResourceId)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.SignalResourceInput_StackName, *v.StackName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.SignalResourceInput_Status, string(v.Status))
+	}
+	if v.UniqueId != nil {
+		s.WriteString(schemas.SignalResourceInput_UniqueId, *v.UniqueId)
+	}
+}
+
 type SignalResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -68,13 +91,26 @@ type SignalResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SignalResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SignalResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SignalResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSignalResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSignalResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SignalResource, schemas.SignalResourceInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSignalResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SignalResource, schemas.SignalResourceInput, nil), output: &SignalResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

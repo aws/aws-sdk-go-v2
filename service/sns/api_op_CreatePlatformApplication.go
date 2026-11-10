@@ -4,6 +4,8 @@ package sns
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sns/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -87,6 +89,24 @@ type CreatePlatformApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePlatformApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePlatformApplicationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePlatformApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attributes != nil {
+		serializeMapStringToString(s, schemas.CreatePlatformApplicationInput_Attributes, v.Attributes)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreatePlatformApplicationInput_Name, *v.Name)
+	}
+	if v.Platform != nil {
+		s.WriteString(schemas.CreatePlatformApplicationInput_Platform, *v.Platform)
+	}
+}
+
 // Response from CreatePlatformApplication action.
 type CreatePlatformApplicationOutput struct {
 
@@ -99,13 +119,32 @@ type CreatePlatformApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePlatformApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePlatformApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePlatformApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PlatformApplicationArn != nil {
+		s.WriteString(schemas.CreatePlatformApplicationResponse_PlatformApplicationArn, *v.PlatformApplicationArn)
+	}
+}
+func (v *CreatePlatformApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePlatformApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePlatformApplicationResponse_PlatformApplicationArn:
+			v.PlatformApplicationArn = new(string)
+			return d.ReadString(schemas.CreatePlatformApplicationResponse_PlatformApplicationArn, v.PlatformApplicationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePlatformApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreatePlatformApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePlatformApplication, schemas.CreatePlatformApplicationInput, schemas.CreatePlatformApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreatePlatformApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePlatformApplication, schemas.CreatePlatformApplicationInput, schemas.CreatePlatformApplicationResponse), output: &CreatePlatformApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

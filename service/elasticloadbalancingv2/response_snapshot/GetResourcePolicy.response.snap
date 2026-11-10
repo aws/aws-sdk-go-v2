@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetResourcePolicyResponse><GetResourcePolicyResult><Policy>__Policy__</Policy></GetResourcePolicyResult></GetResourcePolicyResponse>

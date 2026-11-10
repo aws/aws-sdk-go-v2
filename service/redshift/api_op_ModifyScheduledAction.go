@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -60,6 +62,41 @@ type ModifyScheduledActionInput struct {
 	TargetAction *types.ScheduledActionType
 
 	noSmithyDocumentSerde
+}
+
+func (v *ModifyScheduledActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyScheduledActionMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyScheduledActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enable != nil {
+		s.WriteBool(schemas.ModifyScheduledActionMessage_Enable, *v.Enable)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ModifyScheduledActionMessage_EndTime, *v.EndTime)
+	}
+	if v.IamRole != nil {
+		s.WriteString(schemas.ModifyScheduledActionMessage_IamRole, *v.IamRole)
+	}
+	if v.Schedule != nil {
+		s.WriteString(schemas.ModifyScheduledActionMessage_Schedule, *v.Schedule)
+	}
+	if v.ScheduledActionDescription != nil {
+		s.WriteString(schemas.ModifyScheduledActionMessage_ScheduledActionDescription, *v.ScheduledActionDescription)
+	}
+	if v.ScheduledActionName != nil {
+		s.WriteString(schemas.ModifyScheduledActionMessage_ScheduledActionName, *v.ScheduledActionName)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ModifyScheduledActionMessage_StartTime, *v.StartTime)
+	}
+	if v.TargetAction != nil {
+		s.WriteStruct(schemas.ModifyScheduledActionMessage_TargetAction)
+		v.TargetAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 
 // Describes a scheduled action. You can use a scheduled action to trigger some
@@ -125,13 +162,85 @@ type ModifyScheduledActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyScheduledActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduledAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyScheduledActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ScheduledAction_EndTime, *v.EndTime)
+	}
+	if v.IamRole != nil {
+		s.WriteString(schemas.ScheduledAction_IamRole, *v.IamRole)
+	}
+	if v.NextInvocations != nil {
+		serializeScheduledActionTimeList(s, schemas.ScheduledAction_NextInvocations, v.NextInvocations)
+	}
+	if v.Schedule != nil {
+		s.WriteString(schemas.ScheduledAction_Schedule, *v.Schedule)
+	}
+	if v.ScheduledActionDescription != nil {
+		s.WriteString(schemas.ScheduledAction_ScheduledActionDescription, *v.ScheduledActionDescription)
+	}
+	if v.ScheduledActionName != nil {
+		s.WriteString(schemas.ScheduledAction_ScheduledActionName, *v.ScheduledActionName)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ScheduledAction_StartTime, *v.StartTime)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ScheduledAction_State, string(v.State))
+	}
+	if v.TargetAction != nil {
+		s.WriteStruct(schemas.ScheduledAction_TargetAction)
+		v.TargetAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModifyScheduledActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduledAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduledAction_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.ScheduledAction_EndTime, v.EndTime)
+		case schemas.ScheduledAction_IamRole:
+			v.IamRole = new(string)
+			return d.ReadString(schemas.ScheduledAction_IamRole, v.IamRole)
+		case schemas.ScheduledAction_NextInvocations:
+			return deserializeScheduledActionTimeList(d, schemas.ScheduledAction_NextInvocations, &v.NextInvocations)
+		case schemas.ScheduledAction_Schedule:
+			v.Schedule = new(string)
+			return d.ReadString(schemas.ScheduledAction_Schedule, v.Schedule)
+		case schemas.ScheduledAction_ScheduledActionDescription:
+			v.ScheduledActionDescription = new(string)
+			return d.ReadString(schemas.ScheduledAction_ScheduledActionDescription, v.ScheduledActionDescription)
+		case schemas.ScheduledAction_ScheduledActionName:
+			v.ScheduledActionName = new(string)
+			return d.ReadString(schemas.ScheduledAction_ScheduledActionName, v.ScheduledActionName)
+		case schemas.ScheduledAction_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ScheduledAction_StartTime, v.StartTime)
+		case schemas.ScheduledAction_State:
+			var ev string
+			if err := d.ReadString(schemas.ScheduledAction_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.ScheduledActionState(ev)
+			return nil
+		case schemas.ScheduledAction_TargetAction:
+			v.TargetAction = &types.ScheduledActionType{}
+			return v.TargetAction.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyScheduledActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyScheduledAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyScheduledAction, schemas.ModifyScheduledActionMessage, schemas.ScheduledAction)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyScheduledAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyScheduledAction, schemas.ModifyScheduledActionMessage, schemas.ScheduledAction), output: &ModifyScheduledActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,4 @@
+400
+Content-Type: application/xml
+
+<ErrorResponse><Error><Code>InvalidLambdaFunction</Code><FunctionArn>__FunctionArn__</FunctionArn><message>__Message__</message></Error></ErrorResponse>

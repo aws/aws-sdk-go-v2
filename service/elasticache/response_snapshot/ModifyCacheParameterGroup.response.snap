@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ModifyCacheParameterGroupResponse><ModifyCacheParameterGroupResult><CacheParameterGroupName>__CacheParameterGroupName__</CacheParameterGroupName></ModifyCacheParameterGroupResult></ModifyCacheParameterGroupResponse>

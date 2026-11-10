@@ -4,6 +4,8 @@ package cloudsearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type BuildSuggestersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BuildSuggestersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BuildSuggestersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BuildSuggestersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.BuildSuggestersRequest_DomainName, *v.DomainName)
+	}
+}
+
 // The result of a BuildSuggester request. Contains a list of the fields used for
 // suggestions.
 type BuildSuggestersOutput struct {
@@ -54,13 +68,31 @@ type BuildSuggestersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BuildSuggestersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BuildSuggestersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BuildSuggestersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FieldNames != nil {
+		serializeFieldNameList(s, schemas.BuildSuggestersResponse_FieldNames, v.FieldNames)
+	}
+}
+func (v *BuildSuggestersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BuildSuggestersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BuildSuggestersResponse_FieldNames:
+			return deserializeFieldNameList(d, schemas.BuildSuggestersResponse_FieldNames, &v.FieldNames)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBuildSuggestersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpBuildSuggesters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BuildSuggesters, schemas.BuildSuggestersRequest, schemas.BuildSuggestersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpBuildSuggesters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BuildSuggesters, schemas.BuildSuggestersRequest, schemas.BuildSuggestersResponse), output: &BuildSuggestersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

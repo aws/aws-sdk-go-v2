@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -37,6 +38,27 @@ func (e *AccountNotManagementOrDelegatedAdministratorException) ErrorCode() stri
 func (e *AccountNotManagementOrDelegatedAdministratorException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *AccountNotManagementOrDelegatedAdministratorException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountNotManagementOrDelegatedAdministratorException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountNotManagementOrDelegatedAdministratorException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AccountNotManagementOrDelegatedAdministratorException_Message, *v.Message)
+	}
+}
+func (v *AccountNotManagementOrDelegatedAdministratorException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountNotManagementOrDelegatedAdministratorException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountNotManagementOrDelegatedAdministratorException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccountNotManagementOrDelegatedAdministratorException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because the account making the request is not the
 // management account for the organization.
@@ -66,6 +88,27 @@ func (e *CallerIsNotManagementAccountException) ErrorCode() string {
 func (e *CallerIsNotManagementAccountException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *CallerIsNotManagementAccountException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CallerIsNotManagementAccountException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CallerIsNotManagementAccountException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CallerIsNotManagementAccountException_Message, *v.Message)
+	}
+}
+func (v *CallerIsNotManagementAccountException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CallerIsNotManagementAccountException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CallerIsNotManagementAccountException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CallerIsNotManagementAccountException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because multiple requests to change this object were
 // submitted simultaneously. Wait a few minutes and submit your request again.
@@ -93,6 +136,27 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConcurrentModificationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConcurrentModificationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConcurrentModificationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ConcurrentModificationException_message, *v.Message)
+	}
+}
+func (v *ConcurrentModificationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConcurrentModificationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConcurrentModificationException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConcurrentModificationException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because the most recent credential report has expired.
 // To generate a new credential report, use [GenerateCredentialReport]. For more information about
@@ -124,6 +188,27 @@ func (e *CredentialReportExpiredException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CredentialReportExpiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *CredentialReportExpiredException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CredentialReportExpiredException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CredentialReportExpiredException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CredentialReportExpiredException_message, *v.Message)
+	}
+}
+func (v *CredentialReportExpiredException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CredentialReportExpiredException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CredentialReportExpiredException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CredentialReportExpiredException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because the credential report does not exist. To
 // generate a credential report, use [GenerateCredentialReport].
@@ -155,6 +240,27 @@ func (e *CredentialReportNotPresentException) ErrorCode() string {
 func (e *CredentialReportNotPresentException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *CredentialReportNotPresentException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CredentialReportNotPresentException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CredentialReportNotPresentException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CredentialReportNotPresentException_message, *v.Message)
+	}
+}
+func (v *CredentialReportNotPresentException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CredentialReportNotPresentException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CredentialReportNotPresentException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CredentialReportNotPresentException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because the credential report is still being generated.
 type CredentialReportNotReadyException struct {
@@ -181,6 +287,27 @@ func (e *CredentialReportNotReadyException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CredentialReportNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *CredentialReportNotReadyException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CredentialReportNotReadyException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CredentialReportNotReadyException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CredentialReportNotReadyException_message, *v.Message)
+	}
+}
+func (v *CredentialReportNotReadyException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CredentialReportNotReadyException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CredentialReportNotReadyException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CredentialReportNotReadyException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because it attempted to delete a resource that has
 // attached subordinate entities. The error message describes these entities.
@@ -208,6 +335,27 @@ func (e *DeleteConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DeleteConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DeleteConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DeleteConflictException_message, *v.Message)
+	}
+}
+func (v *DeleteConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteConflictException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DeleteConflictException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because the same certificate is associated with an IAM
 // user in the account.
@@ -235,6 +383,27 @@ func (e *DuplicateCertificateException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DuplicateCertificateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DuplicateCertificateException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DuplicateCertificateException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DuplicateCertificateException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DuplicateCertificateException_message, *v.Message)
+	}
+}
+func (v *DuplicateCertificateException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DuplicateCertificateException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DuplicateCertificateException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DuplicateCertificateException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because the SSH public key is already associated with
 // the specified IAM user.
@@ -262,6 +431,27 @@ func (e *DuplicateSSHPublicKeyException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DuplicateSSHPublicKeyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DuplicateSSHPublicKeyException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DuplicateSSHPublicKeyException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DuplicateSSHPublicKeyException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DuplicateSSHPublicKeyException_message, *v.Message)
+	}
+}
+func (v *DuplicateSSHPublicKeyException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DuplicateSSHPublicKeyException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DuplicateSSHPublicKeyException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DuplicateSSHPublicKeyException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because it attempted to create a resource that already
 // exists.
@@ -289,6 +479,27 @@ func (e *EntityAlreadyExistsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EntityAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *EntityAlreadyExistsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityAlreadyExistsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntityAlreadyExistsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.EntityAlreadyExistsException_message, *v.Message)
+	}
+}
+func (v *EntityAlreadyExistsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityAlreadyExistsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityAlreadyExistsException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EntityAlreadyExistsException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because it referenced an entity that is temporarily
 // unmodifiable, such as a user name that was deleted and then recreated. The error
@@ -320,6 +531,27 @@ func (e *EntityTemporarilyUnmodifiableException) ErrorCode() string {
 func (e *EntityTemporarilyUnmodifiableException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *EntityTemporarilyUnmodifiableException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityTemporarilyUnmodifiableException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntityTemporarilyUnmodifiableException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.EntityTemporarilyUnmodifiableException_message, *v.Message)
+	}
+}
+func (v *EntityTemporarilyUnmodifiableException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityTemporarilyUnmodifiableException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityTemporarilyUnmodifiableException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EntityTemporarilyUnmodifiableException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request failed because outbound identity federation is already disabled for
 // your Amazon Web Services account. You cannot disable the feature multiple times
@@ -347,6 +579,27 @@ func (e *FeatureDisabledException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *FeatureDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *FeatureDisabledException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FeatureDisabledException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FeatureDisabledException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.FeatureDisabledException_message, *v.Message)
+	}
+}
+func (v *FeatureDisabledException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FeatureDisabledException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FeatureDisabledException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.FeatureDisabledException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request failed because outbound identity federation is already enabled for
 // your Amazon Web Services account. You cannot enable the feature multiple times.
@@ -376,6 +629,27 @@ func (e *FeatureEnabledException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *FeatureEnabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *FeatureEnabledException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FeatureEnabledException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FeatureEnabledException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.FeatureEnabledException_message, *v.Message)
+	}
+}
+func (v *FeatureEnabledException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FeatureEnabledException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FeatureEnabledException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.FeatureEnabledException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because the authentication code was not recognized.
 // The error message describes the specific error.
@@ -405,6 +679,27 @@ func (e *InvalidAuthenticationCodeException) ErrorCode() string {
 func (e *InvalidAuthenticationCodeException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *InvalidAuthenticationCodeException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidAuthenticationCodeException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidAuthenticationCodeException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidAuthenticationCodeException_message, *v.Message)
+	}
+}
+func (v *InvalidAuthenticationCodeException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidAuthenticationCodeException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidAuthenticationCodeException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidAuthenticationCodeException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because the certificate is invalid.
 type InvalidCertificateException struct {
@@ -431,6 +726,27 @@ func (e *InvalidCertificateException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidCertificateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidCertificateException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidCertificateException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidCertificateException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidCertificateException_message, *v.Message)
+	}
+}
+func (v *InvalidCertificateException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidCertificateException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidCertificateException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidCertificateException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because an invalid or out-of-range value was supplied
 // for an input parameter.
@@ -458,6 +774,27 @@ func (e *InvalidInputException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidInputException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidInputException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidInputException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidInputException_message, *v.Message)
+	}
+}
+func (v *InvalidInputException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidInputException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidInputException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidInputException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because the public key is malformed or otherwise
 // invalid.
@@ -485,6 +822,27 @@ func (e *InvalidPublicKeyException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidPublicKeyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidPublicKeyException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidPublicKeyException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidPublicKeyException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidPublicKeyException_message, *v.Message)
+	}
+}
+func (v *InvalidPublicKeyException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidPublicKeyException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidPublicKeyException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidPublicKeyException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because the type of user for the transaction was
 // incorrect.
@@ -512,6 +870,27 @@ func (e *InvalidUserTypeException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidUserTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidUserTypeException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidUserTypeException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidUserTypeException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidUserTypeException_message, *v.Message)
+	}
+}
+func (v *InvalidUserTypeException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidUserTypeException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidUserTypeException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidUserTypeException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because the public key certificate and the private key
 // do not match.
@@ -539,6 +918,27 @@ func (e *KeyPairMismatchException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *KeyPairMismatchException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *KeyPairMismatchException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KeyPairMismatchException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KeyPairMismatchException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.KeyPairMismatchException_message, *v.Message)
+	}
+}
+func (v *KeyPairMismatchException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KeyPairMismatchException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KeyPairMismatchException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.KeyPairMismatchException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because it attempted to create resources beyond the
 // current Amazon Web Services account limits. The error message describes the
@@ -567,6 +967,27 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.LimitExceededException_message, *v.Message)
+	}
+}
+func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LimitExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LimitExceededException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because the certificate was malformed or expired. The
 // error message describes the specific error.
@@ -594,6 +1015,27 @@ func (e *MalformedCertificateException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *MalformedCertificateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *MalformedCertificateException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MalformedCertificateException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedCertificateException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.MalformedCertificateException_message, *v.Message)
+	}
+}
+func (v *MalformedCertificateException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MalformedCertificateException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MalformedCertificateException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MalformedCertificateException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because the policy document was malformed. The error
 // message describes the specific error.
@@ -621,6 +1063,27 @@ func (e *MalformedPolicyDocumentException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *MalformedPolicyDocumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *MalformedPolicyDocumentException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MalformedPolicyDocumentException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedPolicyDocumentException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.MalformedPolicyDocumentException_message, *v.Message)
+	}
+}
+func (v *MalformedPolicyDocumentException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MalformedPolicyDocumentException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MalformedPolicyDocumentException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MalformedPolicyDocumentException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because the resulting role name conflicts with an
 // existing role in the account.
@@ -648,6 +1111,27 @@ func (e *NameConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NameConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NameConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NameConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NameConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.NameConflictException_message, *v.Message)
+	}
+}
+func (v *NameConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NameConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NameConflictException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NameConflictException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because it referenced a resource entity that does not
 // exist. The error message describes the resource.
@@ -675,6 +1159,27 @@ func (e *NoSuchEntityException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NoSuchEntityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NoSuchEntityException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NoSuchEntityException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NoSuchEntityException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.NoSuchEntityException_message, *v.Message)
+	}
+}
+func (v *NoSuchEntityException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NoSuchEntityException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NoSuchEntityException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NoSuchEntityException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request failed because IAM cannot connect to the OpenID Connect identity
 // provider URL.
@@ -704,6 +1209,27 @@ func (e *OpenIdIdpCommunicationErrorException) ErrorCode() string {
 func (e *OpenIdIdpCommunicationErrorException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *OpenIdIdpCommunicationErrorException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenIdIdpCommunicationErrorException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenIdIdpCommunicationErrorException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.OpenIdIdpCommunicationErrorException_message, *v.Message)
+	}
+}
+func (v *OpenIdIdpCommunicationErrorException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpenIdIdpCommunicationErrorException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpenIdIdpCommunicationErrorException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.OpenIdIdpCommunicationErrorException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because no organization is associated with your
 // account.
@@ -731,6 +1257,27 @@ func (e *OrganizationNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *OrganizationNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *OrganizationNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.OrganizationNotFoundException_Message, *v.Message)
+	}
+}
+func (v *OrganizationNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.OrganizationNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because your organization does not have All features
 // enabled. For more information, see [Available feature sets]in the Organizations User Guide.
@@ -762,6 +1309,27 @@ func (e *OrganizationNotInAllFeaturesModeException) ErrorCode() string {
 func (e *OrganizationNotInAllFeaturesModeException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *OrganizationNotInAllFeaturesModeException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationNotInAllFeaturesModeException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationNotInAllFeaturesModeException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.OrganizationNotInAllFeaturesModeException_Message, *v.Message)
+	}
+}
+func (v *OrganizationNotInAllFeaturesModeException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationNotInAllFeaturesModeException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationNotInAllFeaturesModeException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.OrganizationNotInAllFeaturesModeException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because the provided password did not meet the
 // requirements imposed by the account password policy.
@@ -789,6 +1357,27 @@ func (e *PasswordPolicyViolationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PasswordPolicyViolationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *PasswordPolicyViolationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PasswordPolicyViolationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PasswordPolicyViolationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PasswordPolicyViolationException_message, *v.Message)
+	}
+}
+func (v *PasswordPolicyViolationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PasswordPolicyViolationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PasswordPolicyViolationException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PasswordPolicyViolationException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request failed because a provided policy could not be successfully
 // evaluated. An additional detailed message indicates the source of the failure.
@@ -816,6 +1405,27 @@ func (e *PolicyEvaluationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PolicyEvaluationException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *PolicyEvaluationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyEvaluationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyEvaluationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PolicyEvaluationException_message, *v.Message)
+	}
+}
+func (v *PolicyEvaluationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyEvaluationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyEvaluationException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PolicyEvaluationException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request failed because Amazon Web Services service role policies can only
 // be attached to the service-linked role for that service.
@@ -843,6 +1453,27 @@ func (e *PolicyNotAttachableException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PolicyNotAttachableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *PolicyNotAttachableException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyNotAttachableException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyNotAttachableException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PolicyNotAttachableException_message, *v.Message)
+	}
+}
+func (v *PolicyNotAttachableException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyNotAttachableException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyNotAttachableException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PolicyNotAttachableException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request failed because the maximum number of concurrent requests for this
 // account are already running.
@@ -872,6 +1503,27 @@ func (e *ReportGenerationLimitExceededException) ErrorCode() string {
 func (e *ReportGenerationLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *ReportGenerationLimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReportGenerationLimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReportGenerationLimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ReportGenerationLimitExceededException_message, *v.Message)
+	}
+}
+func (v *ReportGenerationLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReportGenerationLimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReportGenerationLimitExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ReportGenerationLimitExceededException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because someone modified the role template while the
 // service was creating the role. Wait a few minutes and try the request again.
@@ -899,6 +1551,27 @@ func (e *RoleModifiedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *RoleModifiedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *RoleModifiedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RoleModifiedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RoleModifiedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.RoleModifiedException_message, *v.Message)
+	}
+}
+func (v *RoleModifiedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RoleModifiedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RoleModifiedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.RoleModifiedException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because the specified role template is disabled. A
 // disabled role template cannot be used to create new roles. Contact your
@@ -927,6 +1600,27 @@ func (e *RoleTemplateDisabledException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *RoleTemplateDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *RoleTemplateDisabledException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RoleTemplateDisabledException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RoleTemplateDisabledException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.RoleTemplateDisabledException_message, *v.Message)
+	}
+}
+func (v *RoleTemplateDisabledException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RoleTemplateDisabledException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RoleTemplateDisabledException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.RoleTemplateDisabledException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because trusted access is not enabled for IAM in
 // Organizations. For details, see IAM and Organizations in the Organizations User
@@ -955,6 +1649,27 @@ func (e *ServiceAccessNotEnabledException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceAccessNotEnabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ServiceAccessNotEnabledException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceAccessNotEnabledException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceAccessNotEnabledException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceAccessNotEnabledException_Message, *v.Message)
+	}
+}
+func (v *ServiceAccessNotEnabledException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceAccessNotEnabledException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceAccessNotEnabledException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceAccessNotEnabledException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request processing has failed because of an unknown error, exception or
 // failure.
@@ -982,6 +1697,27 @@ func (e *ServiceFailureException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ServiceFailureException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceFailureException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceFailureException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceFailureException_message, *v.Message)
+	}
+}
+func (v *ServiceFailureException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceFailureException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceFailureException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceFailureException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified service does not support service-specific credentials.
 type ServiceNotSupportedException struct {
@@ -1008,6 +1744,27 @@ func (e *ServiceNotSupportedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ServiceNotSupportedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceNotSupportedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceNotSupportedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceNotSupportedException_message, *v.Message)
+	}
+}
+func (v *ServiceNotSupportedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceNotSupportedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceNotSupportedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceNotSupportedException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because service-linked roles are protected Amazon Web
 // Services resources. Only the service that depends on the service-linked role can
@@ -1038,6 +1795,27 @@ func (e *UnmodifiableEntityException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnmodifiableEntityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnmodifiableEntityException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnmodifiableEntityException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnmodifiableEntityException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UnmodifiableEntityException_message, *v.Message)
+	}
+}
+func (v *UnmodifiableEntityException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnmodifiableEntityException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnmodifiableEntityException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnmodifiableEntityException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because the public key encoding format is unsupported
 // or unrecognized.
@@ -1066,4 +1844,25 @@ func (e *UnrecognizedPublicKeyEncodingException) ErrorCode() string {
 }
 func (e *UnrecognizedPublicKeyEncodingException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+func (v *UnrecognizedPublicKeyEncodingException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnrecognizedPublicKeyEncodingException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnrecognizedPublicKeyEncodingException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UnrecognizedPublicKeyEncodingException_message, *v.Message)
+	}
+}
+func (v *UnrecognizedPublicKeyEncodingException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnrecognizedPublicKeyEncodingException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnrecognizedPublicKeyEncodingException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnrecognizedPublicKeyEncodingException_message, v.Message)
+		}
+		return nil
+	})
 }

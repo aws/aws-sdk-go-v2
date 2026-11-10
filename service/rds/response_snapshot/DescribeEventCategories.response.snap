@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeEventCategoriesResponse><DescribeEventCategoriesResult><EventCategoriesMapList><EventCategoriesMap><EventCategories><EventCategory>__Member__</EventCategory><EventCategory>__Member__</EventCategory></EventCategories><SourceType>__SourceType__</SourceType></EventCategoriesMap><EventCategoriesMap><EventCategories><EventCategory>__Member__</EventCategory><EventCategory>__Member__</EventCategory></EventCategories><SourceType>__SourceType__</SourceType></EventCategoriesMap></EventCategoriesMapList></DescribeEventCategoriesResult></DescribeEventCategoriesResponse>

@@ -4,6 +4,8 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -91,6 +93,27 @@ type ModifyCurrentDBClusterCapacityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyCurrentDBClusterCapacityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyCurrentDBClusterCapacityMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyCurrentDBClusterCapacityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Capacity != nil {
+		s.WriteInt32(schemas.ModifyCurrentDBClusterCapacityMessage_Capacity, *v.Capacity)
+	}
+	if v.DBClusterIdentifier != nil {
+		s.WriteString(schemas.ModifyCurrentDBClusterCapacityMessage_DBClusterIdentifier, *v.DBClusterIdentifier)
+	}
+	if v.SecondsBeforeTimeout != nil {
+		s.WriteInt32(schemas.ModifyCurrentDBClusterCapacityMessage_SecondsBeforeTimeout, *v.SecondsBeforeTimeout)
+	}
+	if v.TimeoutAction != nil {
+		s.WriteString(schemas.ModifyCurrentDBClusterCapacityMessage_TimeoutAction, *v.TimeoutAction)
+	}
+}
+
 type ModifyCurrentDBClusterCapacityOutput struct {
 
 	// The current capacity of the DB cluster.
@@ -116,13 +139,56 @@ type ModifyCurrentDBClusterCapacityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyCurrentDBClusterCapacityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DBClusterCapacityInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyCurrentDBClusterCapacityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentCapacity != nil {
+		s.WriteInt32(schemas.DBClusterCapacityInfo_CurrentCapacity, *v.CurrentCapacity)
+	}
+	if v.DBClusterIdentifier != nil {
+		s.WriteString(schemas.DBClusterCapacityInfo_DBClusterIdentifier, *v.DBClusterIdentifier)
+	}
+	if v.PendingCapacity != nil {
+		s.WriteInt32(schemas.DBClusterCapacityInfo_PendingCapacity, *v.PendingCapacity)
+	}
+	if v.SecondsBeforeTimeout != nil {
+		s.WriteInt32(schemas.DBClusterCapacityInfo_SecondsBeforeTimeout, *v.SecondsBeforeTimeout)
+	}
+	if v.TimeoutAction != nil {
+		s.WriteString(schemas.DBClusterCapacityInfo_TimeoutAction, *v.TimeoutAction)
+	}
+}
+func (v *ModifyCurrentDBClusterCapacityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DBClusterCapacityInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DBClusterCapacityInfo_CurrentCapacity:
+			v.CurrentCapacity = new(int32)
+			return d.ReadInt32(schemas.DBClusterCapacityInfo_CurrentCapacity, v.CurrentCapacity)
+		case schemas.DBClusterCapacityInfo_DBClusterIdentifier:
+			v.DBClusterIdentifier = new(string)
+			return d.ReadString(schemas.DBClusterCapacityInfo_DBClusterIdentifier, v.DBClusterIdentifier)
+		case schemas.DBClusterCapacityInfo_PendingCapacity:
+			v.PendingCapacity = new(int32)
+			return d.ReadInt32(schemas.DBClusterCapacityInfo_PendingCapacity, v.PendingCapacity)
+		case schemas.DBClusterCapacityInfo_SecondsBeforeTimeout:
+			v.SecondsBeforeTimeout = new(int32)
+			return d.ReadInt32(schemas.DBClusterCapacityInfo_SecondsBeforeTimeout, v.SecondsBeforeTimeout)
+		case schemas.DBClusterCapacityInfo_TimeoutAction:
+			v.TimeoutAction = new(string)
+			return d.ReadString(schemas.DBClusterCapacityInfo_TimeoutAction, v.TimeoutAction)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyCurrentDBClusterCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyCurrentDBClusterCapacity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyCurrentDBClusterCapacity, schemas.ModifyCurrentDBClusterCapacityMessage, schemas.DBClusterCapacityInfo)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyCurrentDBClusterCapacity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyCurrentDBClusterCapacity, schemas.ModifyCurrentDBClusterCapacityMessage, schemas.DBClusterCapacityInfo), output: &ModifyCurrentDBClusterCapacityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

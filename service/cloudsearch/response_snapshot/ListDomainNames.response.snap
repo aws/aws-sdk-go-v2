@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListDomainNamesResponse><ListDomainNamesResult><DomainNames><entry><key>key0</key><value>__Value__</value></entry></DomainNames></ListDomainNamesResult></ListDomainNamesResponse>

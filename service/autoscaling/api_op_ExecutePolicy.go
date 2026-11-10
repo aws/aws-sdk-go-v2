@@ -4,6 +4,8 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,52 @@ type ExecutePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecutePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecutePolicyType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecutePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.ExecutePolicyType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.BreachThreshold != nil {
+		s.WriteFloat64(schemas.ExecutePolicyType_BreachThreshold, *v.BreachThreshold)
+	}
+	if v.HonorCooldown != nil {
+		s.WriteBool(schemas.ExecutePolicyType_HonorCooldown, *v.HonorCooldown)
+	}
+	if v.MetricValue != nil {
+		s.WriteFloat64(schemas.ExecutePolicyType_MetricValue, *v.MetricValue)
+	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.ExecutePolicyType_PolicyName, *v.PolicyName)
+	}
+}
+func (v *ExecutePolicyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecutePolicyType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecutePolicyType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.ExecutePolicyType_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.ExecutePolicyType_BreachThreshold:
+			v.BreachThreshold = new(float64)
+			return d.ReadFloat64(schemas.ExecutePolicyType_BreachThreshold, v.BreachThreshold)
+		case schemas.ExecutePolicyType_HonorCooldown:
+			v.HonorCooldown = new(bool)
+			return d.ReadBool(schemas.ExecutePolicyType_HonorCooldown, v.HonorCooldown)
+		case schemas.ExecutePolicyType_MetricValue:
+			v.MetricValue = new(float64)
+			return d.ReadFloat64(schemas.ExecutePolicyType_MetricValue, v.MetricValue)
+		case schemas.ExecutePolicyType_PolicyName:
+			v.PolicyName = new(string)
+			return d.ReadString(schemas.ExecutePolicyType_PolicyName, v.PolicyName)
+		}
+		return nil
+	})
+}
+
 type ExecutePolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -70,13 +118,26 @@ type ExecutePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecutePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecutePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ExecutePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExecutePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpExecutePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecutePolicy, schemas.ExecutePolicyType, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpExecutePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecutePolicy, schemas.ExecutePolicyType, nil), output: &ExecutePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package iam
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -305,6 +307,54 @@ type SimulatePrincipalPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SimulatePrincipalPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SimulatePrincipalPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SimulatePrincipalPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionNames != nil {
+		serializeActionNameListType(s, schemas.SimulatePrincipalPolicyRequest_ActionNames, v.ActionNames)
+	}
+	if v.CallerArn != nil {
+		s.WriteString(schemas.SimulatePrincipalPolicyRequest_CallerArn, *v.CallerArn)
+	}
+	if v.ContextEntries != nil {
+		serializeContextEntryListType(s, schemas.SimulatePrincipalPolicyRequest_ContextEntries, v.ContextEntries)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.SimulatePrincipalPolicyRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.SimulatePrincipalPolicyRequest_MaxItems, *v.MaxItems)
+	}
+	if v.PermissionsBoundaryPolicyInputList != nil {
+		serializeSimulationPolicyListType(s, schemas.SimulatePrincipalPolicyRequest_PermissionsBoundaryPolicyInputList, v.PermissionsBoundaryPolicyInputList)
+	}
+	if v.PolicyExclusionList != nil {
+		serializePolicyExclusionsListType(s, schemas.SimulatePrincipalPolicyRequest_PolicyExclusionList, v.PolicyExclusionList)
+	}
+	if v.PolicyInputList != nil {
+		serializeSimulationPolicyListType(s, schemas.SimulatePrincipalPolicyRequest_PolicyInputList, v.PolicyInputList)
+	}
+	if v.PolicySourceArn != nil {
+		s.WriteString(schemas.SimulatePrincipalPolicyRequest_PolicySourceArn, *v.PolicySourceArn)
+	}
+	if v.ResourceArns != nil {
+		serializeResourceNameListType(s, schemas.SimulatePrincipalPolicyRequest_ResourceArns, v.ResourceArns)
+	}
+	if v.ResourceHandlingOption != nil {
+		s.WriteString(schemas.SimulatePrincipalPolicyRequest_ResourceHandlingOption, *v.ResourceHandlingOption)
+	}
+	if v.ResourceOwner != nil {
+		s.WriteString(schemas.SimulatePrincipalPolicyRequest_ResourceOwner, *v.ResourceOwner)
+	}
+	if v.ResourcePolicy != nil {
+		s.WriteString(schemas.SimulatePrincipalPolicyRequest_ResourcePolicy, *v.ResourcePolicy)
+	}
+}
+
 // Contains the response to a successful [SimulatePrincipalPolicy] or [SimulateCustomPolicy] request.
 //
 // [SimulatePrincipalPolicy]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulatePrincipalPolicy.html
@@ -332,13 +382,42 @@ type SimulatePrincipalPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SimulatePrincipalPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SimulatePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SimulatePrincipalPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationResults != nil {
+		serializeEvaluationResultsListType(s, schemas.SimulatePolicyResponse_EvaluationResults, v.EvaluationResults)
+	}
+	if v.IsTruncated != false {
+		s.WriteBool(schemas.SimulatePolicyResponse_IsTruncated, v.IsTruncated)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.SimulatePolicyResponse_Marker, *v.Marker)
+	}
+}
+func (v *SimulatePrincipalPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SimulatePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SimulatePolicyResponse_EvaluationResults:
+			return deserializeEvaluationResultsListType(d, schemas.SimulatePolicyResponse_EvaluationResults, &v.EvaluationResults)
+		case schemas.SimulatePolicyResponse_IsTruncated:
+			return d.ReadBool(schemas.SimulatePolicyResponse_IsTruncated, &v.IsTruncated)
+		case schemas.SimulatePolicyResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.SimulatePolicyResponse_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSimulatePrincipalPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSimulatePrincipalPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SimulatePrincipalPolicy, schemas.SimulatePrincipalPolicyRequest, schemas.SimulatePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSimulatePrincipalPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SimulatePrincipalPolicy, schemas.SimulatePrincipalPolicyRequest, schemas.SimulatePolicyResponse), output: &SimulatePrincipalPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

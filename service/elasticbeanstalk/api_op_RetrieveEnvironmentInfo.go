@@ -4,7 +4,9 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,24 @@ type RetrieveEnvironmentInfoInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetrieveEnvironmentInfoInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrieveEnvironmentInfoMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetrieveEnvironmentInfoInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.RetrieveEnvironmentInfoMessage_EnvironmentId, *v.EnvironmentId)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.RetrieveEnvironmentInfoMessage_EnvironmentName, *v.EnvironmentName)
+	}
+	if v.InfoType != "" {
+		s.WriteString(schemas.RetrieveEnvironmentInfoMessage_InfoType, string(v.InfoType))
+	}
+}
+
 // Result message containing a description of the requested environment info.
 type RetrieveEnvironmentInfoOutput struct {
 
@@ -67,13 +87,31 @@ type RetrieveEnvironmentInfoOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetrieveEnvironmentInfoOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrieveEnvironmentInfoResultMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetrieveEnvironmentInfoOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentInfo != nil {
+		serializeEnvironmentInfoDescriptionList(s, schemas.RetrieveEnvironmentInfoResultMessage_EnvironmentInfo, v.EnvironmentInfo)
+	}
+}
+func (v *RetrieveEnvironmentInfoOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetrieveEnvironmentInfoResultMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetrieveEnvironmentInfoResultMessage_EnvironmentInfo:
+			return deserializeEnvironmentInfoDescriptionList(d, schemas.RetrieveEnvironmentInfoResultMessage_EnvironmentInfo, &v.EnvironmentInfo)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRetrieveEnvironmentInfoMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRetrieveEnvironmentInfo{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RetrieveEnvironmentInfo, schemas.RetrieveEnvironmentInfoMessage, schemas.RetrieveEnvironmentInfoResultMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRetrieveEnvironmentInfo{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RetrieveEnvironmentInfo, schemas.RetrieveEnvironmentInfoMessage, schemas.RetrieveEnvironmentInfoResultMessage), output: &RetrieveEnvironmentInfoOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

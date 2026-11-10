@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetGroupPolicyResponse><GetGroupPolicyResult><GroupName>__GroupName__</GroupName><PolicyDocument>__PolicyDocument__</PolicyDocument><PolicyName>__PolicyName__</PolicyName></GetGroupPolicyResult></GetGroupPolicyResponse>

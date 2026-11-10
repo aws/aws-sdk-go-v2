@@ -5,7 +5,9 @@ package elasticache
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,30 @@ type DescribeUsersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUsersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUsersMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUsersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Engine != nil {
+		s.WriteString(schemas.DescribeUsersMessage_Engine, *v.Engine)
+	}
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeUsersMessage_Filters, v.Filters)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeUsersMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeUsersMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.DescribeUsersMessage_UserId, *v.UserId)
+	}
+}
+
 type DescribeUsersOutput struct {
 
 	// An optional marker returned from a prior request. Use this marker for
@@ -67,13 +93,37 @@ type DescribeUsersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUsersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUsersResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUsersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeUsersResult_Marker, *v.Marker)
+	}
+	if v.Users != nil {
+		serializeUserList(s, schemas.DescribeUsersResult_Users, v.Users)
+	}
+}
+func (v *DescribeUsersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeUsersResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeUsersResult_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeUsersResult_Marker, v.Marker)
+		case schemas.DescribeUsersResult_Users:
+			return deserializeUserList(d, schemas.DescribeUsersResult_Users, &v.Users)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeUsersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeUsers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUsers, schemas.DescribeUsersMessage, schemas.DescribeUsersResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeUsers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUsers, schemas.DescribeUsersMessage, schemas.DescribeUsersResult), output: &DescribeUsersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

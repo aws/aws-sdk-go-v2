@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<EnableAvailabilityZonesForLoadBalancerResponse><EnableAvailabilityZonesForLoadBalancerResult><AvailabilityZones><member>__Member__</member><member>__Member__</member></AvailabilityZones></EnableAvailabilityZonesForLoadBalancerResult></EnableAvailabilityZonesForLoadBalancerResponse>

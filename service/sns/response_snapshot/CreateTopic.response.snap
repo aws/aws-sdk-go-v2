@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<CreateTopicResponse><CreateTopicResult><TopicArn>__TopicArn__</TopicArn></CreateTopicResult></CreateTopicResponse>

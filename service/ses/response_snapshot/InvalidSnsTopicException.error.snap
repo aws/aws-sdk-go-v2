@@ -1,0 +1,4 @@
+400
+Content-Type: application/xml
+
+<ErrorResponse><Error><Code>InvalidSnsTopic</Code><Topic>__Topic__</Topic><message>__Message__</message></Error></ErrorResponse>

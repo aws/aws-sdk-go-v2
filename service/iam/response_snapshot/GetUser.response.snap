@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetUserResponse><GetUserResult><User><Arn>__Arn__</Arn><CreateDate>2000-01-01T00:00:00Z</CreateDate><PasswordLastUsed>2000-01-01T00:00:00Z</PasswordLastUsed><Path>__Path__</Path><PermissionsBoundary><PermissionsBoundaryArn>__PermissionsBoundaryArn__</PermissionsBoundaryArn><PermissionsBoundaryType>PermissionsBoundaryPolicy</PermissionsBoundaryType></PermissionsBoundary><Tags><member><Key>__Key__</Key><Value>__Value__</Value></member><member><Key>__Key__</Key><Value>__Value__</Value></member></Tags><UserId>__UserId__</UserId><UserName>__UserName__</UserName></User></GetUserResult></GetUserResponse>

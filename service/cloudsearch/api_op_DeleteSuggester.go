@@ -4,7 +4,9 @@ package cloudsearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,21 @@ type DeleteSuggesterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSuggesterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSuggesterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSuggesterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DeleteSuggesterRequest_DomainName, *v.DomainName)
+	}
+	if v.SuggesterName != nil {
+		s.WriteString(schemas.DeleteSuggesterRequest_SuggesterName, *v.SuggesterName)
+	}
+}
+
 // The result of a DeleteSuggester request. Contains the status of the deleted
 // suggester.
 type DeleteSuggesterOutput struct {
@@ -62,13 +79,34 @@ type DeleteSuggesterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSuggesterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSuggesterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSuggesterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Suggester != nil {
+		s.WriteStruct(schemas.DeleteSuggesterResponse_Suggester)
+		v.Suggester.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteSuggesterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSuggesterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSuggesterResponse_Suggester:
+			v.Suggester = &types.SuggesterStatus{}
+			return v.Suggester.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSuggesterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteSuggester{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSuggester, schemas.DeleteSuggesterRequest, schemas.DeleteSuggesterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteSuggester{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSuggester, schemas.DeleteSuggesterRequest, schemas.DeleteSuggesterResponse), output: &DeleteSuggesterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

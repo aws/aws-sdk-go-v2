@@ -5,7 +5,9 @@ package sns
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sns/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sns/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type ListSubscriptionsByTopicInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSubscriptionsByTopicInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSubscriptionsByTopicInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSubscriptionsByTopicInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSubscriptionsByTopicInput_NextToken, *v.NextToken)
+	}
+	if v.TopicArn != nil {
+		s.WriteString(schemas.ListSubscriptionsByTopicInput_TopicArn, *v.TopicArn)
+	}
+}
+
 // Response for ListSubscriptionsByTopic action.
 type ListSubscriptionsByTopicOutput struct {
 
@@ -60,13 +77,37 @@ type ListSubscriptionsByTopicOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSubscriptionsByTopicOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSubscriptionsByTopicResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSubscriptionsByTopicOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSubscriptionsByTopicResponse_NextToken, *v.NextToken)
+	}
+	if v.Subscriptions != nil {
+		serializeSubscriptionsList(s, schemas.ListSubscriptionsByTopicResponse_Subscriptions, v.Subscriptions)
+	}
+}
+func (v *ListSubscriptionsByTopicOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSubscriptionsByTopicResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSubscriptionsByTopicResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSubscriptionsByTopicResponse_NextToken, v.NextToken)
+		case schemas.ListSubscriptionsByTopicResponse_Subscriptions:
+			return deserializeSubscriptionsList(d, schemas.ListSubscriptionsByTopicResponse_Subscriptions, &v.Subscriptions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSubscriptionsByTopicMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListSubscriptionsByTopic{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSubscriptionsByTopic, schemas.ListSubscriptionsByTopicInput, schemas.ListSubscriptionsByTopicResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListSubscriptionsByTopic{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSubscriptionsByTopic, schemas.ListSubscriptionsByTopicInput, schemas.ListSubscriptionsByTopicResponse), output: &ListSubscriptionsByTopicOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

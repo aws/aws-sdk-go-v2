@@ -5,7 +5,9 @@ package elasticbeanstalk
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,24 @@ type ListPlatformVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPlatformVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPlatformVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPlatformVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		serializePlatformFilters(s, schemas.ListPlatformVersionsRequest_Filters, v.Filters)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.ListPlatformVersionsRequest_MaxRecords, *v.MaxRecords)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPlatformVersionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListPlatformVersionsOutput struct {
 
 	// In a paginated request, if this value isn't null , it's the token that you can
@@ -81,13 +101,37 @@ type ListPlatformVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPlatformVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPlatformVersionsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPlatformVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPlatformVersionsResult_NextToken, *v.NextToken)
+	}
+	if v.PlatformSummaryList != nil {
+		serializePlatformSummaryList(s, schemas.ListPlatformVersionsResult_PlatformSummaryList, v.PlatformSummaryList)
+	}
+}
+func (v *ListPlatformVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPlatformVersionsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPlatformVersionsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPlatformVersionsResult_NextToken, v.NextToken)
+		case schemas.ListPlatformVersionsResult_PlatformSummaryList:
+			return deserializePlatformSummaryList(d, schemas.ListPlatformVersionsResult_PlatformSummaryList, &v.PlatformSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPlatformVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListPlatformVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPlatformVersions, schemas.ListPlatformVersionsRequest, schemas.ListPlatformVersionsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListPlatformVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPlatformVersions, schemas.ListPlatformVersionsRequest, schemas.ListPlatformVersionsResult), output: &ListPlatformVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,4 @@
+404
+Content-Type: application/xml
+
+<ErrorResponse><Error><Code>ClusterSnapshotNotFound</Code><message>__Message__</message></Error></ErrorResponse>

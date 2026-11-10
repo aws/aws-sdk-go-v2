@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<SendRawEmailResponse><SendRawEmailResult><MessageId>__MessageId__</MessageId></SendRawEmailResult></SendRawEmailResponse>

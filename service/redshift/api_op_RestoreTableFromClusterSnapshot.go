@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -87,6 +89,42 @@ type RestoreTableFromClusterSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreTableFromClusterSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreTableFromClusterSnapshotMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreTableFromClusterSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.RestoreTableFromClusterSnapshotMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.EnableCaseSensitiveIdentifier != nil {
+		s.WriteBool(schemas.RestoreTableFromClusterSnapshotMessage_EnableCaseSensitiveIdentifier, *v.EnableCaseSensitiveIdentifier)
+	}
+	if v.NewTableName != nil {
+		s.WriteString(schemas.RestoreTableFromClusterSnapshotMessage_NewTableName, *v.NewTableName)
+	}
+	if v.SnapshotIdentifier != nil {
+		s.WriteString(schemas.RestoreTableFromClusterSnapshotMessage_SnapshotIdentifier, *v.SnapshotIdentifier)
+	}
+	if v.SourceDatabaseName != nil {
+		s.WriteString(schemas.RestoreTableFromClusterSnapshotMessage_SourceDatabaseName, *v.SourceDatabaseName)
+	}
+	if v.SourceSchemaName != nil {
+		s.WriteString(schemas.RestoreTableFromClusterSnapshotMessage_SourceSchemaName, *v.SourceSchemaName)
+	}
+	if v.SourceTableName != nil {
+		s.WriteString(schemas.RestoreTableFromClusterSnapshotMessage_SourceTableName, *v.SourceTableName)
+	}
+	if v.TargetDatabaseName != nil {
+		s.WriteString(schemas.RestoreTableFromClusterSnapshotMessage_TargetDatabaseName, *v.TargetDatabaseName)
+	}
+	if v.TargetSchemaName != nil {
+		s.WriteString(schemas.RestoreTableFromClusterSnapshotMessage_TargetSchemaName, *v.TargetSchemaName)
+	}
+}
+
 type RestoreTableFromClusterSnapshotOutput struct {
 
 	// Describes the status of a RestoreTableFromClusterSnapshot operation.
@@ -98,13 +136,34 @@ type RestoreTableFromClusterSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreTableFromClusterSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreTableFromClusterSnapshotResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreTableFromClusterSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TableRestoreStatus != nil {
+		s.WriteStruct(schemas.RestoreTableFromClusterSnapshotResult_TableRestoreStatus)
+		v.TableRestoreStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RestoreTableFromClusterSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreTableFromClusterSnapshotResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreTableFromClusterSnapshotResult_TableRestoreStatus:
+			v.TableRestoreStatus = &types.TableRestoreStatus{}
+			return v.TableRestoreStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRestoreTableFromClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRestoreTableFromClusterSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreTableFromClusterSnapshot, schemas.RestoreTableFromClusterSnapshotMessage, schemas.RestoreTableFromClusterSnapshotResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRestoreTableFromClusterSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreTableFromClusterSnapshot, schemas.RestoreTableFromClusterSnapshotMessage, schemas.RestoreTableFromClusterSnapshotResult), output: &RestoreTableFromClusterSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

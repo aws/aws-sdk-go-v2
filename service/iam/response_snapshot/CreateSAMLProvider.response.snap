@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<CreateSAMLProviderResponse><CreateSAMLProviderResult><SAMLProviderArn>__SAMLProviderArn__</SAMLProviderArn><Tags><member><Key>__Key__</Key><Value>__Value__</Value></member><member><Key>__Key__</Key><Value>__Value__</Value></member></Tags></CreateSAMLProviderResult></CreateSAMLProviderResponse>

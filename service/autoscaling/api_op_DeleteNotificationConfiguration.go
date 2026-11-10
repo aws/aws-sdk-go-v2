@@ -4,6 +4,8 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,34 @@ type DeleteNotificationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteNotificationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteNotificationConfigurationType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteNotificationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.DeleteNotificationConfigurationType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.TopicARN != nil {
+		s.WriteString(schemas.DeleteNotificationConfigurationType_TopicARN, *v.TopicARN)
+	}
+}
+func (v *DeleteNotificationConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteNotificationConfigurationType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteNotificationConfigurationType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.DeleteNotificationConfigurationType_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.DeleteNotificationConfigurationType_TopicARN:
+			v.TopicARN = new(string)
+			return d.ReadString(schemas.DeleteNotificationConfigurationType_TopicARN, v.TopicARN)
+		}
+		return nil
+	})
+}
+
 type DeleteNotificationConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +75,26 @@ type DeleteNotificationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteNotificationConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteNotificationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteNotificationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteNotificationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteNotificationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNotificationConfiguration, schemas.DeleteNotificationConfigurationType, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteNotificationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNotificationConfiguration, schemas.DeleteNotificationConfigurationType, nil), output: &DeleteNotificationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

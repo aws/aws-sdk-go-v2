@@ -4,7 +4,9 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,24 @@ type SetIdentityMailFromDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetIdentityMailFromDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetIdentityMailFromDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetIdentityMailFromDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BehaviorOnMXFailure != "" {
+		s.WriteString(schemas.SetIdentityMailFromDomainRequest_BehaviorOnMXFailure, string(v.BehaviorOnMXFailure))
+	}
+	if v.Identity != nil {
+		s.WriteString(schemas.SetIdentityMailFromDomainRequest_Identity, *v.Identity)
+	}
+	if v.MailFromDomain != nil {
+		s.WriteString(schemas.SetIdentityMailFromDomainRequest_MailFromDomain, *v.MailFromDomain)
+	}
+}
+
 // An empty element returned on a successful request.
 type SetIdentityMailFromDomainOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -76,13 +96,26 @@ type SetIdentityMailFromDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetIdentityMailFromDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetIdentityMailFromDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetIdentityMailFromDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SetIdentityMailFromDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetIdentityMailFromDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetIdentityMailFromDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetIdentityMailFromDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetIdentityMailFromDomain, schemas.SetIdentityMailFromDomainRequest, schemas.SetIdentityMailFromDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSetIdentityMailFromDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetIdentityMailFromDomain, schemas.SetIdentityMailFromDomainRequest, schemas.SetIdentityMailFromDomainResponse), output: &SetIdentityMailFromDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

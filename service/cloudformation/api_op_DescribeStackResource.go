@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,21 @@ type DescribeStackResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStackResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStackResourceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStackResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogicalResourceId != nil {
+		s.WriteString(schemas.DescribeStackResourceInput_LogicalResourceId, *v.LogicalResourceId)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.DescribeStackResourceInput_StackName, *v.StackName)
+	}
+}
+
 // The output for a DescribeStackResource action.
 type DescribeStackResourceOutput struct {
 
@@ -62,13 +79,34 @@ type DescribeStackResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStackResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStackResourceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStackResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StackResourceDetail != nil {
+		s.WriteStruct(schemas.DescribeStackResourceOutput_StackResourceDetail)
+		v.StackResourceDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeStackResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeStackResourceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeStackResourceOutput_StackResourceDetail:
+			v.StackResourceDetail = &types.StackResourceDetail{}
+			return v.StackResourceDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeStackResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeStackResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStackResource, schemas.DescribeStackResourceInput, schemas.DescribeStackResourceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeStackResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStackResource, schemas.DescribeStackResourceInput, schemas.DescribeStackResourceOutput), output: &DescribeStackResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

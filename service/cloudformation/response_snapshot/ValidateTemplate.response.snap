@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ValidateTemplateResponse><ValidateTemplateResult><Capabilities><member>CAPABILITY_IAM</member><member>CAPABILITY_IAM</member></Capabilities><CapabilitiesReason>__CapabilitiesReason__</CapabilitiesReason><DeclaredTransforms><member>__Member__</member><member>__Member__</member></DeclaredTransforms><Description>__Description__</Description><Parameters><member><DefaultValue>__DefaultValue__</DefaultValue><Description>__Description__</Description><NoEcho>true</NoEcho><ParameterKey>__ParameterKey__</ParameterKey></member><member><DefaultValue>__DefaultValue__</DefaultValue><Description>__Description__</Description><NoEcho>true</NoEcho><ParameterKey>__ParameterKey__</ParameterKey></member></Parameters></ValidateTemplateResult></ValidateTemplateResponse>

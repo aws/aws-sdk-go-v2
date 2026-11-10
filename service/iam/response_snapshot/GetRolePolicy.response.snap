@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetRolePolicyResponse><GetRolePolicyResult><PolicyDocument>__PolicyDocument__</PolicyDocument><PolicyName>__PolicyName__</PolicyName><RoleName>__RoleName__</RoleName></GetRolePolicyResult></GetRolePolicyResponse>

@@ -4,6 +4,8 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,34 @@ type DeleteAutoScalingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAutoScalingGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAutoScalingGroupType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAutoScalingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.DeleteAutoScalingGroupType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.ForceDelete != nil {
+		s.WriteBool(schemas.DeleteAutoScalingGroupType_ForceDelete, *v.ForceDelete)
+	}
+}
+func (v *DeleteAutoScalingGroupInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAutoScalingGroupType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAutoScalingGroupType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.DeleteAutoScalingGroupType_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.DeleteAutoScalingGroupType_ForceDelete:
+			v.ForceDelete = new(bool)
+			return d.ReadBool(schemas.DeleteAutoScalingGroupType_ForceDelete, v.ForceDelete)
+		}
+		return nil
+	})
+}
+
 type DeleteAutoScalingGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -67,13 +97,26 @@ type DeleteAutoScalingGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAutoScalingGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAutoScalingGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAutoScalingGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAutoScalingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteAutoScalingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAutoScalingGroup, schemas.DeleteAutoScalingGroupType, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteAutoScalingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAutoScalingGroup, schemas.DeleteAutoScalingGroupType, nil), output: &DeleteAutoScalingGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

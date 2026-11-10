@@ -4,6 +4,8 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,21 @@ type UntagMFADeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UntagMFADeviceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UntagMFADeviceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UntagMFADeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SerialNumber != nil {
+		s.WriteString(schemas.UntagMFADeviceRequest_SerialNumber, *v.SerialNumber)
+	}
+	if v.TagKeys != nil {
+		serializetagKeyListType(s, schemas.UntagMFADeviceRequest_TagKeys, v.TagKeys)
+	}
+}
+
 type UntagMFADeviceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -56,13 +73,26 @@ type UntagMFADeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UntagMFADeviceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UntagMFADeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UntagMFADeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUntagMFADeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpUntagMFADevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UntagMFADevice, schemas.UntagMFADeviceRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpUntagMFADevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UntagMFADevice, schemas.UntagMFADeviceRequest, nil), output: &UntagMFADeviceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ModifyCurrentDBClusterCapacityResponse><ModifyCurrentDBClusterCapacityResult><CurrentCapacity>1</CurrentCapacity><DBClusterIdentifier>__DBClusterIdentifier__</DBClusterIdentifier><PendingCapacity>1</PendingCapacity><SecondsBeforeTimeout>1</SecondsBeforeTimeout><TimeoutAction>__TimeoutAction__</TimeoutAction></ModifyCurrentDBClusterCapacityResult></ModifyCurrentDBClusterCapacityResponse>

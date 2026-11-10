@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ModifyLakehouseConfigurationResponse><ModifyLakehouseConfigurationResult><CatalogArn>__CatalogArn__</CatalogArn><ClusterIdentifier>__ClusterIdentifier__</ClusterIdentifier><LakehouseIdcApplicationArn>__LakehouseIdcApplicationArn__</LakehouseIdcApplicationArn><LakehouseRegistrationStatus>__LakehouseRegistrationStatus__</LakehouseRegistrationStatus></ModifyLakehouseConfigurationResult></ModifyLakehouseConfigurationResponse>

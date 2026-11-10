@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type BatchStopUpdateActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchStopUpdateActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchStopUpdateActionMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchStopUpdateActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheClusterIds != nil {
+		serializeCacheClusterIdList(s, schemas.BatchStopUpdateActionMessage_CacheClusterIds, v.CacheClusterIds)
+	}
+	if v.ReplicationGroupIds != nil {
+		serializeReplicationGroupIdList(s, schemas.BatchStopUpdateActionMessage_ReplicationGroupIds, v.ReplicationGroupIds)
+	}
+	if v.ServiceUpdateName != nil {
+		s.WriteString(schemas.BatchStopUpdateActionMessage_ServiceUpdateName, *v.ServiceUpdateName)
+	}
+}
+
 type BatchStopUpdateActionOutput struct {
 
 	// Update actions that have been processed successfully
@@ -57,13 +77,36 @@ type BatchStopUpdateActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchStopUpdateActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateActionResultsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchStopUpdateActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProcessedUpdateActions != nil {
+		serializeProcessedUpdateActionList(s, schemas.UpdateActionResultsMessage_ProcessedUpdateActions, v.ProcessedUpdateActions)
+	}
+	if v.UnprocessedUpdateActions != nil {
+		serializeUnprocessedUpdateActionList(s, schemas.UpdateActionResultsMessage_UnprocessedUpdateActions, v.UnprocessedUpdateActions)
+	}
+}
+func (v *BatchStopUpdateActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateActionResultsMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateActionResultsMessage_ProcessedUpdateActions:
+			return deserializeProcessedUpdateActionList(d, schemas.UpdateActionResultsMessage_ProcessedUpdateActions, &v.ProcessedUpdateActions)
+		case schemas.UpdateActionResultsMessage_UnprocessedUpdateActions:
+			return deserializeUnprocessedUpdateActionList(d, schemas.UpdateActionResultsMessage_UnprocessedUpdateActions, &v.UnprocessedUpdateActions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchStopUpdateActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpBatchStopUpdateAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchStopUpdateAction, schemas.BatchStopUpdateActionMessage, schemas.UpdateActionResultsMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpBatchStopUpdateAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchStopUpdateAction, schemas.BatchStopUpdateActionMessage, schemas.UpdateActionResultsMessage), output: &BatchStopUpdateActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

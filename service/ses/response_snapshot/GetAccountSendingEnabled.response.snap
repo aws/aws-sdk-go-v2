@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetAccountSendingEnabledResponse><GetAccountSendingEnabledResult><Enabled>true</Enabled></GetAccountSendingEnabledResult></GetAccountSendingEnabledResponse>

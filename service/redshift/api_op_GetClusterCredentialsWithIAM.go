@@ -4,6 +4,8 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -59,6 +61,27 @@ type GetClusterCredentialsWithIAMInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetClusterCredentialsWithIAMInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetClusterCredentialsWithIAMMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetClusterCredentialsWithIAMInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.GetClusterCredentialsWithIAMMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.CustomDomainName != nil {
+		s.WriteString(schemas.GetClusterCredentialsWithIAMMessage_CustomDomainName, *v.CustomDomainName)
+	}
+	if v.DbName != nil {
+		s.WriteString(schemas.GetClusterCredentialsWithIAMMessage_DbName, *v.DbName)
+	}
+	if v.DurationSeconds != nil {
+		s.WriteInt32(schemas.GetClusterCredentialsWithIAMMessage_DurationSeconds, *v.DurationSeconds)
+	}
+}
+
 type GetClusterCredentialsWithIAMOutput struct {
 
 	// A temporary password that you provide when you connect to a database.
@@ -81,13 +104,50 @@ type GetClusterCredentialsWithIAMOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetClusterCredentialsWithIAMOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterExtendedCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetClusterCredentialsWithIAMOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DbPassword != nil {
+		s.WriteString(schemas.ClusterExtendedCredentials_DbPassword, *v.DbPassword)
+	}
+	if v.DbUser != nil {
+		s.WriteString(schemas.ClusterExtendedCredentials_DbUser, *v.DbUser)
+	}
+	if v.Expiration != nil {
+		s.WriteTime(schemas.ClusterExtendedCredentials_Expiration, *v.Expiration)
+	}
+	if v.NextRefreshTime != nil {
+		s.WriteTime(schemas.ClusterExtendedCredentials_NextRefreshTime, *v.NextRefreshTime)
+	}
+}
+func (v *GetClusterCredentialsWithIAMOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterExtendedCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterExtendedCredentials_DbPassword:
+			v.DbPassword = new(string)
+			return d.ReadString(schemas.ClusterExtendedCredentials_DbPassword, v.DbPassword)
+		case schemas.ClusterExtendedCredentials_DbUser:
+			v.DbUser = new(string)
+			return d.ReadString(schemas.ClusterExtendedCredentials_DbUser, v.DbUser)
+		case schemas.ClusterExtendedCredentials_Expiration:
+			v.Expiration = new(time.Time)
+			return d.ReadTime(schemas.ClusterExtendedCredentials_Expiration, v.Expiration)
+		case schemas.ClusterExtendedCredentials_NextRefreshTime:
+			v.NextRefreshTime = new(time.Time)
+			return d.ReadTime(schemas.ClusterExtendedCredentials_NextRefreshTime, v.NextRefreshTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetClusterCredentialsWithIAMMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetClusterCredentialsWithIAM{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetClusterCredentialsWithIAM, schemas.GetClusterCredentialsWithIAMMessage, schemas.ClusterExtendedCredentials)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetClusterCredentialsWithIAM{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetClusterCredentialsWithIAM, schemas.GetClusterCredentialsWithIAMMessage, schemas.ClusterExtendedCredentials), output: &GetClusterCredentialsWithIAMOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

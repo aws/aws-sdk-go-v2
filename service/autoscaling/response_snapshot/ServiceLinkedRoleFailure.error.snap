@@ -1,0 +1,4 @@
+500
+Content-Type: application/xml
+
+<ErrorResponse><Error><Code>ServiceLinkedRoleFailure</Code><message>__Message__</message></Error></ErrorResponse>

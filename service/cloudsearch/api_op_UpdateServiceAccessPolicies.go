@@ -4,7 +4,9 @@ package cloudsearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,21 @@ type UpdateServiceAccessPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceAccessPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceAccessPoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceAccessPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessPolicies != nil {
+		s.WriteString(schemas.UpdateServiceAccessPoliciesRequest_AccessPolicies, *v.AccessPolicies)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.UpdateServiceAccessPoliciesRequest_DomainName, *v.DomainName)
+	}
+}
+
 // The result of an UpdateServiceAccessPolicies request. Contains the new access
 // policies.
 type UpdateServiceAccessPoliciesOutput struct {
@@ -62,13 +79,34 @@ type UpdateServiceAccessPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceAccessPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceAccessPoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceAccessPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessPolicies != nil {
+		s.WriteStruct(schemas.UpdateServiceAccessPoliciesResponse_AccessPolicies)
+		v.AccessPolicies.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateServiceAccessPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServiceAccessPoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServiceAccessPoliciesResponse_AccessPolicies:
+			v.AccessPolicies = &types.AccessPoliciesStatus{}
+			return v.AccessPolicies.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateServiceAccessPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateServiceAccessPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceAccessPolicies, schemas.UpdateServiceAccessPoliciesRequest, schemas.UpdateServiceAccessPoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpUpdateServiceAccessPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceAccessPolicies, schemas.UpdateServiceAccessPoliciesRequest, schemas.UpdateServiceAccessPoliciesResponse), output: &UpdateServiceAccessPoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

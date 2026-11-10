@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DeletePartnerResponse><DeletePartnerResult><DatabaseName>__DatabaseName__</DatabaseName><PartnerName>__PartnerName__</PartnerName></DeletePartnerResult></DeletePartnerResponse>

@@ -5,6 +5,8 @@ package rds
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -82,6 +84,27 @@ type DownloadDBLogFilePortionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DownloadDBLogFilePortionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DownloadDBLogFilePortionMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DownloadDBLogFilePortionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstanceIdentifier != nil {
+		s.WriteString(schemas.DownloadDBLogFilePortionMessage_DBInstanceIdentifier, *v.DBInstanceIdentifier)
+	}
+	if v.LogFileName != nil {
+		s.WriteString(schemas.DownloadDBLogFilePortionMessage_LogFileName, *v.LogFileName)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DownloadDBLogFilePortionMessage_Marker, *v.Marker)
+	}
+	if v.NumberOfLines != nil {
+		s.WriteInt32(schemas.DownloadDBLogFilePortionMessage_NumberOfLines, *v.NumberOfLines)
+	}
+}
+
 // This data type is used as a response element to DownloadDBLogFilePortion .
 type DownloadDBLogFilePortionOutput struct {
 
@@ -100,13 +123,44 @@ type DownloadDBLogFilePortionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DownloadDBLogFilePortionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DownloadDBLogFilePortionDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DownloadDBLogFilePortionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalDataPending != nil {
+		s.WriteBool(schemas.DownloadDBLogFilePortionDetails_AdditionalDataPending, *v.AdditionalDataPending)
+	}
+	if v.LogFileData != nil {
+		s.WriteString(schemas.DownloadDBLogFilePortionDetails_LogFileData, *v.LogFileData)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DownloadDBLogFilePortionDetails_Marker, *v.Marker)
+	}
+}
+func (v *DownloadDBLogFilePortionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DownloadDBLogFilePortionDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DownloadDBLogFilePortionDetails_AdditionalDataPending:
+			v.AdditionalDataPending = new(bool)
+			return d.ReadBool(schemas.DownloadDBLogFilePortionDetails_AdditionalDataPending, v.AdditionalDataPending)
+		case schemas.DownloadDBLogFilePortionDetails_LogFileData:
+			v.LogFileData = new(string)
+			return d.ReadString(schemas.DownloadDBLogFilePortionDetails_LogFileData, v.LogFileData)
+		case schemas.DownloadDBLogFilePortionDetails_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DownloadDBLogFilePortionDetails_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDownloadDBLogFilePortionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDownloadDBLogFilePortion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DownloadDBLogFilePortion, schemas.DownloadDBLogFilePortionMessage, schemas.DownloadDBLogFilePortionDetails)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDownloadDBLogFilePortion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DownloadDBLogFilePortion, schemas.DownloadDBLogFilePortionMessage, schemas.DownloadDBLogFilePortionDetails), output: &DownloadDBLogFilePortionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

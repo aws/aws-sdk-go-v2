@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetAccountPropertiesResponse><GetAccountPropertiesResult><Properties><entry><key>key0</key><value>__Value__</value></entry></Properties></GetAccountPropertiesResult></GetAccountPropertiesResponse>

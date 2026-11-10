@@ -5,7 +5,9 @@ package neptune
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,24 @@ type DescribeGlobalClustersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGlobalClustersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGlobalClustersMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGlobalClustersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalClusterIdentifier != nil {
+		s.WriteString(schemas.DescribeGlobalClustersMessage_GlobalClusterIdentifier, *v.GlobalClusterIdentifier)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeGlobalClustersMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeGlobalClustersMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type DescribeGlobalClustersOutput struct {
 
 	// The list of global clusters and instances returned by this request.
@@ -68,13 +88,37 @@ type DescribeGlobalClustersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGlobalClustersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GlobalClustersMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGlobalClustersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalClusters != nil {
+		serializeGlobalClusterList(s, schemas.GlobalClustersMessage_GlobalClusters, v.GlobalClusters)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.GlobalClustersMessage_Marker, *v.Marker)
+	}
+}
+func (v *DescribeGlobalClustersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GlobalClustersMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GlobalClustersMessage_GlobalClusters:
+			return deserializeGlobalClusterList(d, schemas.GlobalClustersMessage_GlobalClusters, &v.GlobalClusters)
+		case schemas.GlobalClustersMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.GlobalClustersMessage_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeGlobalClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeGlobalClusters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGlobalClusters, schemas.DescribeGlobalClustersMessage, schemas.GlobalClustersMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeGlobalClusters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGlobalClusters, schemas.DescribeGlobalClustersMessage, schemas.GlobalClustersMessage), output: &DescribeGlobalClustersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

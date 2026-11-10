@@ -5,7 +5,9 @@ package rds
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -110,6 +112,36 @@ type DescribeDBSnapshotTenantDatabasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBSnapshotTenantDatabasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDBSnapshotTenantDatabasesMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBSnapshotTenantDatabasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstanceIdentifier != nil {
+		s.WriteString(schemas.DescribeDBSnapshotTenantDatabasesMessage_DBInstanceIdentifier, *v.DBInstanceIdentifier)
+	}
+	if v.DBSnapshotIdentifier != nil {
+		s.WriteString(schemas.DescribeDBSnapshotTenantDatabasesMessage_DBSnapshotIdentifier, *v.DBSnapshotIdentifier)
+	}
+	if v.DbiResourceId != nil {
+		s.WriteString(schemas.DescribeDBSnapshotTenantDatabasesMessage_DbiResourceId, *v.DbiResourceId)
+	}
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeDBSnapshotTenantDatabasesMessage_Filters, v.Filters)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDBSnapshotTenantDatabasesMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeDBSnapshotTenantDatabasesMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.SnapshotType != nil {
+		s.WriteString(schemas.DescribeDBSnapshotTenantDatabasesMessage_SnapshotType, *v.SnapshotType)
+	}
+}
+
 type DescribeDBSnapshotTenantDatabasesOutput struct {
 
 	// A list of DB snapshot tenant databases.
@@ -126,13 +158,37 @@ type DescribeDBSnapshotTenantDatabasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBSnapshotTenantDatabasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DBSnapshotTenantDatabasesMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBSnapshotTenantDatabasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBSnapshotTenantDatabases != nil {
+		serializeDBSnapshotTenantDatabasesList(s, schemas.DBSnapshotTenantDatabasesMessage_DBSnapshotTenantDatabases, v.DBSnapshotTenantDatabases)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DBSnapshotTenantDatabasesMessage_Marker, *v.Marker)
+	}
+}
+func (v *DescribeDBSnapshotTenantDatabasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DBSnapshotTenantDatabasesMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DBSnapshotTenantDatabasesMessage_DBSnapshotTenantDatabases:
+			return deserializeDBSnapshotTenantDatabasesList(d, schemas.DBSnapshotTenantDatabasesMessage_DBSnapshotTenantDatabases, &v.DBSnapshotTenantDatabases)
+		case schemas.DBSnapshotTenantDatabasesMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DBSnapshotTenantDatabasesMessage_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDBSnapshotTenantDatabasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBSnapshotTenantDatabases{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBSnapshotTenantDatabases, schemas.DescribeDBSnapshotTenantDatabasesMessage, schemas.DBSnapshotTenantDatabasesMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeDBSnapshotTenantDatabases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBSnapshotTenantDatabases, schemas.DescribeDBSnapshotTenantDatabasesMessage, schemas.DBSnapshotTenantDatabasesMessage), output: &DescribeDBSnapshotTenantDatabasesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

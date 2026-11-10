@@ -5,6 +5,8 @@ package iam
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,24 @@ type ListGroupPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroupPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroupPoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroupPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupName != nil {
+		s.WriteString(schemas.ListGroupPoliciesRequest_GroupName, *v.GroupName)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListGroupPoliciesRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListGroupPoliciesRequest_MaxItems, *v.MaxItems)
+	}
+}
+
 // Contains the response to a successful [ListGroupPolicies] request.
 //
 // [ListGroupPolicies]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListGroupPolicies.html
@@ -103,13 +123,42 @@ type ListGroupPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroupPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroupPoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroupPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsTruncated != false {
+		s.WriteBool(schemas.ListGroupPoliciesResponse_IsTruncated, v.IsTruncated)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListGroupPoliciesResponse_Marker, *v.Marker)
+	}
+	if v.PolicyNames != nil {
+		serializepolicyNameListType(s, schemas.ListGroupPoliciesResponse_PolicyNames, v.PolicyNames)
+	}
+}
+func (v *ListGroupPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGroupPoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGroupPoliciesResponse_IsTruncated:
+			return d.ReadBool(schemas.ListGroupPoliciesResponse_IsTruncated, &v.IsTruncated)
+		case schemas.ListGroupPoliciesResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListGroupPoliciesResponse_Marker, v.Marker)
+		case schemas.ListGroupPoliciesResponse_PolicyNames:
+			return deserializepolicyNameListType(d, schemas.ListGroupPoliciesResponse_PolicyNames, &v.PolicyNames)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGroupPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListGroupPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroupPolicies, schemas.ListGroupPoliciesRequest, schemas.ListGroupPoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListGroupPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroupPolicies, schemas.ListGroupPoliciesRequest, schemas.ListGroupPoliciesResponse), output: &ListGroupPoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

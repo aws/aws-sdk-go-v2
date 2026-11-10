@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,24 @@ type RevokeCacheSecurityGroupIngressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokeCacheSecurityGroupIngressInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevokeCacheSecurityGroupIngressMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeCacheSecurityGroupIngressInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheSecurityGroupName != nil {
+		s.WriteString(schemas.RevokeCacheSecurityGroupIngressMessage_CacheSecurityGroupName, *v.CacheSecurityGroupName)
+	}
+	if v.EC2SecurityGroupName != nil {
+		s.WriteString(schemas.RevokeCacheSecurityGroupIngressMessage_EC2SecurityGroupName, *v.EC2SecurityGroupName)
+	}
+	if v.EC2SecurityGroupOwnerId != nil {
+		s.WriteString(schemas.RevokeCacheSecurityGroupIngressMessage_EC2SecurityGroupOwnerId, *v.EC2SecurityGroupOwnerId)
+	}
+}
+
 type RevokeCacheSecurityGroupIngressOutput struct {
 
 	// Represents the output of one of the following operations:
@@ -65,13 +85,34 @@ type RevokeCacheSecurityGroupIngressOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokeCacheSecurityGroupIngressOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevokeCacheSecurityGroupIngressResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeCacheSecurityGroupIngressOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheSecurityGroup != nil {
+		s.WriteStruct(schemas.RevokeCacheSecurityGroupIngressResult_CacheSecurityGroup)
+		v.CacheSecurityGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RevokeCacheSecurityGroupIngressOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RevokeCacheSecurityGroupIngressResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RevokeCacheSecurityGroupIngressResult_CacheSecurityGroup:
+			v.CacheSecurityGroup = &types.CacheSecurityGroup{}
+			return v.CacheSecurityGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRevokeCacheSecurityGroupIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRevokeCacheSecurityGroupIngress{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeCacheSecurityGroupIngress, schemas.RevokeCacheSecurityGroupIngressMessage, schemas.RevokeCacheSecurityGroupIngressResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRevokeCacheSecurityGroupIngress{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeCacheSecurityGroupIngress, schemas.RevokeCacheSecurityGroupIngressMessage, schemas.RevokeCacheSecurityGroupIngressResult), output: &RevokeCacheSecurityGroupIngressOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

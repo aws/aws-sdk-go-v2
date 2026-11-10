@@ -4,7 +4,9 @@ package elasticloadbalancingv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -168,6 +170,71 @@ type CreateTargetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTargetGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTargetGroupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTargetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HealthCheckEnabled != nil {
+		s.WriteBool(schemas.CreateTargetGroupInput_HealthCheckEnabled, *v.HealthCheckEnabled)
+	}
+	if v.HealthCheckIntervalSeconds != nil {
+		s.WriteInt32(schemas.CreateTargetGroupInput_HealthCheckIntervalSeconds, *v.HealthCheckIntervalSeconds)
+	}
+	if v.HealthCheckPath != nil {
+		s.WriteString(schemas.CreateTargetGroupInput_HealthCheckPath, *v.HealthCheckPath)
+	}
+	if v.HealthCheckPort != nil {
+		s.WriteString(schemas.CreateTargetGroupInput_HealthCheckPort, *v.HealthCheckPort)
+	}
+	if v.HealthCheckProtocol != "" {
+		s.WriteString(schemas.CreateTargetGroupInput_HealthCheckProtocol, string(v.HealthCheckProtocol))
+	}
+	if v.HealthCheckTimeoutSeconds != nil {
+		s.WriteInt32(schemas.CreateTargetGroupInput_HealthCheckTimeoutSeconds, *v.HealthCheckTimeoutSeconds)
+	}
+	if v.HealthyThresholdCount != nil {
+		s.WriteInt32(schemas.CreateTargetGroupInput_HealthyThresholdCount, *v.HealthyThresholdCount)
+	}
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.CreateTargetGroupInput_IpAddressType, string(v.IpAddressType))
+	}
+	if v.Matcher != nil {
+		s.WriteStruct(schemas.CreateTargetGroupInput_Matcher)
+		v.Matcher.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateTargetGroupInput_Name, *v.Name)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.CreateTargetGroupInput_Port, *v.Port)
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.CreateTargetGroupInput_Protocol, string(v.Protocol))
+	}
+	if v.ProtocolVersion != nil {
+		s.WriteString(schemas.CreateTargetGroupInput_ProtocolVersion, *v.ProtocolVersion)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateTargetGroupInput_Tags, v.Tags)
+	}
+	if v.TargetControlPort != nil {
+		s.WriteInt32(schemas.CreateTargetGroupInput_TargetControlPort, *v.TargetControlPort)
+	}
+	if v.TargetType != "" {
+		s.WriteString(schemas.CreateTargetGroupInput_TargetType, string(v.TargetType))
+	}
+	if v.UnhealthyThresholdCount != nil {
+		s.WriteInt32(schemas.CreateTargetGroupInput_UnhealthyThresholdCount, *v.UnhealthyThresholdCount)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.CreateTargetGroupInput_VpcId, *v.VpcId)
+	}
+}
+
 type CreateTargetGroupOutput struct {
 
 	// Information about the target group.
@@ -179,13 +246,31 @@ type CreateTargetGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTargetGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTargetGroupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTargetGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetGroups != nil {
+		serializeTargetGroups(s, schemas.CreateTargetGroupOutput_TargetGroups, v.TargetGroups)
+	}
+}
+func (v *CreateTargetGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTargetGroupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTargetGroupOutput_TargetGroups:
+			return deserializeTargetGroups(d, schemas.CreateTargetGroupOutput_TargetGroups, &v.TargetGroups)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTargetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateTargetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTargetGroup, schemas.CreateTargetGroupInput, schemas.CreateTargetGroupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateTargetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTargetGroup, schemas.CreateTargetGroupInput, schemas.CreateTargetGroupOutput), output: &CreateTargetGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

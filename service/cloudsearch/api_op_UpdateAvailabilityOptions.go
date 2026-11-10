@@ -4,7 +4,9 @@ package cloudsearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,21 @@ type UpdateAvailabilityOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAvailabilityOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAvailabilityOptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAvailabilityOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.UpdateAvailabilityOptionsRequest_DomainName, *v.DomainName)
+	}
+	if v.MultiAZ != nil {
+		s.WriteBool(schemas.UpdateAvailabilityOptionsRequest_MultiAZ, *v.MultiAZ)
+	}
+}
+
 // The result of a UpdateAvailabilityOptions request. Contains the status of the
 // domain's availability options.
 type UpdateAvailabilityOptionsOutput struct {
@@ -67,13 +84,34 @@ type UpdateAvailabilityOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAvailabilityOptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAvailabilityOptionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAvailabilityOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityOptions != nil {
+		s.WriteStruct(schemas.UpdateAvailabilityOptionsResponse_AvailabilityOptions)
+		v.AvailabilityOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAvailabilityOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAvailabilityOptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAvailabilityOptionsResponse_AvailabilityOptions:
+			v.AvailabilityOptions = &types.AvailabilityOptionsStatus{}
+			return v.AvailabilityOptions.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAvailabilityOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateAvailabilityOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAvailabilityOptions, schemas.UpdateAvailabilityOptionsRequest, schemas.UpdateAvailabilityOptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpUpdateAvailabilityOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAvailabilityOptions, schemas.UpdateAvailabilityOptionsRequest, schemas.UpdateAvailabilityOptionsResponse), output: &UpdateAvailabilityOptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

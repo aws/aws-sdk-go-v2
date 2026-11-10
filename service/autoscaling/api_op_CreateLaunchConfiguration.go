@@ -4,7 +4,9 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -214,6 +216,137 @@ type CreateLaunchConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLaunchConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLaunchConfigurationType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLaunchConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatePublicIpAddress != nil {
+		s.WriteBool(schemas.CreateLaunchConfigurationType_AssociatePublicIpAddress, *v.AssociatePublicIpAddress)
+	}
+	if v.BlockDeviceMappings != nil {
+		serializeBlockDeviceMappings(s, schemas.CreateLaunchConfigurationType_BlockDeviceMappings, v.BlockDeviceMappings)
+	}
+	if v.ClassicLinkVPCId != nil {
+		s.WriteString(schemas.CreateLaunchConfigurationType_ClassicLinkVPCId, *v.ClassicLinkVPCId)
+	}
+	if v.ClassicLinkVPCSecurityGroups != nil {
+		serializeClassicLinkVPCSecurityGroups(s, schemas.CreateLaunchConfigurationType_ClassicLinkVPCSecurityGroups, v.ClassicLinkVPCSecurityGroups)
+	}
+	if v.EbsOptimized != nil {
+		s.WriteBool(schemas.CreateLaunchConfigurationType_EbsOptimized, *v.EbsOptimized)
+	}
+	if v.IamInstanceProfile != nil {
+		s.WriteString(schemas.CreateLaunchConfigurationType_IamInstanceProfile, *v.IamInstanceProfile)
+	}
+	if v.ImageId != nil {
+		s.WriteString(schemas.CreateLaunchConfigurationType_ImageId, *v.ImageId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateLaunchConfigurationType_InstanceId, *v.InstanceId)
+	}
+	if v.InstanceMonitoring != nil {
+		s.WriteStruct(schemas.CreateLaunchConfigurationType_InstanceMonitoring)
+		v.InstanceMonitoring.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.CreateLaunchConfigurationType_InstanceType, *v.InstanceType)
+	}
+	if v.KernelId != nil {
+		s.WriteString(schemas.CreateLaunchConfigurationType_KernelId, *v.KernelId)
+	}
+	if v.KeyName != nil {
+		s.WriteString(schemas.CreateLaunchConfigurationType_KeyName, *v.KeyName)
+	}
+	if v.LaunchConfigurationName != nil {
+		s.WriteString(schemas.CreateLaunchConfigurationType_LaunchConfigurationName, *v.LaunchConfigurationName)
+	}
+	if v.MetadataOptions != nil {
+		s.WriteStruct(schemas.CreateLaunchConfigurationType_MetadataOptions)
+		v.MetadataOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PlacementTenancy != nil {
+		s.WriteString(schemas.CreateLaunchConfigurationType_PlacementTenancy, *v.PlacementTenancy)
+	}
+	if v.RamdiskId != nil {
+		s.WriteString(schemas.CreateLaunchConfigurationType_RamdiskId, *v.RamdiskId)
+	}
+	if v.SecurityGroups != nil {
+		serializeSecurityGroups(s, schemas.CreateLaunchConfigurationType_SecurityGroups, v.SecurityGroups)
+	}
+	if v.SpotPrice != nil {
+		s.WriteString(schemas.CreateLaunchConfigurationType_SpotPrice, *v.SpotPrice)
+	}
+	if v.UserData != nil {
+		s.WriteString(schemas.CreateLaunchConfigurationType_UserData, *v.UserData)
+	}
+}
+func (v *CreateLaunchConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLaunchConfigurationType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLaunchConfigurationType_AssociatePublicIpAddress:
+			v.AssociatePublicIpAddress = new(bool)
+			return d.ReadBool(schemas.CreateLaunchConfigurationType_AssociatePublicIpAddress, v.AssociatePublicIpAddress)
+		case schemas.CreateLaunchConfigurationType_BlockDeviceMappings:
+			return deserializeBlockDeviceMappings(d, schemas.CreateLaunchConfigurationType_BlockDeviceMappings, &v.BlockDeviceMappings)
+		case schemas.CreateLaunchConfigurationType_ClassicLinkVPCId:
+			v.ClassicLinkVPCId = new(string)
+			return d.ReadString(schemas.CreateLaunchConfigurationType_ClassicLinkVPCId, v.ClassicLinkVPCId)
+		case schemas.CreateLaunchConfigurationType_ClassicLinkVPCSecurityGroups:
+			return deserializeClassicLinkVPCSecurityGroups(d, schemas.CreateLaunchConfigurationType_ClassicLinkVPCSecurityGroups, &v.ClassicLinkVPCSecurityGroups)
+		case schemas.CreateLaunchConfigurationType_EbsOptimized:
+			v.EbsOptimized = new(bool)
+			return d.ReadBool(schemas.CreateLaunchConfigurationType_EbsOptimized, v.EbsOptimized)
+		case schemas.CreateLaunchConfigurationType_IamInstanceProfile:
+			v.IamInstanceProfile = new(string)
+			return d.ReadString(schemas.CreateLaunchConfigurationType_IamInstanceProfile, v.IamInstanceProfile)
+		case schemas.CreateLaunchConfigurationType_ImageId:
+			v.ImageId = new(string)
+			return d.ReadString(schemas.CreateLaunchConfigurationType_ImageId, v.ImageId)
+		case schemas.CreateLaunchConfigurationType_InstanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.CreateLaunchConfigurationType_InstanceId, v.InstanceId)
+		case schemas.CreateLaunchConfigurationType_InstanceMonitoring:
+			v.InstanceMonitoring = &types.InstanceMonitoring{}
+			return v.InstanceMonitoring.Deserialize(d)
+		case schemas.CreateLaunchConfigurationType_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.CreateLaunchConfigurationType_InstanceType, v.InstanceType)
+		case schemas.CreateLaunchConfigurationType_KernelId:
+			v.KernelId = new(string)
+			return d.ReadString(schemas.CreateLaunchConfigurationType_KernelId, v.KernelId)
+		case schemas.CreateLaunchConfigurationType_KeyName:
+			v.KeyName = new(string)
+			return d.ReadString(schemas.CreateLaunchConfigurationType_KeyName, v.KeyName)
+		case schemas.CreateLaunchConfigurationType_LaunchConfigurationName:
+			v.LaunchConfigurationName = new(string)
+			return d.ReadString(schemas.CreateLaunchConfigurationType_LaunchConfigurationName, v.LaunchConfigurationName)
+		case schemas.CreateLaunchConfigurationType_MetadataOptions:
+			v.MetadataOptions = &types.InstanceMetadataOptions{}
+			return v.MetadataOptions.Deserialize(d)
+		case schemas.CreateLaunchConfigurationType_PlacementTenancy:
+			v.PlacementTenancy = new(string)
+			return d.ReadString(schemas.CreateLaunchConfigurationType_PlacementTenancy, v.PlacementTenancy)
+		case schemas.CreateLaunchConfigurationType_RamdiskId:
+			v.RamdiskId = new(string)
+			return d.ReadString(schemas.CreateLaunchConfigurationType_RamdiskId, v.RamdiskId)
+		case schemas.CreateLaunchConfigurationType_SecurityGroups:
+			return deserializeSecurityGroups(d, schemas.CreateLaunchConfigurationType_SecurityGroups, &v.SecurityGroups)
+		case schemas.CreateLaunchConfigurationType_SpotPrice:
+			v.SpotPrice = new(string)
+			return d.ReadString(schemas.CreateLaunchConfigurationType_SpotPrice, v.SpotPrice)
+		case schemas.CreateLaunchConfigurationType_UserData:
+			v.UserData = new(string)
+			return d.ReadString(schemas.CreateLaunchConfigurationType_UserData, v.UserData)
+		}
+		return nil
+	})
+}
+
 type CreateLaunchConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -221,13 +354,26 @@ type CreateLaunchConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLaunchConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLaunchConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateLaunchConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLaunchConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateLaunchConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLaunchConfiguration, schemas.CreateLaunchConfigurationType, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateLaunchConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLaunchConfiguration, schemas.CreateLaunchConfigurationType, nil), output: &CreateLaunchConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,4 @@
+400
+Content-Type: application/xml
+
+<ErrorResponse><Error><Code>CustomVerificationEmailTemplateDoesNotExist</Code><CustomVerificationEmailTemplateName>__CustomVerificationEmailTemplateName__</CustomVerificationEmailTemplateName><message>__Message__</message></Error></ErrorResponse>

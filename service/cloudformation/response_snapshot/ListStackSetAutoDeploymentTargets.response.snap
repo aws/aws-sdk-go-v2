@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListStackSetAutoDeploymentTargetsResponse><ListStackSetAutoDeploymentTargetsResult><NextToken>__NextToken__</NextToken><Summaries><member><OrganizationalUnitId>__OrganizationalUnitId__</OrganizationalUnitId><Regions><member>__Member__</member><member>__Member__</member></Regions></member><member><OrganizationalUnitId>__OrganizationalUnitId__</OrganizationalUnitId><Regions><member>__Member__</member><member>__Member__</member></Regions></member></Summaries></ListStackSetAutoDeploymentTargetsResult></ListStackSetAutoDeploymentTargetsResponse>

@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,42 @@ type ModifyDBProxyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyDBProxyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyDBProxyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyDBProxyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Auth != nil {
+		serializeUserAuthConfigList(s, schemas.ModifyDBProxyRequest_Auth, v.Auth)
+	}
+	if v.DBProxyName != nil {
+		s.WriteString(schemas.ModifyDBProxyRequest_DBProxyName, *v.DBProxyName)
+	}
+	if v.DebugLogging != nil {
+		s.WriteBool(schemas.ModifyDBProxyRequest_DebugLogging, *v.DebugLogging)
+	}
+	if v.DefaultAuthScheme != "" {
+		s.WriteString(schemas.ModifyDBProxyRequest_DefaultAuthScheme, string(v.DefaultAuthScheme))
+	}
+	if v.IdleClientTimeout != nil {
+		s.WriteInt32(schemas.ModifyDBProxyRequest_IdleClientTimeout, *v.IdleClientTimeout)
+	}
+	if v.NewDBProxyName != nil {
+		s.WriteString(schemas.ModifyDBProxyRequest_NewDBProxyName, *v.NewDBProxyName)
+	}
+	if v.RequireTLS != nil {
+		s.WriteBool(schemas.ModifyDBProxyRequest_RequireTLS, *v.RequireTLS)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.ModifyDBProxyRequest_RoleArn, *v.RoleArn)
+	}
+	if v.SecurityGroups != nil {
+		serializeStringList(s, schemas.ModifyDBProxyRequest_SecurityGroups, v.SecurityGroups)
+	}
+}
+
 type ModifyDBProxyOutput struct {
 
 	// The DBProxy object representing the new settings for the proxy.
@@ -83,13 +121,34 @@ type ModifyDBProxyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyDBProxyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyDBProxyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyDBProxyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBProxy != nil {
+		s.WriteStruct(schemas.ModifyDBProxyResponse_DBProxy)
+		v.DBProxy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModifyDBProxyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyDBProxyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyDBProxyResponse_DBProxy:
+			v.DBProxy = &types.DBProxy{}
+			return v.DBProxy.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyDBProxyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyDBProxy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBProxy, schemas.ModifyDBProxyRequest, schemas.ModifyDBProxyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyDBProxy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBProxy, schemas.ModifyDBProxyRequest, schemas.ModifyDBProxyResponse), output: &ModifyDBProxyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

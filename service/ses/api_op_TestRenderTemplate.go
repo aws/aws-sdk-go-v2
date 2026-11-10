@@ -4,6 +4,8 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type TestRenderTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestRenderTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestRenderTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestRenderTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateData != nil {
+		s.WriteString(schemas.TestRenderTemplateRequest_TemplateData, *v.TemplateData)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.TestRenderTemplateRequest_TemplateName, *v.TemplateName)
+	}
+}
+
 type TestRenderTemplateOutput struct {
 
 	// The complete MIME message rendered by applying the data in the TemplateData
@@ -55,13 +72,32 @@ type TestRenderTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestRenderTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestRenderTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestRenderTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RenderedTemplate != nil {
+		s.WriteString(schemas.TestRenderTemplateResponse_RenderedTemplate, *v.RenderedTemplate)
+	}
+}
+func (v *TestRenderTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestRenderTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestRenderTemplateResponse_RenderedTemplate:
+			v.RenderedTemplate = new(string)
+			return d.ReadString(schemas.TestRenderTemplateResponse_RenderedTemplate, v.RenderedTemplate)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTestRenderTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpTestRenderTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestRenderTemplate, schemas.TestRenderTemplateRequest, schemas.TestRenderTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpTestRenderTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestRenderTemplate, schemas.TestRenderTemplateRequest, schemas.TestRenderTemplateResponse), output: &TestRenderTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package redshift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,30 @@ type DescribeEndpointAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEndpointAuthorizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEndpointAuthorizationMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEndpointAuthorizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Account != nil {
+		s.WriteString(schemas.DescribeEndpointAuthorizationMessage_Account, *v.Account)
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.DescribeEndpointAuthorizationMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.Grantee != nil {
+		s.WriteBool(schemas.DescribeEndpointAuthorizationMessage_Grantee, *v.Grantee)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeEndpointAuthorizationMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeEndpointAuthorizationMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type DescribeEndpointAuthorizationOutput struct {
 
 	// The authorizations to an endpoint.
@@ -70,13 +96,37 @@ type DescribeEndpointAuthorizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEndpointAuthorizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointAuthorizationList)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEndpointAuthorizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointAuthorizationList != nil {
+		serializeEndpointAuthorizations(s, schemas.EndpointAuthorizationList_EndpointAuthorizationList, v.EndpointAuthorizationList)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.EndpointAuthorizationList_Marker, *v.Marker)
+	}
+}
+func (v *DescribeEndpointAuthorizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndpointAuthorizationList, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndpointAuthorizationList_EndpointAuthorizationList:
+			return deserializeEndpointAuthorizations(d, schemas.EndpointAuthorizationList_EndpointAuthorizationList, &v.EndpointAuthorizationList)
+		case schemas.EndpointAuthorizationList_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.EndpointAuthorizationList_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEndpointAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeEndpointAuthorization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEndpointAuthorization, schemas.DescribeEndpointAuthorizationMessage, schemas.EndpointAuthorizationList)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeEndpointAuthorization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEndpointAuthorization, schemas.DescribeEndpointAuthorizationMessage, schemas.EndpointAuthorizationList), output: &DescribeEndpointAuthorizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

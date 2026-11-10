@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,27 @@ type DescribeDBShardGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBShardGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDBShardGroupsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBShardGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBShardGroupIdentifier != nil {
+		s.WriteString(schemas.DescribeDBShardGroupsMessage_DBShardGroupIdentifier, *v.DBShardGroupIdentifier)
+	}
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeDBShardGroupsMessage_Filters, v.Filters)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDBShardGroupsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeDBShardGroupsMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type DescribeDBShardGroupsOutput struct {
 
 	// Contains a list of DB shard groups for the user.
@@ -69,13 +92,37 @@ type DescribeDBShardGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBShardGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDBShardGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBShardGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBShardGroups != nil {
+		serializeDBShardGroupsList(s, schemas.DescribeDBShardGroupsResponse_DBShardGroups, v.DBShardGroups)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDBShardGroupsResponse_Marker, *v.Marker)
+	}
+}
+func (v *DescribeDBShardGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDBShardGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDBShardGroupsResponse_DBShardGroups:
+			return deserializeDBShardGroupsList(d, schemas.DescribeDBShardGroupsResponse_DBShardGroups, &v.DBShardGroups)
+		case schemas.DescribeDBShardGroupsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeDBShardGroupsResponse_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDBShardGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBShardGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBShardGroups, schemas.DescribeDBShardGroupsMessage, schemas.DescribeDBShardGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeDBShardGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBShardGroups, schemas.DescribeDBShardGroupsMessage, schemas.DescribeDBShardGroupsResponse), output: &DescribeDBShardGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

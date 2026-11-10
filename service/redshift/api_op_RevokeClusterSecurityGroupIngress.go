@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,27 @@ type RevokeClusterSecurityGroupIngressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokeClusterSecurityGroupIngressInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevokeClusterSecurityGroupIngressMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeClusterSecurityGroupIngressInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CIDRIP != nil {
+		s.WriteString(schemas.RevokeClusterSecurityGroupIngressMessage_CIDRIP, *v.CIDRIP)
+	}
+	if v.ClusterSecurityGroupName != nil {
+		s.WriteString(schemas.RevokeClusterSecurityGroupIngressMessage_ClusterSecurityGroupName, *v.ClusterSecurityGroupName)
+	}
+	if v.EC2SecurityGroupName != nil {
+		s.WriteString(schemas.RevokeClusterSecurityGroupIngressMessage_EC2SecurityGroupName, *v.EC2SecurityGroupName)
+	}
+	if v.EC2SecurityGroupOwnerId != nil {
+		s.WriteString(schemas.RevokeClusterSecurityGroupIngressMessage_EC2SecurityGroupOwnerId, *v.EC2SecurityGroupOwnerId)
+	}
+}
+
 type RevokeClusterSecurityGroupIngressOutput struct {
 
 	// Describes a security group.
@@ -68,13 +91,34 @@ type RevokeClusterSecurityGroupIngressOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokeClusterSecurityGroupIngressOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevokeClusterSecurityGroupIngressResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeClusterSecurityGroupIngressOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterSecurityGroup != nil {
+		s.WriteStruct(schemas.RevokeClusterSecurityGroupIngressResult_ClusterSecurityGroup)
+		v.ClusterSecurityGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RevokeClusterSecurityGroupIngressOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RevokeClusterSecurityGroupIngressResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RevokeClusterSecurityGroupIngressResult_ClusterSecurityGroup:
+			v.ClusterSecurityGroup = &types.ClusterSecurityGroup{}
+			return v.ClusterSecurityGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRevokeClusterSecurityGroupIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRevokeClusterSecurityGroupIngress{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeClusterSecurityGroupIngress, schemas.RevokeClusterSecurityGroupIngressMessage, schemas.RevokeClusterSecurityGroupIngressResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRevokeClusterSecurityGroupIngress{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeClusterSecurityGroupIngress, schemas.RevokeClusterSecurityGroupIngressMessage, schemas.RevokeClusterSecurityGroupIngressResult), output: &RevokeClusterSecurityGroupIngressOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -139,6 +141,36 @@ type CreateRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRoleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRoleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRoleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssumeRolePolicyDocument != nil {
+		s.WriteString(schemas.CreateRoleRequest_AssumeRolePolicyDocument, *v.AssumeRolePolicyDocument)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateRoleRequest_Description, *v.Description)
+	}
+	if v.MaxSessionDuration != nil {
+		s.WriteInt32(schemas.CreateRoleRequest_MaxSessionDuration, *v.MaxSessionDuration)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.CreateRoleRequest_Path, *v.Path)
+	}
+	if v.PermissionsBoundary != nil {
+		s.WriteString(schemas.CreateRoleRequest_PermissionsBoundary, *v.PermissionsBoundary)
+	}
+	if v.RoleName != nil {
+		s.WriteString(schemas.CreateRoleRequest_RoleName, *v.RoleName)
+	}
+	if v.Tags != nil {
+		serializetagListType(s, schemas.CreateRoleRequest_Tags, v.Tags)
+	}
+}
+
 // Contains the response to a successful [CreateRole] request.
 //
 // [CreateRole]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
@@ -155,13 +187,34 @@ type CreateRoleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRoleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRoleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRoleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Role != nil {
+		s.WriteStruct(schemas.CreateRoleResponse_Role)
+		v.Role.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateRoleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRoleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRoleResponse_Role:
+			v.Role = &types.Role{}
+			return v.Role.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRole, schemas.CreateRoleRequest, schemas.CreateRoleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRole, schemas.CreateRoleRequest, schemas.CreateRoleResponse), output: &CreateRoleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type DisassociateEnvironmentOperationsRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateEnvironmentOperationsRoleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateEnvironmentOperationsRoleMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateEnvironmentOperationsRoleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.DisassociateEnvironmentOperationsRoleMessage_EnvironmentName, *v.EnvironmentName)
+	}
+}
+
 type DisassociateEnvironmentOperationsRoleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +60,26 @@ type DisassociateEnvironmentOperationsRoleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateEnvironmentOperationsRoleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateEnvironmentOperationsRoleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateEnvironmentOperationsRoleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateEnvironmentOperationsRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDisassociateEnvironmentOperationsRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateEnvironmentOperationsRole, schemas.DisassociateEnvironmentOperationsRoleMessage, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDisassociateEnvironmentOperationsRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateEnvironmentOperationsRole, schemas.DisassociateEnvironmentOperationsRoleMessage, nil), output: &DisassociateEnvironmentOperationsRoleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

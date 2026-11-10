@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeDBParameterGroupsResponse><DescribeDBParameterGroupsResult><DBParameterGroups><DBParameterGroup><DBParameterGroupArn>__DBParameterGroupArn__</DBParameterGroupArn><DBParameterGroupFamily>__DBParameterGroupFamily__</DBParameterGroupFamily><DBParameterGroupName>__DBParameterGroupName__</DBParameterGroupName><Description>__Description__</Description></DBParameterGroup><DBParameterGroup><DBParameterGroupArn>__DBParameterGroupArn__</DBParameterGroupArn><DBParameterGroupFamily>__DBParameterGroupFamily__</DBParameterGroupFamily><DBParameterGroupName>__DBParameterGroupName__</DBParameterGroupName><Description>__Description__</Description></DBParameterGroup></DBParameterGroups><Marker>__Marker__</Marker></DescribeDBParameterGroupsResult></DescribeDBParameterGroupsResponse>

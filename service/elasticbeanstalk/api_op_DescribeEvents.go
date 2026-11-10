@@ -5,7 +5,9 @@ package elasticbeanstalk
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -97,6 +99,51 @@ type DescribeEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEventsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.DescribeEventsMessage_ApplicationName, *v.ApplicationName)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.DescribeEventsMessage_EndTime, *v.EndTime)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.DescribeEventsMessage_EnvironmentId, *v.EnvironmentId)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.DescribeEventsMessage_EnvironmentName, *v.EnvironmentName)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeEventsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeEventsMessage_NextToken, *v.NextToken)
+	}
+	if v.PlatformArn != nil {
+		s.WriteString(schemas.DescribeEventsMessage_PlatformArn, *v.PlatformArn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeEventsMessage_RequestId, *v.RequestId)
+	}
+	if v.Severity != "" {
+		s.WriteString(schemas.DescribeEventsMessage_Severity, string(v.Severity))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.DescribeEventsMessage_StartTime, *v.StartTime)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.DescribeEventsMessage_TemplateName, *v.TemplateName)
+	}
+	if v.VersionLabel != nil {
+		s.WriteString(schemas.DescribeEventsMessage_VersionLabel, *v.VersionLabel)
+	}
+}
+
 // Result message wrapping a list of event descriptions.
 type DescribeEventsOutput struct {
 
@@ -113,13 +160,37 @@ type DescribeEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventDescriptionsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Events != nil {
+		serializeEventDescriptionList(s, schemas.EventDescriptionsMessage_Events, v.Events)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.EventDescriptionsMessage_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventDescriptionsMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventDescriptionsMessage_Events:
+			return deserializeEventDescriptionList(d, schemas.EventDescriptionsMessage_Events, &v.Events)
+		case schemas.EventDescriptionsMessage_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.EventDescriptionsMessage_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEvents, schemas.DescribeEventsMessage, schemas.EventDescriptionsMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEvents, schemas.DescribeEventsMessage, schemas.EventDescriptionsMessage), output: &DescribeEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

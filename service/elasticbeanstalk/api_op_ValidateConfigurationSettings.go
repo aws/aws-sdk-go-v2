@@ -4,7 +4,9 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,27 @@ type ValidateConfigurationSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidateConfigurationSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidateConfigurationSettingsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidateConfigurationSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.ValidateConfigurationSettingsMessage_ApplicationName, *v.ApplicationName)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.ValidateConfigurationSettingsMessage_EnvironmentName, *v.EnvironmentName)
+	}
+	if v.OptionSettings != nil {
+		serializeConfigurationOptionSettingsList(s, schemas.ValidateConfigurationSettingsMessage_OptionSettings, v.OptionSettings)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.ValidateConfigurationSettingsMessage_TemplateName, *v.TemplateName)
+	}
+}
+
 // Provides a list of validation messages.
 type ValidateConfigurationSettingsOutput struct {
 
@@ -67,13 +90,31 @@ type ValidateConfigurationSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidateConfigurationSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigurationSettingsValidationMessages)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidateConfigurationSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Messages != nil {
+		serializeValidationMessagesList(s, schemas.ConfigurationSettingsValidationMessages_Messages, v.Messages)
+	}
+}
+func (v *ValidateConfigurationSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigurationSettingsValidationMessages, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigurationSettingsValidationMessages_Messages:
+			return deserializeValidationMessagesList(d, schemas.ConfigurationSettingsValidationMessages_Messages, &v.Messages)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationValidateConfigurationSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpValidateConfigurationSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidateConfigurationSettings, schemas.ValidateConfigurationSettingsMessage, schemas.ConfigurationSettingsValidationMessages)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpValidateConfigurationSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidateConfigurationSettings, schemas.ValidateConfigurationSettingsMessage, schemas.ConfigurationSettingsValidationMessages), output: &ValidateConfigurationSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

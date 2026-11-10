@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListAccessKeysResponse><ListAccessKeysResult><AccessKeyMetadata><member><AccessKeyId>__AccessKeyId__</AccessKeyId><CreateDate>2000-01-01T00:00:00Z</CreateDate><Status>Active</Status><UserName>__UserName__</UserName></member><member><AccessKeyId>__AccessKeyId__</AccessKeyId><CreateDate>2000-01-01T00:00:00Z</CreateDate><Status>Active</Status><UserName>__UserName__</UserName></member></AccessKeyMetadata><IsTruncated>true</IsTruncated><Marker>__Marker__</Marker></ListAccessKeysResult></ListAccessKeysResponse>

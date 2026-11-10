@@ -4,7 +4,9 @@ package docdb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type DeleteDBClusterSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDBClusterSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDBClusterSnapshotMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDBClusterSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBClusterSnapshotIdentifier != nil {
+		s.WriteString(schemas.DeleteDBClusterSnapshotMessage_DBClusterSnapshotIdentifier, *v.DBClusterSnapshotIdentifier)
+	}
+}
+
 type DeleteDBClusterSnapshotOutput struct {
 
 	// Detailed information about a cluster snapshot.
@@ -52,13 +66,34 @@ type DeleteDBClusterSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDBClusterSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDBClusterSnapshotResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDBClusterSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBClusterSnapshot != nil {
+		s.WriteStruct(schemas.DeleteDBClusterSnapshotResult_DBClusterSnapshot)
+		v.DBClusterSnapshot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteDBClusterSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDBClusterSnapshotResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDBClusterSnapshotResult_DBClusterSnapshot:
+			v.DBClusterSnapshot = &types.DBClusterSnapshot{}
+			return v.DBClusterSnapshot.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDBClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteDBClusterSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDBClusterSnapshot, schemas.DeleteDBClusterSnapshotMessage, schemas.DeleteDBClusterSnapshotResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteDBClusterSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDBClusterSnapshot, schemas.DeleteDBClusterSnapshotMessage, schemas.DeleteDBClusterSnapshotResult), output: &DeleteDBClusterSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

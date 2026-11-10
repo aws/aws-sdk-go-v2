@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetUserPolicyResponse><GetUserPolicyResult><PolicyDocument>__PolicyDocument__</PolicyDocument><PolicyName>__PolicyName__</PolicyName><UserName>__UserName__</UserName></GetUserPolicyResult></GetUserPolicyResponse>

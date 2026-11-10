@@ -4,6 +4,8 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,21 @@ type AddClientIDToOpenIDConnectProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddClientIDToOpenIDConnectProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddClientIDToOpenIDConnectProviderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddClientIDToOpenIDConnectProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientID != nil {
+		s.WriteString(schemas.AddClientIDToOpenIDConnectProviderRequest_ClientID, *v.ClientID)
+	}
+	if v.OpenIDConnectProviderArn != nil {
+		s.WriteString(schemas.AddClientIDToOpenIDConnectProviderRequest_OpenIDConnectProviderArn, *v.OpenIDConnectProviderArn)
+	}
+}
+
 type AddClientIDToOpenIDConnectProviderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +71,26 @@ type AddClientIDToOpenIDConnectProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddClientIDToOpenIDConnectProviderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddClientIDToOpenIDConnectProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AddClientIDToOpenIDConnectProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddClientIDToOpenIDConnectProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpAddClientIDToOpenIDConnectProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddClientIDToOpenIDConnectProvider, schemas.AddClientIDToOpenIDConnectProviderRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpAddClientIDToOpenIDConnectProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddClientIDToOpenIDConnectProvider, schemas.AddClientIDToOpenIDConnectProviderRequest, nil), output: &AddClientIDToOpenIDConnectProviderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

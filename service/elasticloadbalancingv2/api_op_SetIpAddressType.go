@@ -4,7 +4,9 @@ package elasticloadbalancingv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,21 @@ type SetIpAddressTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetIpAddressTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetIpAddressTypeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetIpAddressTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.SetIpAddressTypeInput_IpAddressType, string(v.IpAddressType))
+	}
+	if v.LoadBalancerArn != nil {
+		s.WriteString(schemas.SetIpAddressTypeInput_LoadBalancerArn, *v.LoadBalancerArn)
+	}
+}
+
 type SetIpAddressTypeOutput struct {
 
 	// The IP address type.
@@ -63,13 +80,36 @@ type SetIpAddressTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetIpAddressTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetIpAddressTypeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetIpAddressTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.SetIpAddressTypeOutput_IpAddressType, string(v.IpAddressType))
+	}
+}
+func (v *SetIpAddressTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetIpAddressTypeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetIpAddressTypeOutput_IpAddressType:
+			var ev string
+			if err := d.ReadString(schemas.SetIpAddressTypeOutput_IpAddressType, &ev); err != nil {
+				return err
+			}
+			v.IpAddressType = types.IpAddressType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetIpAddressTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetIpAddressType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetIpAddressType, schemas.SetIpAddressTypeInput, schemas.SetIpAddressTypeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSetIpAddressType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetIpAddressType, schemas.SetIpAddressTypeInput, schemas.SetIpAddressTypeOutput), output: &SetIpAddressTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,18 @@ type DeleteDBParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDBParameterGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDBParameterGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDBParameterGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBParameterGroupName != nil {
+		s.WriteString(schemas.DeleteDBParameterGroupMessage_DBParameterGroupName, *v.DBParameterGroupName)
+	}
+}
+
 type DeleteDBParameterGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +63,26 @@ type DeleteDBParameterGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDBParameterGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDBParameterGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteDBParameterGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDBParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteDBParameterGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDBParameterGroup, schemas.DeleteDBParameterGroupMessage, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteDBParameterGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDBParameterGroup, schemas.DeleteDBParameterGroupMessage, nil), output: &DeleteDBParameterGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

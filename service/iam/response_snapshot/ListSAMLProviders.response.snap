@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListSAMLProvidersResponse><ListSAMLProvidersResult><SAMLProviderList><member><Arn>__Arn__</Arn><CreateDate>2000-01-01T00:00:00Z</CreateDate><ValidUntil>2000-01-01T00:00:00Z</ValidUntil></member><member><Arn>__Arn__</Arn><CreateDate>2000-01-01T00:00:00Z</CreateDate><ValidUntil>2000-01-01T00:00:00Z</ValidUntil></member></SAMLProviderList></ListSAMLProvidersResult></ListSAMLProvidersResponse>

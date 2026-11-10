@@ -5,7 +5,9 @@ package rds
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,27 @@ type DescribeSourceRegionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSourceRegionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSourceRegionsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSourceRegionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeSourceRegionsMessage_Filters, v.Filters)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeSourceRegionsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeSourceRegionsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.RegionName != nil {
+		s.WriteString(schemas.DescribeSourceRegionsMessage_RegionName, *v.RegionName)
+	}
+}
+
 // Contains the result of a successful invocation of the DescribeSourceRegions
 // action.
 type DescribeSourceRegionsOutput struct {
@@ -86,13 +109,37 @@ type DescribeSourceRegionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSourceRegionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceRegionMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSourceRegionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.SourceRegionMessage_Marker, *v.Marker)
+	}
+	if v.SourceRegions != nil {
+		serializeSourceRegionList(s, schemas.SourceRegionMessage_SourceRegions, v.SourceRegions)
+	}
+}
+func (v *DescribeSourceRegionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceRegionMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceRegionMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.SourceRegionMessage_Marker, v.Marker)
+		case schemas.SourceRegionMessage_SourceRegions:
+			return deserializeSourceRegionList(d, schemas.SourceRegionMessage_SourceRegions, &v.SourceRegions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSourceRegionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeSourceRegions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSourceRegions, schemas.DescribeSourceRegionsMessage, schemas.SourceRegionMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeSourceRegions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSourceRegions, schemas.DescribeSourceRegionsMessage, schemas.SourceRegionMessage), output: &DescribeSourceRegionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

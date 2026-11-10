@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetIdentityDkimAttributesResponse><GetIdentityDkimAttributesResult><DkimAttributes><entry><key>key0</key><value><DkimEnabled>true</DkimEnabled><DkimTokens><member>__Member__</member><member>__Member__</member></DkimTokens><DkimVerificationStatus>Pending</DkimVerificationStatus></value></entry></DkimAttributes></GetIdentityDkimAttributesResult></GetIdentityDkimAttributesResponse>

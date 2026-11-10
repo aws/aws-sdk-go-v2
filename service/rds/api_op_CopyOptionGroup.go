@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,27 @@ type CopyOptionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyOptionGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyOptionGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyOptionGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceOptionGroupIdentifier != nil {
+		s.WriteString(schemas.CopyOptionGroupMessage_SourceOptionGroupIdentifier, *v.SourceOptionGroupIdentifier)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CopyOptionGroupMessage_Tags, v.Tags)
+	}
+	if v.TargetOptionGroupDescription != nil {
+		s.WriteString(schemas.CopyOptionGroupMessage_TargetOptionGroupDescription, *v.TargetOptionGroupDescription)
+	}
+	if v.TargetOptionGroupIdentifier != nil {
+		s.WriteString(schemas.CopyOptionGroupMessage_TargetOptionGroupIdentifier, *v.TargetOptionGroupIdentifier)
+	}
+}
+
 type CopyOptionGroupOutput struct {
 
 	//
@@ -80,13 +103,34 @@ type CopyOptionGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyOptionGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyOptionGroupResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyOptionGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OptionGroup != nil {
+		s.WriteStruct(schemas.CopyOptionGroupResult_OptionGroup)
+		v.OptionGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CopyOptionGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CopyOptionGroupResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CopyOptionGroupResult_OptionGroup:
+			v.OptionGroup = &types.OptionGroup{}
+			return v.OptionGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCopyOptionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCopyOptionGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyOptionGroup, schemas.CopyOptionGroupMessage, schemas.CopyOptionGroupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCopyOptionGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyOptionGroup, schemas.CopyOptionGroupMessage, schemas.CopyOptionGroupResult), output: &CopyOptionGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

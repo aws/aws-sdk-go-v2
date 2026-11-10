@@ -4,7 +4,9 @@ package elasticloadbalancingv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type ModifyLoadBalancerAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyLoadBalancerAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyLoadBalancerAttributesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyLoadBalancerAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attributes != nil {
+		serializeLoadBalancerAttributes(s, schemas.ModifyLoadBalancerAttributesInput_Attributes, v.Attributes)
+	}
+	if v.LoadBalancerArn != nil {
+		s.WriteString(schemas.ModifyLoadBalancerAttributesInput_LoadBalancerArn, *v.LoadBalancerArn)
+	}
+}
+
 type ModifyLoadBalancerAttributesOutput struct {
 
 	// Information about the load balancer attributes.
@@ -55,13 +72,31 @@ type ModifyLoadBalancerAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyLoadBalancerAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyLoadBalancerAttributesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyLoadBalancerAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attributes != nil {
+		serializeLoadBalancerAttributes(s, schemas.ModifyLoadBalancerAttributesOutput_Attributes, v.Attributes)
+	}
+}
+func (v *ModifyLoadBalancerAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyLoadBalancerAttributesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyLoadBalancerAttributesOutput_Attributes:
+			return deserializeLoadBalancerAttributes(d, schemas.ModifyLoadBalancerAttributesOutput_Attributes, &v.Attributes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyLoadBalancerAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyLoadBalancerAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyLoadBalancerAttributes, schemas.ModifyLoadBalancerAttributesInput, schemas.ModifyLoadBalancerAttributesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyLoadBalancerAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyLoadBalancerAttributes, schemas.ModifyLoadBalancerAttributesInput, schemas.ModifyLoadBalancerAttributesOutput), output: &ModifyLoadBalancerAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

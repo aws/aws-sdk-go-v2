@@ -4,6 +4,8 @@ package elasticloadbalancing
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type AttachLoadBalancerToSubnetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachLoadBalancerToSubnetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachLoadBalancerToSubnetsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachLoadBalancerToSubnetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoadBalancerName != nil {
+		s.WriteString(schemas.AttachLoadBalancerToSubnetsInput_LoadBalancerName, *v.LoadBalancerName)
+	}
+	if v.Subnets != nil {
+		serializeSubnets(s, schemas.AttachLoadBalancerToSubnetsInput_Subnets, v.Subnets)
+	}
+}
+
 // Contains the output of AttachLoadBalancerToSubnets.
 type AttachLoadBalancerToSubnetsOutput struct {
 
@@ -58,13 +75,31 @@ type AttachLoadBalancerToSubnetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachLoadBalancerToSubnetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachLoadBalancerToSubnetsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachLoadBalancerToSubnetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Subnets != nil {
+		serializeSubnets(s, schemas.AttachLoadBalancerToSubnetsOutput_Subnets, v.Subnets)
+	}
+}
+func (v *AttachLoadBalancerToSubnetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttachLoadBalancerToSubnetsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttachLoadBalancerToSubnetsOutput_Subnets:
+			return deserializeSubnets(d, schemas.AttachLoadBalancerToSubnetsOutput_Subnets, &v.Subnets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAttachLoadBalancerToSubnetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpAttachLoadBalancerToSubnets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachLoadBalancerToSubnets, schemas.AttachLoadBalancerToSubnetsInput, schemas.AttachLoadBalancerToSubnetsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpAttachLoadBalancerToSubnets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachLoadBalancerToSubnets, schemas.AttachLoadBalancerToSubnetsInput, schemas.AttachLoadBalancerToSubnetsOutput), output: &AttachLoadBalancerToSubnetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

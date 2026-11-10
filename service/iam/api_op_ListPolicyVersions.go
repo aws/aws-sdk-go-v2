@@ -5,7 +5,9 @@ package iam
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,24 @@ type ListPolicyVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPolicyVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPolicyVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPolicyVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListPolicyVersionsRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListPolicyVersionsRequest_MaxItems, *v.MaxItems)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.ListPolicyVersionsRequest_PolicyArn, *v.PolicyArn)
+	}
+}
+
 // Contains the response to a successful [ListPolicyVersions] request.
 //
 // [ListPolicyVersions]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListPolicyVersions.html
@@ -93,13 +113,42 @@ type ListPolicyVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPolicyVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPolicyVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPolicyVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsTruncated != false {
+		s.WriteBool(schemas.ListPolicyVersionsResponse_IsTruncated, v.IsTruncated)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListPolicyVersionsResponse_Marker, *v.Marker)
+	}
+	if v.Versions != nil {
+		serializepolicyDocumentVersionListType(s, schemas.ListPolicyVersionsResponse_Versions, v.Versions)
+	}
+}
+func (v *ListPolicyVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPolicyVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPolicyVersionsResponse_IsTruncated:
+			return d.ReadBool(schemas.ListPolicyVersionsResponse_IsTruncated, &v.IsTruncated)
+		case schemas.ListPolicyVersionsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListPolicyVersionsResponse_Marker, v.Marker)
+		case schemas.ListPolicyVersionsResponse_Versions:
+			return deserializepolicyDocumentVersionListType(d, schemas.ListPolicyVersionsResponse_Versions, &v.Versions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPolicyVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListPolicyVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPolicyVersions, schemas.ListPolicyVersionsRequest, schemas.ListPolicyVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListPolicyVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPolicyVersions, schemas.ListPolicyVersionsRequest, schemas.ListPolicyVersionsResponse), output: &ListPolicyVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

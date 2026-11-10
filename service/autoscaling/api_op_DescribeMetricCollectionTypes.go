@@ -4,7 +4,9 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,22 @@ type DescribeMetricCollectionTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMetricCollectionTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMetricCollectionTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DescribeMetricCollectionTypesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type DescribeMetricCollectionTypesOutput struct {
 
 	// The granularities for the metrics.
@@ -42,13 +60,36 @@ type DescribeMetricCollectionTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMetricCollectionTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMetricCollectionTypesAnswer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMetricCollectionTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Granularities != nil {
+		serializeMetricGranularityTypes(s, schemas.DescribeMetricCollectionTypesAnswer_Granularities, v.Granularities)
+	}
+	if v.Metrics != nil {
+		serializeMetricCollectionTypes(s, schemas.DescribeMetricCollectionTypesAnswer_Metrics, v.Metrics)
+	}
+}
+func (v *DescribeMetricCollectionTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMetricCollectionTypesAnswer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMetricCollectionTypesAnswer_Granularities:
+			return deserializeMetricGranularityTypes(d, schemas.DescribeMetricCollectionTypesAnswer_Granularities, &v.Granularities)
+		case schemas.DescribeMetricCollectionTypesAnswer_Metrics:
+			return deserializeMetricCollectionTypes(d, schemas.DescribeMetricCollectionTypesAnswer_Metrics, &v.Metrics)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMetricCollectionTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeMetricCollectionTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMetricCollectionTypes, nil, schemas.DescribeMetricCollectionTypesAnswer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeMetricCollectionTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMetricCollectionTypes, nil, schemas.DescribeMetricCollectionTypesAnswer), output: &DescribeMetricCollectionTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

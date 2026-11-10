@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type SwitchoverReadReplicaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SwitchoverReadReplicaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SwitchoverReadReplicaMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SwitchoverReadReplicaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstanceIdentifier != nil {
+		s.WriteString(schemas.SwitchoverReadReplicaMessage_DBInstanceIdentifier, *v.DBInstanceIdentifier)
+	}
+}
+
 type SwitchoverReadReplicaOutput struct {
 
 	// Contains the details of an Amazon RDS DB instance.
@@ -58,13 +72,34 @@ type SwitchoverReadReplicaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SwitchoverReadReplicaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SwitchoverReadReplicaResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SwitchoverReadReplicaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstance != nil {
+		s.WriteStruct(schemas.SwitchoverReadReplicaResult_DBInstance)
+		v.DBInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SwitchoverReadReplicaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SwitchoverReadReplicaResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SwitchoverReadReplicaResult_DBInstance:
+			v.DBInstance = &types.DBInstance{}
+			return v.DBInstance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSwitchoverReadReplicaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSwitchoverReadReplica{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SwitchoverReadReplica, schemas.SwitchoverReadReplicaMessage, schemas.SwitchoverReadReplicaResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSwitchoverReadReplica{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SwitchoverReadReplica, schemas.SwitchoverReadReplicaMessage, schemas.SwitchoverReadReplicaResult), output: &SwitchoverReadReplicaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

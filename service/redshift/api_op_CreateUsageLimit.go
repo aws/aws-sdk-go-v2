@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,36 @@ type CreateUsageLimitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUsageLimitInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUsageLimitMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUsageLimitInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Amount != nil {
+		s.WriteInt64(schemas.CreateUsageLimitMessage_Amount, *v.Amount)
+	}
+	if v.BreachAction != "" {
+		s.WriteString(schemas.CreateUsageLimitMessage_BreachAction, string(v.BreachAction))
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.CreateUsageLimitMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.FeatureType != "" {
+		s.WriteString(schemas.CreateUsageLimitMessage_FeatureType, string(v.FeatureType))
+	}
+	if v.LimitType != "" {
+		s.WriteString(schemas.CreateUsageLimitMessage_LimitType, string(v.LimitType))
+	}
+	if v.Period != "" {
+		s.WriteString(schemas.CreateUsageLimitMessage_Period, string(v.Period))
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateUsageLimitMessage_Tags, v.Tags)
+	}
+}
+
 // Describes a usage limit object for a cluster.
 type CreateUsageLimitOutput struct {
 
@@ -110,13 +142,89 @@ type CreateUsageLimitOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUsageLimitOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UsageLimit)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUsageLimitOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Amount != nil {
+		s.WriteInt64(schemas.UsageLimit_Amount, *v.Amount)
+	}
+	if v.BreachAction != "" {
+		s.WriteString(schemas.UsageLimit_BreachAction, string(v.BreachAction))
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.UsageLimit_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.FeatureType != "" {
+		s.WriteString(schemas.UsageLimit_FeatureType, string(v.FeatureType))
+	}
+	if v.LimitType != "" {
+		s.WriteString(schemas.UsageLimit_LimitType, string(v.LimitType))
+	}
+	if v.Period != "" {
+		s.WriteString(schemas.UsageLimit_Period, string(v.Period))
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.UsageLimit_Tags, v.Tags)
+	}
+	if v.UsageLimitId != nil {
+		s.WriteString(schemas.UsageLimit_UsageLimitId, *v.UsageLimitId)
+	}
+}
+func (v *CreateUsageLimitOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UsageLimit, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UsageLimit_Amount:
+			v.Amount = new(int64)
+			return d.ReadInt64(schemas.UsageLimit_Amount, v.Amount)
+		case schemas.UsageLimit_BreachAction:
+			var ev string
+			if err := d.ReadString(schemas.UsageLimit_BreachAction, &ev); err != nil {
+				return err
+			}
+			v.BreachAction = types.UsageLimitBreachAction(ev)
+			return nil
+		case schemas.UsageLimit_ClusterIdentifier:
+			v.ClusterIdentifier = new(string)
+			return d.ReadString(schemas.UsageLimit_ClusterIdentifier, v.ClusterIdentifier)
+		case schemas.UsageLimit_FeatureType:
+			var ev string
+			if err := d.ReadString(schemas.UsageLimit_FeatureType, &ev); err != nil {
+				return err
+			}
+			v.FeatureType = types.UsageLimitFeatureType(ev)
+			return nil
+		case schemas.UsageLimit_LimitType:
+			var ev string
+			if err := d.ReadString(schemas.UsageLimit_LimitType, &ev); err != nil {
+				return err
+			}
+			v.LimitType = types.UsageLimitLimitType(ev)
+			return nil
+		case schemas.UsageLimit_Period:
+			var ev string
+			if err := d.ReadString(schemas.UsageLimit_Period, &ev); err != nil {
+				return err
+			}
+			v.Period = types.UsageLimitPeriod(ev)
+			return nil
+		case schemas.UsageLimit_Tags:
+			return deserializeTagList(d, schemas.UsageLimit_Tags, &v.Tags)
+		case schemas.UsageLimit_UsageLimitId:
+			v.UsageLimitId = new(string)
+			return d.ReadString(schemas.UsageLimit_UsageLimitId, v.UsageLimitId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUsageLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateUsageLimit{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUsageLimit, schemas.CreateUsageLimitMessage, schemas.UsageLimit)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateUsageLimit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUsageLimit, schemas.CreateUsageLimitMessage, schemas.UsageLimit), output: &CreateUsageLimitOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

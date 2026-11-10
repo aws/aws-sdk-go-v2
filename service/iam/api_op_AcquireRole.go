@@ -4,7 +4,9 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,24 @@ type AcquireRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcquireRoleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcquireRoleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcquireRoleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplacementValues != nil {
+		serializemapStringReplacementValueEntry(s, schemas.AcquireRoleRequest_ReplacementValues, v.ReplacementValues)
+	}
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.AcquireRoleRequest_TemplateArn, *v.TemplateArn)
+	}
+	if v.TemplateMinorVersion != nil {
+		s.WriteInt32(schemas.AcquireRoleRequest_TemplateMinorVersion, *v.TemplateMinorVersion)
+	}
+}
+
 type AcquireRoleOutput struct {
 
 	// A structure that contains details about the IAM role that was created.
@@ -70,13 +90,34 @@ type AcquireRoleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcquireRoleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcquireRoleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcquireRoleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Role != nil {
+		s.WriteStruct(schemas.AcquireRoleResponse_Role)
+		v.Role.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AcquireRoleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcquireRoleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcquireRoleResponse_Role:
+			v.Role = &types.Role{}
+			return v.Role.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAcquireRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpAcquireRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcquireRole, schemas.AcquireRoleRequest, schemas.AcquireRoleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpAcquireRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcquireRole, schemas.AcquireRoleRequest, schemas.AcquireRoleResponse), output: &AcquireRoleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

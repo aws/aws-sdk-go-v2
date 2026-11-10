@@ -4,7 +4,9 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ApplyEnvironmentManagedActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplyEnvironmentManagedActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplyEnvironmentManagedActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplyEnvironmentManagedActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionId != nil {
+		s.WriteString(schemas.ApplyEnvironmentManagedActionRequest_ActionId, *v.ActionId)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.ApplyEnvironmentManagedActionRequest_EnvironmentId, *v.EnvironmentId)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.ApplyEnvironmentManagedActionRequest_EnvironmentName, *v.EnvironmentName)
+	}
+}
+
 // The result message containing information about the managed action.
 type ApplyEnvironmentManagedActionOutput struct {
 
@@ -64,13 +84,54 @@ type ApplyEnvironmentManagedActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplyEnvironmentManagedActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplyEnvironmentManagedActionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplyEnvironmentManagedActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionDescription != nil {
+		s.WriteString(schemas.ApplyEnvironmentManagedActionResult_ActionDescription, *v.ActionDescription)
+	}
+	if v.ActionId != nil {
+		s.WriteString(schemas.ApplyEnvironmentManagedActionResult_ActionId, *v.ActionId)
+	}
+	if v.ActionType != "" {
+		s.WriteString(schemas.ApplyEnvironmentManagedActionResult_ActionType, string(v.ActionType))
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.ApplyEnvironmentManagedActionResult_Status, *v.Status)
+	}
+}
+func (v *ApplyEnvironmentManagedActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplyEnvironmentManagedActionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplyEnvironmentManagedActionResult_ActionDescription:
+			v.ActionDescription = new(string)
+			return d.ReadString(schemas.ApplyEnvironmentManagedActionResult_ActionDescription, v.ActionDescription)
+		case schemas.ApplyEnvironmentManagedActionResult_ActionId:
+			v.ActionId = new(string)
+			return d.ReadString(schemas.ApplyEnvironmentManagedActionResult_ActionId, v.ActionId)
+		case schemas.ApplyEnvironmentManagedActionResult_ActionType:
+			var ev string
+			if err := d.ReadString(schemas.ApplyEnvironmentManagedActionResult_ActionType, &ev); err != nil {
+				return err
+			}
+			v.ActionType = types.ActionType(ev)
+			return nil
+		case schemas.ApplyEnvironmentManagedActionResult_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.ApplyEnvironmentManagedActionResult_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationApplyEnvironmentManagedActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpApplyEnvironmentManagedAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ApplyEnvironmentManagedAction, schemas.ApplyEnvironmentManagedActionRequest, schemas.ApplyEnvironmentManagedActionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpApplyEnvironmentManagedAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ApplyEnvironmentManagedAction, schemas.ApplyEnvironmentManagedActionRequest, schemas.ApplyEnvironmentManagedActionResult), output: &ApplyEnvironmentManagedActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

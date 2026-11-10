@@ -5,7 +5,9 @@ package autoscaling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,45 @@ type DescribeInstanceRefreshesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInstanceRefreshesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInstanceRefreshesType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInstanceRefreshesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.DescribeInstanceRefreshesType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.InstanceRefreshIds != nil {
+		serializeInstanceRefreshIds(s, schemas.DescribeInstanceRefreshesType_InstanceRefreshIds, v.InstanceRefreshIds)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeInstanceRefreshesType_MaxRecords, *v.MaxRecords)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeInstanceRefreshesType_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeInstanceRefreshesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeInstanceRefreshesType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeInstanceRefreshesType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.DescribeInstanceRefreshesType_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.DescribeInstanceRefreshesType_InstanceRefreshIds:
+			return deserializeInstanceRefreshIds(d, schemas.DescribeInstanceRefreshesType_InstanceRefreshIds, &v.InstanceRefreshIds)
+		case schemas.DescribeInstanceRefreshesType_MaxRecords:
+			v.MaxRecords = new(int32)
+			return d.ReadInt32(schemas.DescribeInstanceRefreshesType_MaxRecords, v.MaxRecords)
+		case schemas.DescribeInstanceRefreshesType_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeInstanceRefreshesType_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type DescribeInstanceRefreshesOutput struct {
 
 	// The instance refreshes for the specified group, sorted by creation timestamp in
@@ -79,13 +120,37 @@ type DescribeInstanceRefreshesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInstanceRefreshesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInstanceRefreshesAnswer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInstanceRefreshesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceRefreshes != nil {
+		serializeInstanceRefreshes(s, schemas.DescribeInstanceRefreshesAnswer_InstanceRefreshes, v.InstanceRefreshes)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeInstanceRefreshesAnswer_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeInstanceRefreshesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeInstanceRefreshesAnswer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeInstanceRefreshesAnswer_InstanceRefreshes:
+			return deserializeInstanceRefreshes(d, schemas.DescribeInstanceRefreshesAnswer_InstanceRefreshes, &v.InstanceRefreshes)
+		case schemas.DescribeInstanceRefreshesAnswer_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeInstanceRefreshesAnswer_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeInstanceRefreshesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeInstanceRefreshes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInstanceRefreshes, schemas.DescribeInstanceRefreshesType, schemas.DescribeInstanceRefreshesAnswer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeInstanceRefreshes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInstanceRefreshes, schemas.DescribeInstanceRefreshesType, schemas.DescribeInstanceRefreshesAnswer), output: &DescribeInstanceRefreshesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

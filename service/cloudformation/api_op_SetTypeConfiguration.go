@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -88,6 +90,30 @@ type SetTypeConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetTypeConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetTypeConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetTypeConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteString(schemas.SetTypeConfigurationInput_Configuration, *v.Configuration)
+	}
+	if v.ConfigurationAlias != nil {
+		s.WriteString(schemas.SetTypeConfigurationInput_ConfigurationAlias, *v.ConfigurationAlias)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.SetTypeConfigurationInput_Type, string(v.Type))
+	}
+	if v.TypeArn != nil {
+		s.WriteString(schemas.SetTypeConfigurationInput_TypeArn, *v.TypeArn)
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.SetTypeConfigurationInput_TypeName, *v.TypeName)
+	}
+}
+
 type SetTypeConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) for the configuration data in this account and
@@ -102,13 +128,32 @@ type SetTypeConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetTypeConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetTypeConfigurationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetTypeConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationArn != nil {
+		s.WriteString(schemas.SetTypeConfigurationOutput_ConfigurationArn, *v.ConfigurationArn)
+	}
+}
+func (v *SetTypeConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetTypeConfigurationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetTypeConfigurationOutput_ConfigurationArn:
+			v.ConfigurationArn = new(string)
+			return d.ReadString(schemas.SetTypeConfigurationOutput_ConfigurationArn, v.ConfigurationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetTypeConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetTypeConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetTypeConfiguration, schemas.SetTypeConfigurationInput, schemas.SetTypeConfigurationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSetTypeConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetTypeConfiguration, schemas.SetTypeConfigurationInput, schemas.SetTypeConfigurationOutput), output: &SetTypeConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

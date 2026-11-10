@@ -1,0 +1,4 @@
+409
+Content-Type: application/xml
+
+<ErrorResponse><Error><Code>EntityAlreadyExists</Code><message>__Message__</message></Error></ErrorResponse>

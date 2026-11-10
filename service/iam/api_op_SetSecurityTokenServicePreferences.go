@@ -4,7 +4,9 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,18 @@ type SetSecurityTokenServicePreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetSecurityTokenServicePreferencesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetSecurityTokenServicePreferencesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetSecurityTokenServicePreferencesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalEndpointTokenVersion != "" {
+		s.WriteString(schemas.SetSecurityTokenServicePreferencesRequest_GlobalEndpointTokenVersion, string(v.GlobalEndpointTokenVersion))
+	}
+}
+
 type SetSecurityTokenServicePreferencesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -71,13 +85,26 @@ type SetSecurityTokenServicePreferencesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetSecurityTokenServicePreferencesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetSecurityTokenServicePreferencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SetSecurityTokenServicePreferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetSecurityTokenServicePreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetSecurityTokenServicePreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetSecurityTokenServicePreferences, schemas.SetSecurityTokenServicePreferencesRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSetSecurityTokenServicePreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetSecurityTokenServicePreferences, schemas.SetSecurityTokenServicePreferencesRequest, nil), output: &SetSecurityTokenServicePreferencesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

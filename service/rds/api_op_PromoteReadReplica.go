@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -91,6 +93,27 @@ type PromoteReadReplicaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PromoteReadReplicaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PromoteReadReplicaMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PromoteReadReplicaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupRetentionPeriod != nil {
+		s.WriteInt32(schemas.PromoteReadReplicaMessage_BackupRetentionPeriod, *v.BackupRetentionPeriod)
+	}
+	if v.DBInstanceIdentifier != nil {
+		s.WriteString(schemas.PromoteReadReplicaMessage_DBInstanceIdentifier, *v.DBInstanceIdentifier)
+	}
+	if v.PreferredBackupWindow != nil {
+		s.WriteString(schemas.PromoteReadReplicaMessage_PreferredBackupWindow, *v.PreferredBackupWindow)
+	}
+	if v.TagSpecifications != nil {
+		serializeTagSpecificationList(s, schemas.PromoteReadReplicaMessage_TagSpecifications, v.TagSpecifications)
+	}
+}
+
 type PromoteReadReplicaOutput struct {
 
 	// Contains the details of an Amazon RDS DB instance.
@@ -108,13 +131,34 @@ type PromoteReadReplicaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PromoteReadReplicaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PromoteReadReplicaResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PromoteReadReplicaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstance != nil {
+		s.WriteStruct(schemas.PromoteReadReplicaResult_DBInstance)
+		v.DBInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PromoteReadReplicaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PromoteReadReplicaResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PromoteReadReplicaResult_DBInstance:
+			v.DBInstance = &types.DBInstance{}
+			return v.DBInstance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPromoteReadReplicaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpPromoteReadReplica{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PromoteReadReplica, schemas.PromoteReadReplicaMessage, schemas.PromoteReadReplicaResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpPromoteReadReplica{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PromoteReadReplica, schemas.PromoteReadReplicaMessage, schemas.PromoteReadReplicaResult), output: &PromoteReadReplicaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package elasticloadbalancingv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteTrustStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTrustStoreInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTrustStoreInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTrustStoreInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrustStoreArn != nil {
+		s.WriteString(schemas.DeleteTrustStoreInput_TrustStoreArn, *v.TrustStoreArn)
+	}
+}
+
 type DeleteTrustStoreOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteTrustStoreOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTrustStoreOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTrustStoreOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTrustStoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteTrustStoreOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTrustStoreOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTrustStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteTrustStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTrustStore, schemas.DeleteTrustStoreInput, schemas.DeleteTrustStoreOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteTrustStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTrustStore, schemas.DeleteTrustStoreInput, schemas.DeleteTrustStoreOutput), output: &DeleteTrustStoreOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

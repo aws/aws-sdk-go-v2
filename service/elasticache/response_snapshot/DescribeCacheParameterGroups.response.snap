@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeCacheParameterGroupsResponse><DescribeCacheParameterGroupsResult><CacheParameterGroups><CacheParameterGroup><ARN>__ARN__</ARN><CacheParameterGroupFamily>__CacheParameterGroupFamily__</CacheParameterGroupFamily><CacheParameterGroupName>__CacheParameterGroupName__</CacheParameterGroupName><Description>__Description__</Description><IsGlobal>true</IsGlobal></CacheParameterGroup><CacheParameterGroup><ARN>__ARN__</ARN><CacheParameterGroupFamily>__CacheParameterGroupFamily__</CacheParameterGroupFamily><CacheParameterGroupName>__CacheParameterGroupName__</CacheParameterGroupName><Description>__Description__</Description><IsGlobal>true</IsGlobal></CacheParameterGroup></CacheParameterGroups><Marker>__Marker__</Marker></DescribeCacheParameterGroupsResult></DescribeCacheParameterGroupsResponse>

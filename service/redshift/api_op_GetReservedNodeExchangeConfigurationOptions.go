@@ -5,7 +5,9 @@ package redshift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,30 @@ type GetReservedNodeExchangeConfigurationOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReservedNodeExchangeConfigurationOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReservedNodeExchangeConfigurationOptionsInputMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReservedNodeExchangeConfigurationOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionType != "" {
+		s.WriteString(schemas.GetReservedNodeExchangeConfigurationOptionsInputMessage_ActionType, string(v.ActionType))
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.GetReservedNodeExchangeConfigurationOptionsInputMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.GetReservedNodeExchangeConfigurationOptionsInputMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.GetReservedNodeExchangeConfigurationOptionsInputMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.SnapshotIdentifier != nil {
+		s.WriteString(schemas.GetReservedNodeExchangeConfigurationOptionsInputMessage_SnapshotIdentifier, *v.SnapshotIdentifier)
+	}
+}
+
 type GetReservedNodeExchangeConfigurationOptionsOutput struct {
 
 	// A pagination token provided by a previous
@@ -77,13 +103,37 @@ type GetReservedNodeExchangeConfigurationOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReservedNodeExchangeConfigurationOptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReservedNodeExchangeConfigurationOptionsOutputMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReservedNodeExchangeConfigurationOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.GetReservedNodeExchangeConfigurationOptionsOutputMessage_Marker, *v.Marker)
+	}
+	if v.ReservedNodeConfigurationOptionList != nil {
+		serializeReservedNodeConfigurationOptionList(s, schemas.GetReservedNodeExchangeConfigurationOptionsOutputMessage_ReservedNodeConfigurationOptionList, v.ReservedNodeConfigurationOptionList)
+	}
+}
+func (v *GetReservedNodeExchangeConfigurationOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetReservedNodeExchangeConfigurationOptionsOutputMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetReservedNodeExchangeConfigurationOptionsOutputMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.GetReservedNodeExchangeConfigurationOptionsOutputMessage_Marker, v.Marker)
+		case schemas.GetReservedNodeExchangeConfigurationOptionsOutputMessage_ReservedNodeConfigurationOptionList:
+			return deserializeReservedNodeConfigurationOptionList(d, schemas.GetReservedNodeExchangeConfigurationOptionsOutputMessage_ReservedNodeConfigurationOptionList, &v.ReservedNodeConfigurationOptionList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetReservedNodeExchangeConfigurationOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetReservedNodeExchangeConfigurationOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReservedNodeExchangeConfigurationOptions, schemas.GetReservedNodeExchangeConfigurationOptionsInputMessage, schemas.GetReservedNodeExchangeConfigurationOptionsOutputMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetReservedNodeExchangeConfigurationOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReservedNodeExchangeConfigurationOptions, schemas.GetReservedNodeExchangeConfigurationOptionsInputMessage, schemas.GetReservedNodeExchangeConfigurationOptionsOutputMessage), output: &GetReservedNodeExchangeConfigurationOptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

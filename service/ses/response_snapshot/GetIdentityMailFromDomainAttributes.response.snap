@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetIdentityMailFromDomainAttributesResponse><GetIdentityMailFromDomainAttributesResult><MailFromDomainAttributes><entry><key>key0</key><value><BehaviorOnMXFailure>UseDefaultValue</BehaviorOnMXFailure><MailFromDomain>__MailFromDomain__</MailFromDomain><MailFromDomainStatus>Pending</MailFromDomainStatus></value></entry></MailFromDomainAttributes></GetIdentityMailFromDomainAttributesResult></GetIdentityMailFromDomainAttributesResponse>

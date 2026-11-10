@@ -1,0 +1,4 @@
+400
+Content-Type: application/xml
+
+<ErrorResponse><Error><Code>InvalidS3Configuration</Code><Bucket>__Bucket__</Bucket><message>__Message__</message></Error></ErrorResponse>

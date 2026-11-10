@@ -5,7 +5,9 @@ package redshift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -69,6 +71,39 @@ type DescribeScheduledActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeScheduledActionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeScheduledActionsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeScheduledActionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Active != nil {
+		s.WriteBool(schemas.DescribeScheduledActionsMessage_Active, *v.Active)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.DescribeScheduledActionsMessage_EndTime, *v.EndTime)
+	}
+	if v.Filters != nil {
+		serializeScheduledActionFilterList(s, schemas.DescribeScheduledActionsMessage_Filters, v.Filters)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeScheduledActionsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeScheduledActionsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.ScheduledActionName != nil {
+		s.WriteString(schemas.DescribeScheduledActionsMessage_ScheduledActionName, *v.ScheduledActionName)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.DescribeScheduledActionsMessage_StartTime, *v.StartTime)
+	}
+	if v.TargetActionType != "" {
+		s.WriteString(schemas.DescribeScheduledActionsMessage_TargetActionType, string(v.TargetActionType))
+	}
+}
+
 type DescribeScheduledActionsOutput struct {
 
 	// An optional parameter that specifies the starting point to return a set of
@@ -87,13 +122,37 @@ type DescribeScheduledActionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeScheduledActionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduledActionsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeScheduledActionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ScheduledActionsMessage_Marker, *v.Marker)
+	}
+	if v.ScheduledActions != nil {
+		serializeScheduledActionList(s, schemas.ScheduledActionsMessage_ScheduledActions, v.ScheduledActions)
+	}
+}
+func (v *DescribeScheduledActionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduledActionsMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduledActionsMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ScheduledActionsMessage_Marker, v.Marker)
+		case schemas.ScheduledActionsMessage_ScheduledActions:
+			return deserializeScheduledActionList(d, schemas.ScheduledActionsMessage_ScheduledActions, &v.ScheduledActions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeScheduledActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeScheduledActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeScheduledActions, schemas.DescribeScheduledActionsMessage, schemas.ScheduledActionsMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeScheduledActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeScheduledActions, schemas.DescribeScheduledActionsMessage, schemas.ScheduledActionsMessage), output: &DescribeScheduledActionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

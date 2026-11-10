@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeLoadBalancersResponse><DescribeLoadBalancersResult><LoadBalancers><member><LoadBalancerName>__LoadBalancerName__</LoadBalancerName><State>__State__</State></member><member><LoadBalancerName>__LoadBalancerName__</LoadBalancerName><State>__State__</State></member></LoadBalancers><NextToken>__NextToken__</NextToken></DescribeLoadBalancersResult></DescribeLoadBalancersResponse>

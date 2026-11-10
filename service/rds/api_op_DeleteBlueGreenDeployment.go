@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,21 @@ type DeleteBlueGreenDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBlueGreenDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBlueGreenDeploymentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBlueGreenDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlueGreenDeploymentIdentifier != nil {
+		s.WriteString(schemas.DeleteBlueGreenDeploymentRequest_BlueGreenDeploymentIdentifier, *v.BlueGreenDeploymentIdentifier)
+	}
+	if v.DeleteTarget != nil {
+		s.WriteBool(schemas.DeleteBlueGreenDeploymentRequest_DeleteTarget, *v.DeleteTarget)
+	}
+}
+
 type DeleteBlueGreenDeploymentOutput struct {
 
 	// Details about a blue/green deployment.
@@ -66,13 +83,34 @@ type DeleteBlueGreenDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBlueGreenDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBlueGreenDeploymentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBlueGreenDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlueGreenDeployment != nil {
+		s.WriteStruct(schemas.DeleteBlueGreenDeploymentResponse_BlueGreenDeployment)
+		v.BlueGreenDeployment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteBlueGreenDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBlueGreenDeploymentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteBlueGreenDeploymentResponse_BlueGreenDeployment:
+			v.BlueGreenDeployment = &types.BlueGreenDeployment{}
+			return v.BlueGreenDeployment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBlueGreenDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteBlueGreenDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBlueGreenDeployment, schemas.DeleteBlueGreenDeploymentRequest, schemas.DeleteBlueGreenDeploymentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteBlueGreenDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBlueGreenDeployment, schemas.DeleteBlueGreenDeploymentRequest, schemas.DeleteBlueGreenDeploymentResponse), output: &DeleteBlueGreenDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

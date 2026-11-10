@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListServerCertificatesResponse><ListServerCertificatesResult><IsTruncated>true</IsTruncated><Marker>__Marker__</Marker><ServerCertificateMetadataList><member><Arn>__Arn__</Arn><Expiration>2000-01-01T00:00:00Z</Expiration><Path>__Path__</Path><ServerCertificateId>__ServerCertificateId__</ServerCertificateId><ServerCertificateName>__ServerCertificateName__</ServerCertificateName><UploadDate>2000-01-01T00:00:00Z</UploadDate></member><member><Arn>__Arn__</Arn><Expiration>2000-01-01T00:00:00Z</Expiration><Path>__Path__</Path><ServerCertificateId>__ServerCertificateId__</ServerCertificateId><ServerCertificateName>__ServerCertificateName__</ServerCertificateName><UploadDate>2000-01-01T00:00:00Z</UploadDate></member></ServerCertificateMetadataList></ListServerCertificatesResult></ListServerCertificatesResponse>

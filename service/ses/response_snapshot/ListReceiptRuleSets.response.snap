@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListReceiptRuleSetsResponse><ListReceiptRuleSetsResult><NextToken>__NextToken__</NextToken><RuleSets><member><CreatedTimestamp>2000-01-01T00:00:00Z</CreatedTimestamp><Name>__Name__</Name></member><member><CreatedTimestamp>2000-01-01T00:00:00Z</CreatedTimestamp><Name>__Name__</Name></member></RuleSets></ListReceiptRuleSetsResult></ListReceiptRuleSetsResponse>

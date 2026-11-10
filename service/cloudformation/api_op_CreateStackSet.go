@@ -5,7 +5,9 @@ package cloudformation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -229,6 +231,64 @@ type CreateStackSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStackSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStackSetInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStackSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdministrationRoleARN != nil {
+		s.WriteString(schemas.CreateStackSetInput_AdministrationRoleARN, *v.AdministrationRoleARN)
+	}
+	if v.AutoDeployment != nil {
+		s.WriteStruct(schemas.CreateStackSetInput_AutoDeployment)
+		v.AutoDeployment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CallAs != "" {
+		s.WriteString(schemas.CreateStackSetInput_CallAs, string(v.CallAs))
+	}
+	if v.Capabilities != nil {
+		serializeCapabilities(s, schemas.CreateStackSetInput_Capabilities, v.Capabilities)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateStackSetInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateStackSetInput_Description, *v.Description)
+	}
+	if v.ExecutionRoleName != nil {
+		s.WriteString(schemas.CreateStackSetInput_ExecutionRoleName, *v.ExecutionRoleName)
+	}
+	if v.ManagedExecution != nil {
+		s.WriteStruct(schemas.CreateStackSetInput_ManagedExecution)
+		v.ManagedExecution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Parameters != nil {
+		serializeParameters(s, schemas.CreateStackSetInput_Parameters, v.Parameters)
+	}
+	if v.PermissionModel != "" {
+		s.WriteString(schemas.CreateStackSetInput_PermissionModel, string(v.PermissionModel))
+	}
+	if v.StackId != nil {
+		s.WriteString(schemas.CreateStackSetInput_StackId, *v.StackId)
+	}
+	if v.StackSetName != nil {
+		s.WriteString(schemas.CreateStackSetInput_StackSetName, *v.StackSetName)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateStackSetInput_Tags, v.Tags)
+	}
+	if v.TemplateBody != nil {
+		s.WriteString(schemas.CreateStackSetInput_TemplateBody, *v.TemplateBody)
+	}
+	if v.TemplateURL != nil {
+		s.WriteString(schemas.CreateStackSetInput_TemplateURL, *v.TemplateURL)
+	}
+}
+
 type CreateStackSetOutput struct {
 
 	// The ID of the StackSet that you're creating.
@@ -240,13 +300,32 @@ type CreateStackSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStackSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStackSetOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStackSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StackSetId != nil {
+		s.WriteString(schemas.CreateStackSetOutput_StackSetId, *v.StackSetId)
+	}
+}
+func (v *CreateStackSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStackSetOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStackSetOutput_StackSetId:
+			v.StackSetId = new(string)
+			return d.ReadString(schemas.CreateStackSetOutput_StackSetId, v.StackSetId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStackSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateStackSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStackSet, schemas.CreateStackSetInput, schemas.CreateStackSetOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateStackSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStackSet, schemas.CreateStackSetInput, schemas.CreateStackSetOutput), output: &CreateStackSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,27 @@ type RegisterDBProxyTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterDBProxyTargetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterDBProxyTargetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterDBProxyTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBClusterIdentifiers != nil {
+		serializeStringList(s, schemas.RegisterDBProxyTargetsRequest_DBClusterIdentifiers, v.DBClusterIdentifiers)
+	}
+	if v.DBInstanceIdentifiers != nil {
+		serializeStringList(s, schemas.RegisterDBProxyTargetsRequest_DBInstanceIdentifiers, v.DBInstanceIdentifiers)
+	}
+	if v.DBProxyName != nil {
+		s.WriteString(schemas.RegisterDBProxyTargetsRequest_DBProxyName, *v.DBProxyName)
+	}
+	if v.TargetGroupName != nil {
+		s.WriteString(schemas.RegisterDBProxyTargetsRequest_TargetGroupName, *v.TargetGroupName)
+	}
+}
+
 type RegisterDBProxyTargetsOutput struct {
 
 	// One or more DBProxyTarget objects that are created when you register targets
@@ -55,13 +78,31 @@ type RegisterDBProxyTargetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterDBProxyTargetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterDBProxyTargetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterDBProxyTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBProxyTargets != nil {
+		serializeTargetList(s, schemas.RegisterDBProxyTargetsResponse_DBProxyTargets, v.DBProxyTargets)
+	}
+}
+func (v *RegisterDBProxyTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterDBProxyTargetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterDBProxyTargetsResponse_DBProxyTargets:
+			return deserializeTargetList(d, schemas.RegisterDBProxyTargetsResponse_DBProxyTargets, &v.DBProxyTargets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterDBProxyTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRegisterDBProxyTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterDBProxyTargets, schemas.RegisterDBProxyTargetsRequest, schemas.RegisterDBProxyTargetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRegisterDBProxyTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterDBProxyTargets, schemas.RegisterDBProxyTargetsRequest, schemas.RegisterDBProxyTargetsResponse), output: &RegisterDBProxyTargetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

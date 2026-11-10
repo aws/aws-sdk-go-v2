@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DeleteEndpointAccessInput struct {
 	EndpointName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteEndpointAccessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEndpointAccessMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEndpointAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointName != nil {
+		s.WriteString(schemas.DeleteEndpointAccessMessage_EndpointName, *v.EndpointName)
+	}
 }
 
 // Describes a Redshift-managed VPC endpoint.
@@ -75,13 +89,87 @@ type DeleteEndpointAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEndpointAccessOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointAccess)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEndpointAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteString(schemas.EndpointAccess_Address, *v.Address)
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.EndpointAccess_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.EndpointCreateTime != nil {
+		s.WriteTime(schemas.EndpointAccess_EndpointCreateTime, *v.EndpointCreateTime)
+	}
+	if v.EndpointName != nil {
+		s.WriteString(schemas.EndpointAccess_EndpointName, *v.EndpointName)
+	}
+	if v.EndpointStatus != nil {
+		s.WriteString(schemas.EndpointAccess_EndpointStatus, *v.EndpointStatus)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.EndpointAccess_Port, *v.Port)
+	}
+	if v.ResourceOwner != nil {
+		s.WriteString(schemas.EndpointAccess_ResourceOwner, *v.ResourceOwner)
+	}
+	if v.SubnetGroupName != nil {
+		s.WriteString(schemas.EndpointAccess_SubnetGroupName, *v.SubnetGroupName)
+	}
+	if v.VpcEndpoint != nil {
+		s.WriteStruct(schemas.EndpointAccess_VpcEndpoint)
+		v.VpcEndpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VpcSecurityGroups != nil {
+		serializeVpcSecurityGroupMembershipList(s, schemas.EndpointAccess_VpcSecurityGroups, v.VpcSecurityGroups)
+	}
+}
+func (v *DeleteEndpointAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndpointAccess, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndpointAccess_Address:
+			v.Address = new(string)
+			return d.ReadString(schemas.EndpointAccess_Address, v.Address)
+		case schemas.EndpointAccess_ClusterIdentifier:
+			v.ClusterIdentifier = new(string)
+			return d.ReadString(schemas.EndpointAccess_ClusterIdentifier, v.ClusterIdentifier)
+		case schemas.EndpointAccess_EndpointCreateTime:
+			v.EndpointCreateTime = new(time.Time)
+			return d.ReadTime(schemas.EndpointAccess_EndpointCreateTime, v.EndpointCreateTime)
+		case schemas.EndpointAccess_EndpointName:
+			v.EndpointName = new(string)
+			return d.ReadString(schemas.EndpointAccess_EndpointName, v.EndpointName)
+		case schemas.EndpointAccess_EndpointStatus:
+			v.EndpointStatus = new(string)
+			return d.ReadString(schemas.EndpointAccess_EndpointStatus, v.EndpointStatus)
+		case schemas.EndpointAccess_Port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.EndpointAccess_Port, v.Port)
+		case schemas.EndpointAccess_ResourceOwner:
+			v.ResourceOwner = new(string)
+			return d.ReadString(schemas.EndpointAccess_ResourceOwner, v.ResourceOwner)
+		case schemas.EndpointAccess_SubnetGroupName:
+			v.SubnetGroupName = new(string)
+			return d.ReadString(schemas.EndpointAccess_SubnetGroupName, v.SubnetGroupName)
+		case schemas.EndpointAccess_VpcEndpoint:
+			v.VpcEndpoint = &types.VpcEndpoint{}
+			return v.VpcEndpoint.Deserialize(d)
+		case schemas.EndpointAccess_VpcSecurityGroups:
+			return deserializeVpcSecurityGroupMembershipList(d, schemas.EndpointAccess_VpcSecurityGroups, &v.VpcSecurityGroups)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEndpointAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteEndpointAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEndpointAccess, schemas.DeleteEndpointAccessMessage, schemas.EndpointAccess)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteEndpointAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEndpointAccess, schemas.DeleteEndpointAccessMessage, schemas.EndpointAccess), output: &DeleteEndpointAccessOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,21 @@ type UpdateTerminationProtectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTerminationProtectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTerminationProtectionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTerminationProtectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnableTerminationProtection != nil {
+		s.WriteBool(schemas.UpdateTerminationProtectionInput_EnableTerminationProtection, *v.EnableTerminationProtection)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.UpdateTerminationProtectionInput_StackName, *v.StackName)
+	}
+}
+
 type UpdateTerminationProtectionOutput struct {
 
 	// The unique ID of the stack.
@@ -59,13 +76,32 @@ type UpdateTerminationProtectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTerminationProtectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTerminationProtectionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTerminationProtectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StackId != nil {
+		s.WriteString(schemas.UpdateTerminationProtectionOutput_StackId, *v.StackId)
+	}
+}
+func (v *UpdateTerminationProtectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTerminationProtectionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTerminationProtectionOutput_StackId:
+			v.StackId = new(string)
+			return d.ReadString(schemas.UpdateTerminationProtectionOutput_StackId, v.StackId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTerminationProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateTerminationProtection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTerminationProtection, schemas.UpdateTerminationProtectionInput, schemas.UpdateTerminationProtectionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpUpdateTerminationProtection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTerminationProtection, schemas.UpdateTerminationProtectionInput, schemas.UpdateTerminationProtectionOutput), output: &UpdateTerminationProtectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

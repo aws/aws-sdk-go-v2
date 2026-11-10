@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListMFADeviceTagsResponse><ListMFADeviceTagsResult><IsTruncated>true</IsTruncated><Marker>__Marker__</Marker><Tags><member><Key>__Key__</Key><Value>__Value__</Value></member><member><Key>__Key__</Key><Value>__Value__</Value></member></Tags></ListMFADeviceTagsResult></ListMFADeviceTagsResponse>

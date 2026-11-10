@@ -4,6 +4,8 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,24 @@ type UpdateRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRoleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRoleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRoleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateRoleRequest_Description, *v.Description)
+	}
+	if v.MaxSessionDuration != nil {
+		s.WriteInt32(schemas.UpdateRoleRequest_MaxSessionDuration, *v.MaxSessionDuration)
+	}
+	if v.RoleName != nil {
+		s.WriteString(schemas.UpdateRoleRequest_RoleName, *v.RoleName)
+	}
+}
+
 type UpdateRoleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -64,13 +84,26 @@ type UpdateRoleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRoleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRoleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRoleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateRoleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRoleResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRole, schemas.UpdateRoleRequest, schemas.UpdateRoleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpUpdateRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRole, schemas.UpdateRoleRequest, schemas.UpdateRoleResponse), output: &UpdateRoleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

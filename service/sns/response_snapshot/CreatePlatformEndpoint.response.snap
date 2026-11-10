@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<CreatePlatformEndpointResponse><CreatePlatformEndpointResult><EndpointArn>__EndpointArn__</EndpointArn></CreatePlatformEndpointResult></CreatePlatformEndpointResponse>

@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DeregisterNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterNamespaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterNamespaceInputMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsumerIdentifiers != nil {
+		serializeConsumerIdentifierList(s, schemas.DeregisterNamespaceInputMessage_ConsumerIdentifiers, v.ConsumerIdentifiers)
+	}
+	if v.NamespaceIdentifier != nil {
+		serializeNamespaceIdentifierUnion(s, schemas.DeregisterNamespaceInputMessage_NamespaceIdentifier, v.NamespaceIdentifier)
+	}
+}
+
 type DeregisterNamespaceOutput struct {
 
 	// The registration status of the cluster or serverless namespace.
@@ -53,13 +70,36 @@ type DeregisterNamespaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterNamespaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterNamespaceOutputMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterNamespaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.DeregisterNamespaceOutputMessage_Status, string(v.Status))
+	}
+}
+func (v *DeregisterNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterNamespaceOutputMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeregisterNamespaceOutputMessage_Status:
+			var ev string
+			if err := d.ReadString(schemas.DeregisterNamespaceOutputMessage_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.NamespaceRegistrationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeregisterNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterNamespace, schemas.DeregisterNamespaceInputMessage, schemas.DeregisterNamespaceOutputMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeregisterNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterNamespace, schemas.DeregisterNamespaceInputMessage, schemas.DeregisterNamespaceOutputMessage), output: &DeregisterNamespaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

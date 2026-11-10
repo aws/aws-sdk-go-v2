@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListReceiptFiltersResponse><ListReceiptFiltersResult><Filters><member><IpFilter><Cidr>__Cidr__</Cidr><Policy>Block</Policy></IpFilter><Name>__Name__</Name></member><member><IpFilter><Cidr>__Cidr__</Cidr><Policy>Block</Policy></IpFilter><Name>__Name__</Name></member></Filters></ListReceiptFiltersResult></ListReceiptFiltersResponse>

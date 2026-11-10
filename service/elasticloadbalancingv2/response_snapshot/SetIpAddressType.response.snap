@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<SetIpAddressTypeResponse><SetIpAddressTypeResult><IpAddressType>ipv4</IpAddressType></SetIpAddressTypeResult></SetIpAddressTypeResponse>

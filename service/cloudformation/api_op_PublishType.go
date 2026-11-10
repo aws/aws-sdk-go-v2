@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,27 @@ type PublishTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PublishTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublishTypeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublishTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.PublishTypeInput_Arn, *v.Arn)
+	}
+	if v.PublicVersionNumber != nil {
+		s.WriteString(schemas.PublishTypeInput_PublicVersionNumber, *v.PublicVersionNumber)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.PublishTypeInput_Type, string(v.Type))
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.PublishTypeInput_TypeName, *v.TypeName)
+	}
+}
+
 type PublishTypeOutput struct {
 
 	// The Amazon Resource Name (ARN) assigned to the public extension upon
@@ -83,13 +106,32 @@ type PublishTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PublishTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublishTypeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublishTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PublicTypeArn != nil {
+		s.WriteString(schemas.PublishTypeOutput_PublicTypeArn, *v.PublicTypeArn)
+	}
+}
+func (v *PublishTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PublishTypeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PublishTypeOutput_PublicTypeArn:
+			v.PublicTypeArn = new(string)
+			return d.ReadString(schemas.PublishTypeOutput_PublicTypeArn, v.PublicTypeArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPublishTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpPublishType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PublishType, schemas.PublishTypeInput, schemas.PublishTypeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpPublishType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PublishType, schemas.PublishTypeInput, schemas.PublishTypeOutput), output: &PublishTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

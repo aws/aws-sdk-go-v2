@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListOriginationNumbersResponse><ListOriginationNumbersResult><NextToken>__NextToken__</NextToken><PhoneNumbers><member><CreatedAt>2000-01-01T00:00:00Z</CreatedAt><Iso2CountryCode>__Iso2CountryCode__</Iso2CountryCode><NumberCapabilities><member>SMS</member><member>SMS</member></NumberCapabilities><PhoneNumber>__PhoneNumber__</PhoneNumber><RouteType>Transactional</RouteType><Status>__Status__</Status></member><member><CreatedAt>2000-01-01T00:00:00Z</CreatedAt><Iso2CountryCode>__Iso2CountryCode__</Iso2CountryCode><NumberCapabilities><member>SMS</member><member>SMS</member></NumberCapabilities><PhoneNumber>__PhoneNumber__</PhoneNumber><RouteType>Transactional</RouteType><Status>__Status__</Status></member></PhoneNumbers></ListOriginationNumbersResult></ListOriginationNumbersResponse>

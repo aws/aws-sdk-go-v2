@@ -4,6 +4,8 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,46 @@ type DeletePartnerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePartnerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PartnerIntegrationInputMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePartnerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.PartnerIntegrationInputMessage_AccountId, *v.AccountId)
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.PartnerIntegrationInputMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.PartnerIntegrationInputMessage_DatabaseName, *v.DatabaseName)
+	}
+	if v.PartnerName != nil {
+		s.WriteString(schemas.PartnerIntegrationInputMessage_PartnerName, *v.PartnerName)
+	}
+}
+func (v *DeletePartnerInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PartnerIntegrationInputMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PartnerIntegrationInputMessage_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.PartnerIntegrationInputMessage_AccountId, v.AccountId)
+		case schemas.PartnerIntegrationInputMessage_ClusterIdentifier:
+			v.ClusterIdentifier = new(string)
+			return d.ReadString(schemas.PartnerIntegrationInputMessage_ClusterIdentifier, v.ClusterIdentifier)
+		case schemas.PartnerIntegrationInputMessage_DatabaseName:
+			v.DatabaseName = new(string)
+			return d.ReadString(schemas.PartnerIntegrationInputMessage_DatabaseName, v.DatabaseName)
+		case schemas.PartnerIntegrationInputMessage_PartnerName:
+			v.PartnerName = new(string)
+			return d.ReadString(schemas.PartnerIntegrationInputMessage_PartnerName, v.PartnerName)
+		}
+		return nil
+	})
+}
+
 type DeletePartnerOutput struct {
 
 	// The name of the database that receives data from the partner.
@@ -63,13 +105,38 @@ type DeletePartnerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePartnerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PartnerIntegrationOutputMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePartnerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.PartnerIntegrationOutputMessage_DatabaseName, *v.DatabaseName)
+	}
+	if v.PartnerName != nil {
+		s.WriteString(schemas.PartnerIntegrationOutputMessage_PartnerName, *v.PartnerName)
+	}
+}
+func (v *DeletePartnerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PartnerIntegrationOutputMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PartnerIntegrationOutputMessage_DatabaseName:
+			v.DatabaseName = new(string)
+			return d.ReadString(schemas.PartnerIntegrationOutputMessage_DatabaseName, v.DatabaseName)
+		case schemas.PartnerIntegrationOutputMessage_PartnerName:
+			v.PartnerName = new(string)
+			return d.ReadString(schemas.PartnerIntegrationOutputMessage_PartnerName, v.PartnerName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePartnerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeletePartner{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePartner, schemas.PartnerIntegrationInputMessage, schemas.PartnerIntegrationOutputMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeletePartner{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePartner, schemas.PartnerIntegrationInputMessage, schemas.PartnerIntegrationOutputMessage), output: &DeletePartnerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

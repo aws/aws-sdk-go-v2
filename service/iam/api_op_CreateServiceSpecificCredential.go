@@ -4,7 +4,9 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -83,6 +85,24 @@ type CreateServiceSpecificCredentialInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServiceSpecificCredentialInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServiceSpecificCredentialRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServiceSpecificCredentialInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CredentialAgeDays != nil {
+		s.WriteInt32(schemas.CreateServiceSpecificCredentialRequest_CredentialAgeDays, *v.CredentialAgeDays)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.CreateServiceSpecificCredentialRequest_ServiceName, *v.ServiceName)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.CreateServiceSpecificCredentialRequest_UserName, *v.UserName)
+	}
+}
+
 type CreateServiceSpecificCredentialOutput struct {
 
 	// A structure that contains information about the newly created service-specific
@@ -100,13 +120,34 @@ type CreateServiceSpecificCredentialOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServiceSpecificCredentialOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServiceSpecificCredentialResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServiceSpecificCredentialOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceSpecificCredential != nil {
+		s.WriteStruct(schemas.CreateServiceSpecificCredentialResponse_ServiceSpecificCredential)
+		v.ServiceSpecificCredential.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateServiceSpecificCredentialOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateServiceSpecificCredentialResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateServiceSpecificCredentialResponse_ServiceSpecificCredential:
+			v.ServiceSpecificCredential = &types.ServiceSpecificCredential{}
+			return v.ServiceSpecificCredential.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateServiceSpecificCredentialMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateServiceSpecificCredential{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServiceSpecificCredential, schemas.CreateServiceSpecificCredentialRequest, schemas.CreateServiceSpecificCredentialResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateServiceSpecificCredential{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServiceSpecificCredential, schemas.CreateServiceSpecificCredentialRequest, schemas.CreateServiceSpecificCredentialResponse), output: &CreateServiceSpecificCredentialOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

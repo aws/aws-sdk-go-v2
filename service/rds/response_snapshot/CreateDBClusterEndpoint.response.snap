@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<CreateDBClusterEndpointResponse><CreateDBClusterEndpointResult><CustomEndpointType>__CustomEndpointType__</CustomEndpointType><DBClusterEndpointArn>__DBClusterEndpointArn__</DBClusterEndpointArn><DBClusterEndpointIdentifier>__DBClusterEndpointIdentifier__</DBClusterEndpointIdentifier><DBClusterEndpointResourceIdentifier>__DBClusterEndpointResourceIdentifier__</DBClusterEndpointResourceIdentifier><DBClusterIdentifier>__DBClusterIdentifier__</DBClusterIdentifier><Endpoint>__Endpoint__</Endpoint><EndpointType>__EndpointType__</EndpointType><ExcludedMembers><member>__Member__</member><member>__Member__</member></ExcludedMembers><StaticMembers><member>__Member__</member><member>__Member__</member></StaticMembers><Status>__Status__</Status></CreateDBClusterEndpointResult></CreateDBClusterEndpointResponse>

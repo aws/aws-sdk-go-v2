@@ -4,6 +4,8 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type RestartAppServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestartAppServerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestartAppServerMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestartAppServerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.RestartAppServerMessage_EnvironmentId, *v.EnvironmentId)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.RestartAppServerMessage_EnvironmentName, *v.EnvironmentName)
+	}
+}
+
 type RestartAppServerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +66,26 @@ type RestartAppServerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestartAppServerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestartAppServerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RestartAppServerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRestartAppServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRestartAppServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestartAppServer, schemas.RestartAppServerMessage, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRestartAppServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestartAppServer, schemas.RestartAppServerMessage, nil), output: &RestartAppServerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

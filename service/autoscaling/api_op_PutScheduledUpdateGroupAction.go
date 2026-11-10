@@ -4,6 +4,8 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -104,6 +106,82 @@ type PutScheduledUpdateGroupActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutScheduledUpdateGroupActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutScheduledUpdateGroupActionType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutScheduledUpdateGroupActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.PutScheduledUpdateGroupActionType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.DesiredCapacity != nil {
+		s.WriteInt32(schemas.PutScheduledUpdateGroupActionType_DesiredCapacity, *v.DesiredCapacity)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.PutScheduledUpdateGroupActionType_EndTime, *v.EndTime)
+	}
+	if v.MaxSize != nil {
+		s.WriteInt32(schemas.PutScheduledUpdateGroupActionType_MaxSize, *v.MaxSize)
+	}
+	if v.MinSize != nil {
+		s.WriteInt32(schemas.PutScheduledUpdateGroupActionType_MinSize, *v.MinSize)
+	}
+	if v.Recurrence != nil {
+		s.WriteString(schemas.PutScheduledUpdateGroupActionType_Recurrence, *v.Recurrence)
+	}
+	if v.ScheduledActionName != nil {
+		s.WriteString(schemas.PutScheduledUpdateGroupActionType_ScheduledActionName, *v.ScheduledActionName)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.PutScheduledUpdateGroupActionType_StartTime, *v.StartTime)
+	}
+	if v.Time != nil {
+		s.WriteTime(schemas.PutScheduledUpdateGroupActionType_Time, *v.Time)
+	}
+	if v.TimeZone != nil {
+		s.WriteString(schemas.PutScheduledUpdateGroupActionType_TimeZone, *v.TimeZone)
+	}
+}
+func (v *PutScheduledUpdateGroupActionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutScheduledUpdateGroupActionType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutScheduledUpdateGroupActionType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.PutScheduledUpdateGroupActionType_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.PutScheduledUpdateGroupActionType_DesiredCapacity:
+			v.DesiredCapacity = new(int32)
+			return d.ReadInt32(schemas.PutScheduledUpdateGroupActionType_DesiredCapacity, v.DesiredCapacity)
+		case schemas.PutScheduledUpdateGroupActionType_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.PutScheduledUpdateGroupActionType_EndTime, v.EndTime)
+		case schemas.PutScheduledUpdateGroupActionType_MaxSize:
+			v.MaxSize = new(int32)
+			return d.ReadInt32(schemas.PutScheduledUpdateGroupActionType_MaxSize, v.MaxSize)
+		case schemas.PutScheduledUpdateGroupActionType_MinSize:
+			v.MinSize = new(int32)
+			return d.ReadInt32(schemas.PutScheduledUpdateGroupActionType_MinSize, v.MinSize)
+		case schemas.PutScheduledUpdateGroupActionType_Recurrence:
+			v.Recurrence = new(string)
+			return d.ReadString(schemas.PutScheduledUpdateGroupActionType_Recurrence, v.Recurrence)
+		case schemas.PutScheduledUpdateGroupActionType_ScheduledActionName:
+			v.ScheduledActionName = new(string)
+			return d.ReadString(schemas.PutScheduledUpdateGroupActionType_ScheduledActionName, v.ScheduledActionName)
+		case schemas.PutScheduledUpdateGroupActionType_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.PutScheduledUpdateGroupActionType_StartTime, v.StartTime)
+		case schemas.PutScheduledUpdateGroupActionType_Time:
+			v.Time = new(time.Time)
+			return d.ReadTime(schemas.PutScheduledUpdateGroupActionType_Time, v.Time)
+		case schemas.PutScheduledUpdateGroupActionType_TimeZone:
+			v.TimeZone = new(string)
+			return d.ReadString(schemas.PutScheduledUpdateGroupActionType_TimeZone, v.TimeZone)
+		}
+		return nil
+	})
+}
+
 type PutScheduledUpdateGroupActionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -111,13 +189,26 @@ type PutScheduledUpdateGroupActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutScheduledUpdateGroupActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutScheduledUpdateGroupActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutScheduledUpdateGroupActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutScheduledUpdateGroupActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpPutScheduledUpdateGroupAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutScheduledUpdateGroupAction, schemas.PutScheduledUpdateGroupActionType, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpPutScheduledUpdateGroupAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutScheduledUpdateGroupAction, schemas.PutScheduledUpdateGroupActionType, nil), output: &PutScheduledUpdateGroupActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

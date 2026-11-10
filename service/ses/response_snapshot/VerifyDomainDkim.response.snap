@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<VerifyDomainDkimResponse><VerifyDomainDkimResult><DkimTokens><member>__Member__</member><member>__Member__</member></DkimTokens></VerifyDomainDkimResult></VerifyDomainDkimResponse>

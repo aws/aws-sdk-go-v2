@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,18 @@ type DescribePublisherInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePublisherInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePublisherInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePublisherInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PublisherId != nil {
+		s.WriteString(schemas.DescribePublisherInput_PublisherId, *v.PublisherId)
+	}
+}
+
 type DescribePublisherOutput struct {
 
 	// The type of account used as the identity provider when registering this
@@ -72,13 +86,58 @@ type DescribePublisherOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePublisherOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePublisherOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePublisherOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityProvider != "" {
+		s.WriteString(schemas.DescribePublisherOutput_IdentityProvider, string(v.IdentityProvider))
+	}
+	if v.PublisherId != nil {
+		s.WriteString(schemas.DescribePublisherOutput_PublisherId, *v.PublisherId)
+	}
+	if v.PublisherProfile != nil {
+		s.WriteString(schemas.DescribePublisherOutput_PublisherProfile, *v.PublisherProfile)
+	}
+	if v.PublisherStatus != "" {
+		s.WriteString(schemas.DescribePublisherOutput_PublisherStatus, string(v.PublisherStatus))
+	}
+}
+func (v *DescribePublisherOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePublisherOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePublisherOutput_IdentityProvider:
+			var ev string
+			if err := d.ReadString(schemas.DescribePublisherOutput_IdentityProvider, &ev); err != nil {
+				return err
+			}
+			v.IdentityProvider = types.IdentityProvider(ev)
+			return nil
+		case schemas.DescribePublisherOutput_PublisherId:
+			v.PublisherId = new(string)
+			return d.ReadString(schemas.DescribePublisherOutput_PublisherId, v.PublisherId)
+		case schemas.DescribePublisherOutput_PublisherProfile:
+			v.PublisherProfile = new(string)
+			return d.ReadString(schemas.DescribePublisherOutput_PublisherProfile, v.PublisherProfile)
+		case schemas.DescribePublisherOutput_PublisherStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribePublisherOutput_PublisherStatus, &ev); err != nil {
+				return err
+			}
+			v.PublisherStatus = types.PublisherStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePublisherMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribePublisher{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePublisher, schemas.DescribePublisherInput, schemas.DescribePublisherOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribePublisher{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePublisher, schemas.DescribePublisherInput, schemas.DescribePublisherOutput), output: &DescribePublisherOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

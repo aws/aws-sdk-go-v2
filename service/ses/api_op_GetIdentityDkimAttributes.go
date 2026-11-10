@@ -4,7 +4,9 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,18 @@ type GetIdentityDkimAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdentityDkimAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdentityDkimAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdentityDkimAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identities != nil {
+		serializeIdentityList(s, schemas.GetIdentityDkimAttributesRequest_Identities, v.Identities)
+	}
+}
+
 // Represents the status of Amazon SES Easy DKIM signing for an identity. For
 // domain identities, this response also contains the DKIM tokens that are required
 // for Easy DKIM signing, and whether Amazon SES successfully verified that these
@@ -80,13 +94,31 @@ type GetIdentityDkimAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdentityDkimAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdentityDkimAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdentityDkimAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DkimAttributes != nil {
+		serializeDkimAttributes(s, schemas.GetIdentityDkimAttributesResponse_DkimAttributes, v.DkimAttributes)
+	}
+}
+func (v *GetIdentityDkimAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIdentityDkimAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIdentityDkimAttributesResponse_DkimAttributes:
+			return deserializeDkimAttributes(d, schemas.GetIdentityDkimAttributesResponse_DkimAttributes, &v.DkimAttributes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIdentityDkimAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetIdentityDkimAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdentityDkimAttributes, schemas.GetIdentityDkimAttributesRequest, schemas.GetIdentityDkimAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetIdentityDkimAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdentityDkimAttributes, schemas.GetIdentityDkimAttributesRequest, schemas.GetIdentityDkimAttributesResponse), output: &GetIdentityDkimAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

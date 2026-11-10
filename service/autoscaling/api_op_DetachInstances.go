@@ -4,7 +4,9 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,39 @@ type DetachInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetachInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetachInstancesQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetachInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.DetachInstancesQuery_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.InstanceIds != nil {
+		serializeInstanceIds(s, schemas.DetachInstancesQuery_InstanceIds, v.InstanceIds)
+	}
+	if v.ShouldDecrementDesiredCapacity != nil {
+		s.WriteBool(schemas.DetachInstancesQuery_ShouldDecrementDesiredCapacity, *v.ShouldDecrementDesiredCapacity)
+	}
+}
+func (v *DetachInstancesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetachInstancesQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetachInstancesQuery_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.DetachInstancesQuery_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.DetachInstancesQuery_InstanceIds:
+			return deserializeInstanceIds(d, schemas.DetachInstancesQuery_InstanceIds, &v.InstanceIds)
+		case schemas.DetachInstancesQuery_ShouldDecrementDesiredCapacity:
+			v.ShouldDecrementDesiredCapacity = new(bool)
+			return d.ReadBool(schemas.DetachInstancesQuery_ShouldDecrementDesiredCapacity, v.ShouldDecrementDesiredCapacity)
+		}
+		return nil
+	})
+}
+
 type DetachInstancesOutput struct {
 
 	// The activities related to detaching the instances from the Auto Scaling group.
@@ -69,13 +104,31 @@ type DetachInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetachInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetachInstancesAnswer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetachInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Activities != nil {
+		serializeActivities(s, schemas.DetachInstancesAnswer_Activities, v.Activities)
+	}
+}
+func (v *DetachInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetachInstancesAnswer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetachInstancesAnswer_Activities:
+			return deserializeActivities(d, schemas.DetachInstancesAnswer_Activities, &v.Activities)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetachInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDetachInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetachInstances, schemas.DetachInstancesQuery, schemas.DetachInstancesAnswer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDetachInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetachInstances, schemas.DetachInstancesQuery, schemas.DetachInstancesAnswer), output: &DetachInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

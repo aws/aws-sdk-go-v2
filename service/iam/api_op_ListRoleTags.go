@@ -5,7 +5,9 @@ package iam
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,24 @@ type ListRoleTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRoleTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRoleTagsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRoleTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListRoleTagsRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListRoleTagsRequest_MaxItems, *v.MaxItems)
+	}
+	if v.RoleName != nil {
+		s.WriteString(schemas.ListRoleTagsRequest_RoleName, *v.RoleName)
+	}
+}
+
 type ListRoleTagsOutput struct {
 
 	// The list of tags that are currently attached to the role. Each tag consists of
@@ -89,13 +109,42 @@ type ListRoleTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRoleTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRoleTagsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRoleTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsTruncated != false {
+		s.WriteBool(schemas.ListRoleTagsResponse_IsTruncated, v.IsTruncated)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListRoleTagsResponse_Marker, *v.Marker)
+	}
+	if v.Tags != nil {
+		serializetagListType(s, schemas.ListRoleTagsResponse_Tags, v.Tags)
+	}
+}
+func (v *ListRoleTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRoleTagsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRoleTagsResponse_IsTruncated:
+			return d.ReadBool(schemas.ListRoleTagsResponse_IsTruncated, &v.IsTruncated)
+		case schemas.ListRoleTagsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListRoleTagsResponse_Marker, v.Marker)
+		case schemas.ListRoleTagsResponse_Tags:
+			return deserializetagListType(d, schemas.ListRoleTagsResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRoleTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListRoleTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoleTags, schemas.ListRoleTagsRequest, schemas.ListRoleTagsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListRoleTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoleTags, schemas.ListRoleTagsRequest, schemas.ListRoleTagsResponse), output: &ListRoleTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

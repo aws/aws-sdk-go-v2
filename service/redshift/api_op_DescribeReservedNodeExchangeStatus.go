@@ -5,7 +5,9 @@ package redshift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,27 @@ type DescribeReservedNodeExchangeStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReservedNodeExchangeStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReservedNodeExchangeStatusInputMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReservedNodeExchangeStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeReservedNodeExchangeStatusInputMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeReservedNodeExchangeStatusInputMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.ReservedNodeExchangeRequestId != nil {
+		s.WriteString(schemas.DescribeReservedNodeExchangeStatusInputMessage_ReservedNodeExchangeRequestId, *v.ReservedNodeExchangeRequestId)
+	}
+	if v.ReservedNodeId != nil {
+		s.WriteString(schemas.DescribeReservedNodeExchangeStatusInputMessage_ReservedNodeId, *v.ReservedNodeId)
+	}
+}
+
 type DescribeReservedNodeExchangeStatusOutput struct {
 
 	// A pagination token provided by a previous DescribeReservedNodeExchangeStatus
@@ -67,13 +90,37 @@ type DescribeReservedNodeExchangeStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReservedNodeExchangeStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReservedNodeExchangeStatusOutputMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReservedNodeExchangeStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeReservedNodeExchangeStatusOutputMessage_Marker, *v.Marker)
+	}
+	if v.ReservedNodeExchangeStatusDetails != nil {
+		serializeReservedNodeExchangeStatusList(s, schemas.DescribeReservedNodeExchangeStatusOutputMessage_ReservedNodeExchangeStatusDetails, v.ReservedNodeExchangeStatusDetails)
+	}
+}
+func (v *DescribeReservedNodeExchangeStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeReservedNodeExchangeStatusOutputMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeReservedNodeExchangeStatusOutputMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeReservedNodeExchangeStatusOutputMessage_Marker, v.Marker)
+		case schemas.DescribeReservedNodeExchangeStatusOutputMessage_ReservedNodeExchangeStatusDetails:
+			return deserializeReservedNodeExchangeStatusList(d, schemas.DescribeReservedNodeExchangeStatusOutputMessage_ReservedNodeExchangeStatusDetails, &v.ReservedNodeExchangeStatusDetails)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReservedNodeExchangeStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeReservedNodeExchangeStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReservedNodeExchangeStatus, schemas.DescribeReservedNodeExchangeStatusInputMessage, schemas.DescribeReservedNodeExchangeStatusOutputMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeReservedNodeExchangeStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReservedNodeExchangeStatus, schemas.DescribeReservedNodeExchangeStatusInputMessage, schemas.DescribeReservedNodeExchangeStatusOutputMessage), output: &DescribeReservedNodeExchangeStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

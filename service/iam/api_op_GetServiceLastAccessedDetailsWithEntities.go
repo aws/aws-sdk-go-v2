@@ -4,7 +4,9 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -90,6 +92,27 @@ type GetServiceLastAccessedDetailsWithEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceLastAccessedDetailsWithEntitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceLastAccessedDetailsWithEntitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceLastAccessedDetailsWithEntitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.GetServiceLastAccessedDetailsWithEntitiesRequest_JobId, *v.JobId)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.GetServiceLastAccessedDetailsWithEntitiesRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.GetServiceLastAccessedDetailsWithEntitiesRequest_MaxItems, *v.MaxItems)
+	}
+	if v.ServiceNamespace != nil {
+		s.WriteString(schemas.GetServiceLastAccessedDetailsWithEntitiesRequest_ServiceNamespace, *v.ServiceNamespace)
+	}
+}
+
 type GetServiceLastAccessedDetailsWithEntitiesOutput struct {
 
 	// An EntityDetailsList object that contains details about when an IAM entity
@@ -142,13 +165,72 @@ type GetServiceLastAccessedDetailsWithEntitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceLastAccessedDetailsWithEntitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceLastAccessedDetailsWithEntitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceLastAccessedDetailsWithEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityDetailsList != nil {
+		serializeentityDetailsListType(s, schemas.GetServiceLastAccessedDetailsWithEntitiesResponse_EntityDetailsList, v.EntityDetailsList)
+	}
+	if v.Error != nil {
+		s.WriteStruct(schemas.GetServiceLastAccessedDetailsWithEntitiesResponse_Error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IsTruncated != false {
+		s.WriteBool(schemas.GetServiceLastAccessedDetailsWithEntitiesResponse_IsTruncated, v.IsTruncated)
+	}
+	if v.JobCompletionDate != nil {
+		s.WriteTime(schemas.GetServiceLastAccessedDetailsWithEntitiesResponse_JobCompletionDate, *v.JobCompletionDate)
+	}
+	if v.JobCreationDate != nil {
+		s.WriteTime(schemas.GetServiceLastAccessedDetailsWithEntitiesResponse_JobCreationDate, *v.JobCreationDate)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.GetServiceLastAccessedDetailsWithEntitiesResponse_JobStatus, string(v.JobStatus))
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.GetServiceLastAccessedDetailsWithEntitiesResponse_Marker, *v.Marker)
+	}
+}
+func (v *GetServiceLastAccessedDetailsWithEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceLastAccessedDetailsWithEntitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceLastAccessedDetailsWithEntitiesResponse_EntityDetailsList:
+			return deserializeentityDetailsListType(d, schemas.GetServiceLastAccessedDetailsWithEntitiesResponse_EntityDetailsList, &v.EntityDetailsList)
+		case schemas.GetServiceLastAccessedDetailsWithEntitiesResponse_Error:
+			v.Error = &types.ErrorDetails{}
+			return v.Error.Deserialize(d)
+		case schemas.GetServiceLastAccessedDetailsWithEntitiesResponse_IsTruncated:
+			return d.ReadBool(schemas.GetServiceLastAccessedDetailsWithEntitiesResponse_IsTruncated, &v.IsTruncated)
+		case schemas.GetServiceLastAccessedDetailsWithEntitiesResponse_JobCompletionDate:
+			v.JobCompletionDate = new(time.Time)
+			return d.ReadTime(schemas.GetServiceLastAccessedDetailsWithEntitiesResponse_JobCompletionDate, v.JobCompletionDate)
+		case schemas.GetServiceLastAccessedDetailsWithEntitiesResponse_JobCreationDate:
+			v.JobCreationDate = new(time.Time)
+			return d.ReadTime(schemas.GetServiceLastAccessedDetailsWithEntitiesResponse_JobCreationDate, v.JobCreationDate)
+		case schemas.GetServiceLastAccessedDetailsWithEntitiesResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetServiceLastAccessedDetailsWithEntitiesResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatusType(ev)
+			return nil
+		case schemas.GetServiceLastAccessedDetailsWithEntitiesResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.GetServiceLastAccessedDetailsWithEntitiesResponse_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetServiceLastAccessedDetailsWithEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetServiceLastAccessedDetailsWithEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceLastAccessedDetailsWithEntities, schemas.GetServiceLastAccessedDetailsWithEntitiesRequest, schemas.GetServiceLastAccessedDetailsWithEntitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetServiceLastAccessedDetailsWithEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceLastAccessedDetailsWithEntities, schemas.GetServiceLastAccessedDetailsWithEntitiesRequest, schemas.GetServiceLastAccessedDetailsWithEntitiesResponse), output: &GetServiceLastAccessedDetailsWithEntitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

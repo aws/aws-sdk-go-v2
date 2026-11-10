@@ -4,6 +4,8 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -84,6 +86,33 @@ type DisableMetricsCollectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableMetricsCollectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableMetricsCollectionQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableMetricsCollectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.DisableMetricsCollectionQuery_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.Metrics != nil {
+		serializeMetrics(s, schemas.DisableMetricsCollectionQuery_Metrics, v.Metrics)
+	}
+}
+func (v *DisableMetricsCollectionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisableMetricsCollectionQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisableMetricsCollectionQuery_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.DisableMetricsCollectionQuery_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.DisableMetricsCollectionQuery_Metrics:
+			return deserializeMetrics(d, schemas.DisableMetricsCollectionQuery_Metrics, &v.Metrics)
+		}
+		return nil
+	})
+}
+
 type DisableMetricsCollectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -91,13 +120,26 @@ type DisableMetricsCollectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableMetricsCollectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableMetricsCollectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisableMetricsCollectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisableMetricsCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDisableMetricsCollection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableMetricsCollection, schemas.DisableMetricsCollectionQuery, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDisableMetricsCollection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableMetricsCollection, schemas.DisableMetricsCollectionQuery, nil), output: &DisableMetricsCollectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

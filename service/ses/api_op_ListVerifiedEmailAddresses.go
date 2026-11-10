@@ -4,6 +4,8 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,22 @@ type ListVerifiedEmailAddressesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVerifiedEmailAddressesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVerifiedEmailAddressesInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ListVerifiedEmailAddressesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 // A list of email addresses that you have verified with Amazon SES under your
 // Amazon Web Services account.
 type ListVerifiedEmailAddressesOutput struct {
@@ -41,13 +59,31 @@ type ListVerifiedEmailAddressesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVerifiedEmailAddressesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVerifiedEmailAddressesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVerifiedEmailAddressesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VerifiedEmailAddresses != nil {
+		serializeAddressList(s, schemas.ListVerifiedEmailAddressesResponse_VerifiedEmailAddresses, v.VerifiedEmailAddresses)
+	}
+}
+func (v *ListVerifiedEmailAddressesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVerifiedEmailAddressesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVerifiedEmailAddressesResponse_VerifiedEmailAddresses:
+			return deserializeAddressList(d, schemas.ListVerifiedEmailAddressesResponse_VerifiedEmailAddresses, &v.VerifiedEmailAddresses)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVerifiedEmailAddressesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListVerifiedEmailAddresses{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVerifiedEmailAddresses, nil, schemas.ListVerifiedEmailAddressesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListVerifiedEmailAddresses{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVerifiedEmailAddresses, nil, schemas.ListVerifiedEmailAddressesResponse), output: &ListVerifiedEmailAddressesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

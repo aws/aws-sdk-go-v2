@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListEntitiesForPolicyResponse><ListEntitiesForPolicyResult><IsTruncated>true</IsTruncated><Marker>__Marker__</Marker><PolicyGroups><member><GroupId>__GroupId__</GroupId><GroupName>__GroupName__</GroupName></member><member><GroupId>__GroupId__</GroupId><GroupName>__GroupName__</GroupName></member></PolicyGroups><PolicyRoles><member><RoleId>__RoleId__</RoleId><RoleName>__RoleName__</RoleName></member><member><RoleId>__RoleId__</RoleId><RoleName>__RoleName__</RoleName></member></PolicyRoles><PolicyUsers><member><UserId>__UserId__</UserId><UserName>__UserName__</UserName></member><member><UserId>__UserId__</UserId><UserName>__UserName__</UserName></member></PolicyUsers></ListEntitiesForPolicyResult></ListEntitiesForPolicyResponse>

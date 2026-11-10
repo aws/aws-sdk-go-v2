@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListStackSetOperationResultsResponse><ListStackSetOperationResultsResult><NextToken>__NextToken__</NextToken><Summaries><member><Account>__Account__</Account><AccountGateResult><Status>SUCCEEDED</Status><StatusReason>__StatusReason__</StatusReason></AccountGateResult><OrganizationalUnitId>__OrganizationalUnitId__</OrganizationalUnitId><Region>__Region__</Region><Status>PENDING</Status><StatusReason>__StatusReason__</StatusReason></member><member><Account>__Account__</Account><AccountGateResult><Status>SUCCEEDED</Status><StatusReason>__StatusReason__</StatusReason></AccountGateResult><OrganizationalUnitId>__OrganizationalUnitId__</OrganizationalUnitId><Region>__Region__</Region><Status>PENDING</Status><StatusReason>__StatusReason__</StatusReason></member></Summaries></ListStackSetOperationResultsResult></ListStackSetOperationResultsResponse>

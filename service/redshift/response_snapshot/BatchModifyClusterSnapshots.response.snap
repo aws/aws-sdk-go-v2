@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<BatchModifyClusterSnapshotsResponse><BatchModifyClusterSnapshotsResult><Errors><SnapshotErrorMessage><FailureCode>__FailureCode__</FailureCode><FailureReason>__FailureReason__</FailureReason><SnapshotClusterIdentifier>__SnapshotClusterIdentifier__</SnapshotClusterIdentifier><SnapshotIdentifier>__SnapshotIdentifier__</SnapshotIdentifier></SnapshotErrorMessage><SnapshotErrorMessage><FailureCode>__FailureCode__</FailureCode><FailureReason>__FailureReason__</FailureReason><SnapshotClusterIdentifier>__SnapshotClusterIdentifier__</SnapshotClusterIdentifier><SnapshotIdentifier>__SnapshotIdentifier__</SnapshotIdentifier></SnapshotErrorMessage></Errors><Resources><String>__Member__</String><String>__Member__</String></Resources></BatchModifyClusterSnapshotsResult></BatchModifyClusterSnapshotsResponse>

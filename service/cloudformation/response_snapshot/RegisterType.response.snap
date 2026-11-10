@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<RegisterTypeResponse><RegisterTypeResult><RegistrationToken>__RegistrationToken__</RegistrationToken></RegisterTypeResult></RegisterTypeResponse>

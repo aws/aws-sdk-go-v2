@@ -4,6 +4,8 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DeleteCacheParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCacheParameterGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCacheParameterGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCacheParameterGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheParameterGroupName != nil {
+		s.WriteString(schemas.DeleteCacheParameterGroupMessage_CacheParameterGroupName, *v.CacheParameterGroupName)
+	}
+}
+
 type DeleteCacheParameterGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +59,26 @@ type DeleteCacheParameterGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCacheParameterGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCacheParameterGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCacheParameterGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCacheParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteCacheParameterGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCacheParameterGroup, schemas.DeleteCacheParameterGroupMessage, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteCacheParameterGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCacheParameterGroup, schemas.DeleteCacheParameterGroupMessage, nil), output: &DeleteCacheParameterGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

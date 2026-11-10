@@ -5,7 +5,9 @@ package cloudformation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,27 @@ type DescribeStackResourceDriftsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStackResourceDriftsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStackResourceDriftsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStackResourceDriftsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeStackResourceDriftsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeStackResourceDriftsInput_NextToken, *v.NextToken)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.DescribeStackResourceDriftsInput_StackName, *v.StackName)
+	}
+	if v.StackResourceDriftStatusFilters != nil {
+		serializeStackResourceDriftStatusFilters(s, schemas.DescribeStackResourceDriftsInput_StackResourceDriftStatusFilters, v.StackResourceDriftStatusFilters)
+	}
+}
+
 type DescribeStackResourceDriftsOutput struct {
 
 	// Drift information for the resources that have been checked for drift in the
@@ -104,13 +127,37 @@ type DescribeStackResourceDriftsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStackResourceDriftsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStackResourceDriftsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStackResourceDriftsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeStackResourceDriftsOutput_NextToken, *v.NextToken)
+	}
+	if v.StackResourceDrifts != nil {
+		serializeStackResourceDrifts(s, schemas.DescribeStackResourceDriftsOutput_StackResourceDrifts, v.StackResourceDrifts)
+	}
+}
+func (v *DescribeStackResourceDriftsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeStackResourceDriftsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeStackResourceDriftsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeStackResourceDriftsOutput_NextToken, v.NextToken)
+		case schemas.DescribeStackResourceDriftsOutput_StackResourceDrifts:
+			return deserializeStackResourceDrifts(d, schemas.DescribeStackResourceDriftsOutput_StackResourceDrifts, &v.StackResourceDrifts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeStackResourceDriftsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeStackResourceDrifts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStackResourceDrifts, schemas.DescribeStackResourceDriftsInput, schemas.DescribeStackResourceDriftsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeStackResourceDrifts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStackResourceDrifts, schemas.DescribeStackResourceDriftsInput, schemas.DescribeStackResourceDriftsOutput), output: &DescribeStackResourceDriftsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

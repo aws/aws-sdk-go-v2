@@ -5,7 +5,9 @@ package iam
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,24 @@ type ListMFADevicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMFADevicesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMFADevicesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMFADevicesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListMFADevicesRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListMFADevicesRequest_MaxItems, *v.MaxItems)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.ListMFADevicesRequest_UserName, *v.UserName)
+	}
+}
+
 // Contains the response to a successful [ListMFADevices] request.
 //
 // [ListMFADevices]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListMFADevices.html
@@ -90,13 +110,42 @@ type ListMFADevicesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMFADevicesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMFADevicesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMFADevicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsTruncated != false {
+		s.WriteBool(schemas.ListMFADevicesResponse_IsTruncated, v.IsTruncated)
+	}
+	if v.MFADevices != nil {
+		serializemfaDeviceListType(s, schemas.ListMFADevicesResponse_MFADevices, v.MFADevices)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListMFADevicesResponse_Marker, *v.Marker)
+	}
+}
+func (v *ListMFADevicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMFADevicesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMFADevicesResponse_IsTruncated:
+			return d.ReadBool(schemas.ListMFADevicesResponse_IsTruncated, &v.IsTruncated)
+		case schemas.ListMFADevicesResponse_MFADevices:
+			return deserializemfaDeviceListType(d, schemas.ListMFADevicesResponse_MFADevices, &v.MFADevices)
+		case schemas.ListMFADevicesResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListMFADevicesResponse_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMFADevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListMFADevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMFADevices, schemas.ListMFADevicesRequest, schemas.ListMFADevicesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListMFADevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMFADevices, schemas.ListMFADevicesRequest, schemas.ListMFADevicesResponse), output: &ListMFADevicesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

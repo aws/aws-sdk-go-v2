@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribePartnersResponse><DescribePartnersResult><PartnerIntegrationInfoList><PartnerIntegrationInfo><CreatedAt>2000-01-01T00:00:00Z</CreatedAt><DatabaseName>__DatabaseName__</DatabaseName><PartnerName>__PartnerName__</PartnerName><Status>Active</Status><StatusMessage>__StatusMessage__</StatusMessage><UpdatedAt>2000-01-01T00:00:00Z</UpdatedAt></PartnerIntegrationInfo><PartnerIntegrationInfo><CreatedAt>2000-01-01T00:00:00Z</CreatedAt><DatabaseName>__DatabaseName__</DatabaseName><PartnerName>__PartnerName__</PartnerName><Status>Active</Status><StatusMessage>__StatusMessage__</StatusMessage><UpdatedAt>2000-01-01T00:00:00Z</UpdatedAt></PartnerIntegrationInfo></PartnerIntegrationInfoList></DescribePartnersResult></DescribePartnersResponse>

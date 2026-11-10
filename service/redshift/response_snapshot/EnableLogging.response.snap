@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<EnableLoggingResponse><EnableLoggingResult><BucketName>__BucketName__</BucketName><LastFailureMessage>__LastFailureMessage__</LastFailureMessage><LastFailureTime>2000-01-01T00:00:00Z</LastFailureTime><LastSuccessfulDeliveryTime>2000-01-01T00:00:00Z</LastSuccessfulDeliveryTime><LogDestinationType>s3</LogDestinationType><LogExports><member>__Member__</member><member>__Member__</member></LogExports><LoggingEnabled>true</LoggingEnabled><S3KeyPrefix>__S3KeyPrefix__</S3KeyPrefix><S3Tables><EnabledAll>true</EnabledAll><LastIngestionTimes><entry><key>key0</key><value>__Value__</value></entry></LastIngestionTimes><S3TableGranularity>__S3TableGranularity__</S3TableGranularity><S3TableNamespace>__S3TableNamespace__</S3TableNamespace><S3Tables><member>__Member__</member><member>__Member__</member></S3Tables></S3Tables></EnableLoggingResult></EnableLoggingResponse>

@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeTrustStoreAssociationsResponse><DescribeTrustStoreAssociationsResult><NextMarker>__NextMarker__</NextMarker><TrustStoreAssociations><member><ResourceArn>__ResourceArn__</ResourceArn></member><member><ResourceArn>__ResourceArn__</ResourceArn></member></TrustStoreAssociations></DescribeTrustStoreAssociationsResult></DescribeTrustStoreAssociationsResponse>

@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeSnapshotCopyGrantsResponse><DescribeSnapshotCopyGrantsResult><Marker>__Marker__</Marker><SnapshotCopyGrants><SnapshotCopyGrant><KmsKeyId>__KmsKeyId__</KmsKeyId><SnapshotCopyGrantName>__SnapshotCopyGrantName__</SnapshotCopyGrantName><Tags><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag></Tags></SnapshotCopyGrant><SnapshotCopyGrant><KmsKeyId>__KmsKeyId__</KmsKeyId><SnapshotCopyGrantName>__SnapshotCopyGrantName__</SnapshotCopyGrantName><Tags><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag></Tags></SnapshotCopyGrant></SnapshotCopyGrants></DescribeSnapshotCopyGrantsResult></DescribeSnapshotCopyGrantsResponse>

@@ -4,6 +4,8 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,21 @@ type CancelUpdateStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelUpdateStackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelUpdateStackInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelUpdateStackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CancelUpdateStackInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.CancelUpdateStackInput_StackName, *v.StackName)
+	}
+}
+
 type CancelUpdateStackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -62,13 +79,26 @@ type CancelUpdateStackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelUpdateStackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelUpdateStackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CancelUpdateStackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelUpdateStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCancelUpdateStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelUpdateStack, schemas.CancelUpdateStackInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCancelUpdateStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelUpdateStack, schemas.CancelUpdateStackInput, nil), output: &CancelUpdateStackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

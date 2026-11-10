@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,27 @@ type SetTypeDefaultVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetTypeDefaultVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetTypeDefaultVersionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetTypeDefaultVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.SetTypeDefaultVersionInput_Arn, *v.Arn)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.SetTypeDefaultVersionInput_Type, string(v.Type))
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.SetTypeDefaultVersionInput_TypeName, *v.TypeName)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.SetTypeDefaultVersionInput_VersionId, *v.VersionId)
+	}
+}
+
 type SetTypeDefaultVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,13 +81,26 @@ type SetTypeDefaultVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetTypeDefaultVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetTypeDefaultVersionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetTypeDefaultVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SetTypeDefaultVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetTypeDefaultVersionOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetTypeDefaultVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetTypeDefaultVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetTypeDefaultVersion, schemas.SetTypeDefaultVersionInput, schemas.SetTypeDefaultVersionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSetTypeDefaultVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetTypeDefaultVersion, schemas.SetTypeDefaultVersionInput, schemas.SetTypeDefaultVersionOutput), output: &SetTypeDefaultVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

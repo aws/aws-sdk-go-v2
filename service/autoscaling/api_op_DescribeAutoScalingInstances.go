@@ -5,7 +5,9 @@ package autoscaling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,45 @@ type DescribeAutoScalingInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAutoScalingInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAutoScalingInstancesType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAutoScalingInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeManagedResources != nil {
+		s.WriteBool(schemas.DescribeAutoScalingInstancesType_IncludeManagedResources, *v.IncludeManagedResources)
+	}
+	if v.InstanceIds != nil {
+		serializeInstanceIds(s, schemas.DescribeAutoScalingInstancesType_InstanceIds, v.InstanceIds)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeAutoScalingInstancesType_MaxRecords, *v.MaxRecords)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAutoScalingInstancesType_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeAutoScalingInstancesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAutoScalingInstancesType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAutoScalingInstancesType_IncludeManagedResources:
+			v.IncludeManagedResources = new(bool)
+			return d.ReadBool(schemas.DescribeAutoScalingInstancesType_IncludeManagedResources, v.IncludeManagedResources)
+		case schemas.DescribeAutoScalingInstancesType_InstanceIds:
+			return deserializeInstanceIds(d, schemas.DescribeAutoScalingInstancesType_InstanceIds, &v.InstanceIds)
+		case schemas.DescribeAutoScalingInstancesType_MaxRecords:
+			v.MaxRecords = new(int32)
+			return d.ReadInt32(schemas.DescribeAutoScalingInstancesType_MaxRecords, v.MaxRecords)
+		case schemas.DescribeAutoScalingInstancesType_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeAutoScalingInstancesType_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type DescribeAutoScalingInstancesOutput struct {
 
 	// The instances.
@@ -72,13 +113,37 @@ type DescribeAutoScalingInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAutoScalingInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoScalingInstancesType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAutoScalingInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingInstances != nil {
+		serializeAutoScalingInstances(s, schemas.AutoScalingInstancesType_AutoScalingInstances, v.AutoScalingInstances)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.AutoScalingInstancesType_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeAutoScalingInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoScalingInstancesType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoScalingInstancesType_AutoScalingInstances:
+			return deserializeAutoScalingInstances(d, schemas.AutoScalingInstancesType_AutoScalingInstances, &v.AutoScalingInstances)
+		case schemas.AutoScalingInstancesType_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.AutoScalingInstancesType_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAutoScalingInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeAutoScalingInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAutoScalingInstances, schemas.DescribeAutoScalingInstancesType, schemas.AutoScalingInstancesType)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeAutoScalingInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAutoScalingInstances, schemas.DescribeAutoScalingInstancesType, schemas.AutoScalingInstancesType), output: &DescribeAutoScalingInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

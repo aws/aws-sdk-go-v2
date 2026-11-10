@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<AttachLoadBalancerToSubnetsResponse><AttachLoadBalancerToSubnetsResult><Subnets><member>__Member__</member><member>__Member__</member></Subnets></AttachLoadBalancerToSubnetsResult></AttachLoadBalancerToSubnetsResponse>

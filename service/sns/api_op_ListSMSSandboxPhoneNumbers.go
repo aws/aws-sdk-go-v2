@@ -5,7 +5,9 @@ package sns
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sns/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sns/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,21 @@ type ListSMSSandboxPhoneNumbersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSMSSandboxPhoneNumbersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSMSSandboxPhoneNumbersInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSMSSandboxPhoneNumbersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSMSSandboxPhoneNumbersInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSMSSandboxPhoneNumbersInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListSMSSandboxPhoneNumbersOutput struct {
 
 	// A list of the calling account's pending and verified phone numbers.
@@ -65,13 +82,37 @@ type ListSMSSandboxPhoneNumbersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSMSSandboxPhoneNumbersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSMSSandboxPhoneNumbersResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSMSSandboxPhoneNumbersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSMSSandboxPhoneNumbersResult_NextToken, *v.NextToken)
+	}
+	if v.PhoneNumbers != nil {
+		serializeSMSSandboxPhoneNumberList(s, schemas.ListSMSSandboxPhoneNumbersResult_PhoneNumbers, v.PhoneNumbers)
+	}
+}
+func (v *ListSMSSandboxPhoneNumbersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSMSSandboxPhoneNumbersResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSMSSandboxPhoneNumbersResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSMSSandboxPhoneNumbersResult_NextToken, v.NextToken)
+		case schemas.ListSMSSandboxPhoneNumbersResult_PhoneNumbers:
+			return deserializeSMSSandboxPhoneNumberList(d, schemas.ListSMSSandboxPhoneNumbersResult_PhoneNumbers, &v.PhoneNumbers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSMSSandboxPhoneNumbersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListSMSSandboxPhoneNumbers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSMSSandboxPhoneNumbers, schemas.ListSMSSandboxPhoneNumbersInput, schemas.ListSMSSandboxPhoneNumbersResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListSMSSandboxPhoneNumbers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSMSSandboxPhoneNumbers, schemas.ListSMSSandboxPhoneNumbersInput, schemas.ListSMSSandboxPhoneNumbersResult), output: &ListSMSSandboxPhoneNumbersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

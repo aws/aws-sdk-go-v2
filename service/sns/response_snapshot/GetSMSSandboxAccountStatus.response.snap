@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetSMSSandboxAccountStatusResponse><GetSMSSandboxAccountStatusResult><IsInSandbox>true</IsInSandbox></GetSMSSandboxAccountStatusResult></GetSMSSandboxAccountStatusResponse>

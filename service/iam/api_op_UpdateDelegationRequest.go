@@ -4,6 +4,8 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type UpdateDelegationRequestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDelegationRequestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDelegationRequestRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDelegationRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DelegationRequestId != nil {
+		s.WriteString(schemas.UpdateDelegationRequestRequest_DelegationRequestId, *v.DelegationRequestId)
+	}
+	if v.Notes != nil {
+		s.WriteString(schemas.UpdateDelegationRequestRequest_Notes, *v.Notes)
+	}
+}
+
 type UpdateDelegationRequestOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +66,26 @@ type UpdateDelegationRequestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDelegationRequestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDelegationRequestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateDelegationRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDelegationRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateDelegationRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDelegationRequest, schemas.UpdateDelegationRequestRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpUpdateDelegationRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDelegationRequest, schemas.UpdateDelegationRequestRequest, nil), output: &UpdateDelegationRequestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

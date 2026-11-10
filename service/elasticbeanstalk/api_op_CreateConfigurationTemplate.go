@@ -4,7 +4,9 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -117,6 +119,44 @@ type CreateConfigurationTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConfigurationTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConfigurationTemplateMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConfigurationTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.CreateConfigurationTemplateMessage_ApplicationName, *v.ApplicationName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateConfigurationTemplateMessage_Description, *v.Description)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.CreateConfigurationTemplateMessage_EnvironmentId, *v.EnvironmentId)
+	}
+	if v.OptionSettings != nil {
+		serializeConfigurationOptionSettingsList(s, schemas.CreateConfigurationTemplateMessage_OptionSettings, v.OptionSettings)
+	}
+	if v.PlatformArn != nil {
+		s.WriteString(schemas.CreateConfigurationTemplateMessage_PlatformArn, *v.PlatformArn)
+	}
+	if v.SolutionStackName != nil {
+		s.WriteString(schemas.CreateConfigurationTemplateMessage_SolutionStackName, *v.SolutionStackName)
+	}
+	if v.SourceConfiguration != nil {
+		s.WriteStruct(schemas.CreateConfigurationTemplateMessage_SourceConfiguration)
+		v.SourceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateConfigurationTemplateMessage_Tags, v.Tags)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.CreateConfigurationTemplateMessage_TemplateName, *v.TemplateName)
+	}
+}
+
 // Describes the settings for a configuration set.
 type CreateConfigurationTemplateOutput struct {
 
@@ -169,13 +209,89 @@ type CreateConfigurationTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConfigurationTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigurationSettingsDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConfigurationTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.ConfigurationSettingsDescription_ApplicationName, *v.ApplicationName)
+	}
+	if v.DateCreated != nil {
+		s.WriteTime(schemas.ConfigurationSettingsDescription_DateCreated, *v.DateCreated)
+	}
+	if v.DateUpdated != nil {
+		s.WriteTime(schemas.ConfigurationSettingsDescription_DateUpdated, *v.DateUpdated)
+	}
+	if v.DeploymentStatus != "" {
+		s.WriteString(schemas.ConfigurationSettingsDescription_DeploymentStatus, string(v.DeploymentStatus))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ConfigurationSettingsDescription_Description, *v.Description)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.ConfigurationSettingsDescription_EnvironmentName, *v.EnvironmentName)
+	}
+	if v.OptionSettings != nil {
+		serializeConfigurationOptionSettingsList(s, schemas.ConfigurationSettingsDescription_OptionSettings, v.OptionSettings)
+	}
+	if v.PlatformArn != nil {
+		s.WriteString(schemas.ConfigurationSettingsDescription_PlatformArn, *v.PlatformArn)
+	}
+	if v.SolutionStackName != nil {
+		s.WriteString(schemas.ConfigurationSettingsDescription_SolutionStackName, *v.SolutionStackName)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.ConfigurationSettingsDescription_TemplateName, *v.TemplateName)
+	}
+}
+func (v *CreateConfigurationTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigurationSettingsDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigurationSettingsDescription_ApplicationName:
+			v.ApplicationName = new(string)
+			return d.ReadString(schemas.ConfigurationSettingsDescription_ApplicationName, v.ApplicationName)
+		case schemas.ConfigurationSettingsDescription_DateCreated:
+			v.DateCreated = new(time.Time)
+			return d.ReadTime(schemas.ConfigurationSettingsDescription_DateCreated, v.DateCreated)
+		case schemas.ConfigurationSettingsDescription_DateUpdated:
+			v.DateUpdated = new(time.Time)
+			return d.ReadTime(schemas.ConfigurationSettingsDescription_DateUpdated, v.DateUpdated)
+		case schemas.ConfigurationSettingsDescription_DeploymentStatus:
+			var ev string
+			if err := d.ReadString(schemas.ConfigurationSettingsDescription_DeploymentStatus, &ev); err != nil {
+				return err
+			}
+			v.DeploymentStatus = types.ConfigurationDeploymentStatus(ev)
+			return nil
+		case schemas.ConfigurationSettingsDescription_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ConfigurationSettingsDescription_Description, v.Description)
+		case schemas.ConfigurationSettingsDescription_EnvironmentName:
+			v.EnvironmentName = new(string)
+			return d.ReadString(schemas.ConfigurationSettingsDescription_EnvironmentName, v.EnvironmentName)
+		case schemas.ConfigurationSettingsDescription_OptionSettings:
+			return deserializeConfigurationOptionSettingsList(d, schemas.ConfigurationSettingsDescription_OptionSettings, &v.OptionSettings)
+		case schemas.ConfigurationSettingsDescription_PlatformArn:
+			v.PlatformArn = new(string)
+			return d.ReadString(schemas.ConfigurationSettingsDescription_PlatformArn, v.PlatformArn)
+		case schemas.ConfigurationSettingsDescription_SolutionStackName:
+			v.SolutionStackName = new(string)
+			return d.ReadString(schemas.ConfigurationSettingsDescription_SolutionStackName, v.SolutionStackName)
+		case schemas.ConfigurationSettingsDescription_TemplateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.ConfigurationSettingsDescription_TemplateName, v.TemplateName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConfigurationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateConfigurationTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConfigurationTemplate, schemas.CreateConfigurationTemplateMessage, schemas.ConfigurationSettingsDescription)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateConfigurationTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConfigurationTemplate, schemas.CreateConfigurationTemplateMessage, schemas.ConfigurationSettingsDescription), output: &CreateConfigurationTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

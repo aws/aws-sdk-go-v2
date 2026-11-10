@@ -4,6 +4,8 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteScheduledActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteScheduledActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteScheduledActionMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteScheduledActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScheduledActionName != nil {
+		s.WriteString(schemas.DeleteScheduledActionMessage_ScheduledActionName, *v.ScheduledActionName)
+	}
+}
+
 type DeleteScheduledActionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteScheduledActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteScheduledActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteScheduledActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteScheduledActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteScheduledActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteScheduledAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteScheduledAction, schemas.DeleteScheduledActionMessage, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteScheduledAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteScheduledAction, schemas.DeleteScheduledActionMessage, nil), output: &DeleteScheduledActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

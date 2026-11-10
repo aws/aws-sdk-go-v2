@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,41 @@ type CreateUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessString != nil {
+		s.WriteString(schemas.CreateUserMessage_AccessString, *v.AccessString)
+	}
+	if v.AuthenticationMode != nil {
+		s.WriteStruct(schemas.CreateUserMessage_AuthenticationMode)
+		v.AuthenticationMode.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.CreateUserMessage_Engine, *v.Engine)
+	}
+	if v.NoPasswordRequired != nil {
+		s.WriteBool(schemas.CreateUserMessage_NoPasswordRequired, *v.NoPasswordRequired)
+	}
+	if v.Passwords != nil {
+		serializePasswordListInput(s, schemas.CreateUserMessage_Passwords, v.Passwords)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateUserMessage_Tags, v.Tags)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.CreateUserMessage_UserId, *v.UserId)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.CreateUserMessage_UserName, *v.UserName)
+	}
+}
+
 type CreateUserOutput struct {
 
 	// The Amazon Resource Name (ARN) of the user.
@@ -100,13 +137,81 @@ type CreateUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.User)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.User_ARN, *v.ARN)
+	}
+	if v.AccessString != nil {
+		s.WriteString(schemas.User_AccessString, *v.AccessString)
+	}
+	if v.Authentication != nil {
+		s.WriteStruct(schemas.User_Authentication)
+		v.Authentication.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.User_Engine, *v.Engine)
+	}
+	if v.MinimumEngineVersion != nil {
+		s.WriteString(schemas.User_MinimumEngineVersion, *v.MinimumEngineVersion)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.User_Status, *v.Status)
+	}
+	if v.UserGroupIds != nil {
+		serializeUserGroupIdList(s, schemas.User_UserGroupIds, v.UserGroupIds)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.User_UserId, *v.UserId)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.User_UserName, *v.UserName)
+	}
+}
+func (v *CreateUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.User, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.User_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.User_ARN, v.ARN)
+		case schemas.User_AccessString:
+			v.AccessString = new(string)
+			return d.ReadString(schemas.User_AccessString, v.AccessString)
+		case schemas.User_Authentication:
+			v.Authentication = &types.Authentication{}
+			return v.Authentication.Deserialize(d)
+		case schemas.User_Engine:
+			v.Engine = new(string)
+			return d.ReadString(schemas.User_Engine, v.Engine)
+		case schemas.User_MinimumEngineVersion:
+			v.MinimumEngineVersion = new(string)
+			return d.ReadString(schemas.User_MinimumEngineVersion, v.MinimumEngineVersion)
+		case schemas.User_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.User_Status, v.Status)
+		case schemas.User_UserGroupIds:
+			return deserializeUserGroupIdList(d, schemas.User_UserGroupIds, &v.UserGroupIds)
+		case schemas.User_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.User_UserId, v.UserId)
+		case schemas.User_UserName:
+			v.UserName = new(string)
+			return d.ReadString(schemas.User_UserName, v.UserName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUser, schemas.CreateUserMessage, schemas.User)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUser, schemas.CreateUserMessage, schemas.User), output: &CreateUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

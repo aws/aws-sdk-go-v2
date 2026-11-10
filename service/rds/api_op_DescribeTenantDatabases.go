@@ -6,7 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -70,6 +72,30 @@ type DescribeTenantDatabasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTenantDatabasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTenantDatabasesMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTenantDatabasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstanceIdentifier != nil {
+		s.WriteString(schemas.DescribeTenantDatabasesMessage_DBInstanceIdentifier, *v.DBInstanceIdentifier)
+	}
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeTenantDatabasesMessage_Filters, v.Filters)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeTenantDatabasesMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeTenantDatabasesMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.TenantDBName != nil {
+		s.WriteString(schemas.DescribeTenantDatabasesMessage_TenantDBName, *v.TenantDBName)
+	}
+}
+
 type DescribeTenantDatabasesOutput struct {
 
 	// An optional pagination token provided by a previous DescribeTenantDatabases
@@ -87,13 +113,37 @@ type DescribeTenantDatabasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTenantDatabasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TenantDatabasesMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTenantDatabasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.TenantDatabasesMessage_Marker, *v.Marker)
+	}
+	if v.TenantDatabases != nil {
+		serializeTenantDatabasesList(s, schemas.TenantDatabasesMessage_TenantDatabases, v.TenantDatabases)
+	}
+}
+func (v *DescribeTenantDatabasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TenantDatabasesMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TenantDatabasesMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.TenantDatabasesMessage_Marker, v.Marker)
+		case schemas.TenantDatabasesMessage_TenantDatabases:
+			return deserializeTenantDatabasesList(d, schemas.TenantDatabasesMessage_TenantDatabases, &v.TenantDatabases)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTenantDatabasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeTenantDatabases{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTenantDatabases, schemas.DescribeTenantDatabasesMessage, schemas.TenantDatabasesMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeTenantDatabases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTenantDatabases, schemas.DescribeTenantDatabasesMessage, schemas.TenantDatabasesMessage), output: &DescribeTenantDatabasesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
