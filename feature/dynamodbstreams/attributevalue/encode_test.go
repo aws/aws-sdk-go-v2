@@ -83,6 +83,57 @@ func TestMarshalMashaler(t *testing.T) {
 	}
 }
 
+func TestMarshalNilPointerMarshaler(t *testing.T) {
+	var nilMarshaler *marshalMarshaler
+	nilNull := &types.AttributeValueMemberNULL{Value: true}
+
+	type anyField struct {
+		Value any
+	}
+	type doublePointerField struct {
+		Value **marshalMarshaler
+	}
+
+	cases := map[string]struct {
+		input    any
+		expected types.AttributeValue
+	}{
+		"nil pointer": {
+			input:    nilMarshaler,
+			expected: nilNull,
+		},
+		"nil pointer in interface map value": {
+			input:    map[string]any{"Value": nilMarshaler},
+			expected: &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{"Value": nilNull}},
+		},
+		"nil pointer in interface struct field": {
+			input:    anyField{Value: nilMarshaler},
+			expected: &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{"Value": nilNull}},
+		},
+		"nil pointer in interface slice element": {
+			input:    []any{nilMarshaler},
+			expected: &types.AttributeValueMemberL{Value: []types.AttributeValue{nilNull}},
+		},
+		"nil inner pointer of double pointer": {
+			input:    doublePointerField{Value: &nilMarshaler},
+			expected: &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{"Value": nilNull}},
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			actual, err := Marshal(c.input)
+			if err != nil {
+				t.Fatalf("unexpected error: %v", err)
+			}
+
+			if diff := cmpDiff(c.expected, actual); diff != "" {
+				t.Errorf("unexpected diff: %v", diff)
+			}
+		})
+	}
+}
+
 type customBoolStringMarshaler string
 
 func (m customBoolStringMarshaler) MarshalDynamoDBStreamsAttributeValue() (types.AttributeValue, error) {
