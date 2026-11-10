@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 	"hash/crc32"
+	"io"
 	"net/http"
-	"net/http/httptest"
 	"strings"
 	"sync/atomic"
 	"testing"
@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 func TestResponseChecksumValidation(t *testing.T) {
@@ -36,19 +37,23 @@ func TestResponseChecksumValidation(t *testing.T) {
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
 			var calls atomic.Int32
-			srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			httpClient := smithyhttp.ClientDoFunc(func(*http.Request) (*http.Response, error) {
 				calls.Add(1)
+				header := http.Header{"Content-Type": {"application/x-amz-json-1.0"}}
 				for _, v := range c.header {
-					w.Header().Add("X-Amz-Crc32", v)
+					header.Add("X-Amz-Crc32", v)
 				}
-				w.Header().Set("Content-Type", "application/x-amz-json-1.0")
-				w.Write([]byte(body))
-			}))
-			defer srv.Close()
+				return &http.Response{
+					StatusCode: http.StatusOK,
+					Header:     header,
+					Body:       io.NopCloser(strings.NewReader(body)),
+				}, nil
+			})
 
 			client := New(Options{
 				Region:       "us-west-2",
-				BaseEndpoint: aws.String(srv.URL),
+				BaseEndpoint: aws.String("https://dynamodb.test"),
+				HTTPClient:   httpClient,
 				Credentials: aws.CredentialsProviderFunc(func(context.Context) (aws.Credentials, error) {
 					return aws.Credentials{AccessKeyID: "AKID", SecretAccessKey: "SECRET"}, nil
 				}),
