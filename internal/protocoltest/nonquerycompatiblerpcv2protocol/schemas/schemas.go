@@ -6,13 +6,17 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// Codec extensions of the schemas. The array is zero, so it takes no space in the
+// binary.
+var ext [2]smithy.SchemaExtensions
+
 var (
 	iNonQueryCompatibleOperation      = smithy.ShapeID{Namespace: "aws.protocoltests.rpcv2cbor", Name: "NonQueryCompatibleOperation"}
 	i_NonQueryCompatibleRpcV2Protocol = smithy.ShapeID{Namespace: "aws.protocoltests.rpcv2cbor", Name: "NonQueryCompatibleRpcV2Protocol"}
 )
 
-var sNonQueryCompatibleOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNonQueryCompatibleOperation, Type: smithy.ShapeTypeOperation})
-var s_NonQueryCompatibleRpcV2Protocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonQueryCompatibleRpcV2Protocol, Type: smithy.ShapeTypeService})
+var sNonQueryCompatibleOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNonQueryCompatibleOperation, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
+var s_NonQueryCompatibleRpcV2Protocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonQueryCompatibleRpcV2Protocol, Type: smithy.ShapeTypeService, Ext: &ext[1]})
 
 var NonQueryCompatibleOperation = &sNonQueryCompatibleOperation
 
