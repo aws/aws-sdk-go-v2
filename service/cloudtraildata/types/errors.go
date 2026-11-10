@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtraildata/schemas"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 // The caller's account ID must be the same as the channel owner's account ID.
@@ -33,6 +34,13 @@ func (e *ChannelInsufficientPermission) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ChannelInsufficientPermission) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ChannelInsufficientPermission) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ChannelInsufficientPermission) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ChannelInsufficientPermission)
 	v.SerializeMembers(s)
@@ -80,6 +88,13 @@ func (e *ChannelNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ChannelNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ChannelNotFound) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ChannelNotFound) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ChannelNotFound)
 	v.SerializeMembers(s)
@@ -127,6 +142,13 @@ func (e *ChannelUnsupportedSchema) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ChannelUnsupportedSchema) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ChannelUnsupportedSchema) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ChannelUnsupportedSchema) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ChannelUnsupportedSchema)
 	v.SerializeMembers(s)
@@ -174,6 +196,13 @@ func (e *DuplicatedAuditEventId) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DuplicatedAuditEventId) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *DuplicatedAuditEventId) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *DuplicatedAuditEventId) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.DuplicatedAuditEventId)
 	v.SerializeMembers(s)
@@ -221,6 +250,13 @@ func (e *InvalidChannelARN) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidChannelARN) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidChannelARN) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *InvalidChannelARN) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.InvalidChannelARN)
 	v.SerializeMembers(s)
@@ -268,6 +304,13 @@ func (e *UnsupportedOperationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *UnsupportedOperationException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *UnsupportedOperationException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.UnsupportedOperationException)
 	v.SerializeMembers(s)

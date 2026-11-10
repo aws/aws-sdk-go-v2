@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/datapipeline/schemas"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 // An internal service error occurred.
@@ -33,6 +34,13 @@ func (e *InternalServiceError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServiceError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InternalServiceError) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *InternalServiceError) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.InternalServiceError)
 	v.SerializeMembers(s)
@@ -82,6 +90,13 @@ func (e *InvalidRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidRequestException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *InvalidRequestException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.InvalidRequestException)
 	v.SerializeMembers(s)
@@ -129,6 +144,13 @@ func (e *PipelineDeletedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PipelineDeletedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *PipelineDeletedException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *PipelineDeletedException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.PipelineDeletedException)
 	v.SerializeMembers(s)
@@ -177,6 +199,13 @@ func (e *PipelineNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PipelineNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *PipelineNotFoundException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *PipelineNotFoundException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.PipelineNotFoundException)
 	v.SerializeMembers(s)
@@ -224,6 +253,13 @@ func (e *TaskNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TaskNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TaskNotFoundException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *TaskNotFoundException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.TaskNotFoundException)
 	v.SerializeMembers(s)

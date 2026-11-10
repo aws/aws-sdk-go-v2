@@ -5,6 +5,7 @@ package types
 import (
 	"fmt"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 type BadRequestException struct {
@@ -31,6 +32,12 @@ func (e *BadRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *BadRequestException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The requested Outposts bucket name is not available. The bucket namespace is
 // shared by all users of the Outposts in this Region. Select a different name and
@@ -60,6 +67,12 @@ func (e *BucketAlreadyExists) ErrorCode() string {
 }
 func (e *BucketAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *BucketAlreadyExists) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The Outposts bucket you tried to create already exists, and you own it.
 type BucketAlreadyOwnedByYou struct {
 	Message *string
@@ -86,6 +99,12 @@ func (e *BucketAlreadyOwnedByYou) ErrorCode() string {
 }
 func (e *BucketAlreadyOwnedByYou) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *BucketAlreadyOwnedByYou) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 type IdempotencyException struct {
 	Message *string
 
@@ -110,6 +129,12 @@ func (e *IdempotencyException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *IdempotencyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *IdempotencyException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 type InternalServiceException struct {
 	Message *string
@@ -136,6 +161,12 @@ func (e *InternalServiceException) ErrorCode() string {
 }
 func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InternalServiceException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 type InvalidNextTokenException struct {
 	Message *string
 
@@ -160,6 +191,12 @@ func (e *InvalidNextTokenException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidNextTokenException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 type InvalidRequestException struct {
 	Message *string
@@ -186,6 +223,12 @@ func (e *InvalidRequestException) ErrorCode() string {
 }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidRequestException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 type JobStatusException struct {
 	Message *string
 
@@ -210,6 +253,12 @@ func (e *JobStatusException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *JobStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *JobStatusException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // Amazon S3 throws this exception if you make a GetPublicAccessBlock request
 // against an account that doesn't have a PublicAccessBlockConfiguration set.
@@ -240,6 +289,12 @@ func (e *NoSuchPublicAccessBlockConfiguration) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchPublicAccessBlockConfiguration) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 type NotFoundException struct {
 	Message *string
 
@@ -264,6 +319,12 @@ func (e *NotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NotFoundException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 type TooManyRequestsException struct {
 	Message *string
@@ -290,6 +351,12 @@ func (e *TooManyRequestsException) ErrorCode() string {
 }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyRequestsException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // Amazon S3 throws this exception if you have too many tags in your tag set.
 type TooManyTagsException struct {
 	Message *string
@@ -315,3 +382,9 @@ func (e *TooManyTagsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyTagsException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}

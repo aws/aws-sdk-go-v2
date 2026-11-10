@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/mediastoredata/schemas"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 // The specified container was not found for the specified account.
@@ -33,6 +34,13 @@ func (e *ContainerNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ContainerNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ContainerNotFoundException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ContainerNotFoundException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ContainerNotFoundException)
 	v.SerializeMembers(s)
@@ -80,6 +88,13 @@ func (e *InternalServerError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InternalServerError) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *InternalServerError) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.InternalServerError)
 	v.SerializeMembers(s)
@@ -127,6 +142,13 @@ func (e *ObjectNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ObjectNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ObjectNotFoundException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ObjectNotFoundException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ObjectNotFoundException)
 	v.SerializeMembers(s)
@@ -176,6 +198,13 @@ func (e *RequestedRangeNotSatisfiableException) ErrorCode() string {
 func (e *RequestedRangeNotSatisfiableException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *RequestedRangeNotSatisfiableException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *RequestedRangeNotSatisfiableException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.RequestedRangeNotSatisfiableException)
 	v.SerializeMembers(s)

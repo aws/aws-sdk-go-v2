@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain/schemas"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 // Information about any problems encountered while processing an upload request.
@@ -35,6 +36,13 @@ func (e *DocumentServiceException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DocumentServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *DocumentServiceException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *DocumentServiceException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.DocumentServiceException)
 	v.SerializeMembers(s)
@@ -88,6 +96,13 @@ func (e *SearchException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *SearchException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *SearchException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *SearchException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.SearchException)
 	v.SerializeMembers(s)

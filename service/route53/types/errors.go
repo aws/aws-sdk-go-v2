@@ -5,6 +5,7 @@ package types
 import (
 	"fmt"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 // This CIDR block is already in use.
@@ -32,6 +33,12 @@ func (e *CidrBlockInUseException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CidrBlockInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *CidrBlockInUseException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // A CIDR collection with this name and a different caller reference already
 // exists in this account.
@@ -62,6 +69,12 @@ func (e *CidrCollectionAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *CidrCollectionAlreadyExistsException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // This CIDR collection is in use, and isn't empty.
 type CidrCollectionInUseException struct {
 	Message *string
@@ -87,6 +100,12 @@ func (e *CidrCollectionInUseException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CidrCollectionInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *CidrCollectionInUseException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The CIDR collection version you provided, doesn't match the one in the
 // ListCidrCollections operation.
@@ -117,6 +136,12 @@ func (e *CidrCollectionVersionMismatchException) ErrorFault() smithy.ErrorFault 
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *CidrCollectionVersionMismatchException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // Another user submitted a request to create, update, or delete the object at the
 // same time that you did. Retry the request.
 type ConcurrentModification struct {
@@ -143,6 +168,12 @@ func (e *ConcurrentModification) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConcurrentModification) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ConcurrentModification) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The cause of this error depends on the operation that you're performing:
 //
@@ -185,6 +216,12 @@ func (e *ConflictingDomainExists) ErrorCode() string {
 }
 func (e *ConflictingDomainExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ConflictingDomainExists) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // You tried to update a traffic policy instance by using a traffic policy version
 // that has a different DNS type than the current type for the instance. You
 // specified the type in the JSON document in the CreateTrafficPolicy or
@@ -214,6 +251,12 @@ func (e *ConflictingTypes) ErrorCode() string {
 }
 func (e *ConflictingTypes) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ConflictingTypes) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // A delegation set with the same owner and caller reference combination has
 // already been created.
 type DelegationSetAlreadyCreated struct {
@@ -241,6 +284,12 @@ func (e *DelegationSetAlreadyCreated) ErrorCode() string {
 }
 func (e *DelegationSetAlreadyCreated) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *DelegationSetAlreadyCreated) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The specified delegation set has already been marked as reusable.
 type DelegationSetAlreadyReusable struct {
 	Message *string
@@ -266,6 +315,12 @@ func (e *DelegationSetAlreadyReusable) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DelegationSetAlreadyReusable) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *DelegationSetAlreadyReusable) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The specified delegation contains associated hosted zones which must be deleted
 // before the reusable delegation set can be deleted.
@@ -293,6 +348,12 @@ func (e *DelegationSetInUse) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DelegationSetInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *DelegationSetInUse) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // You can create a hosted zone that has the same name as an existing hosted zone
 // (example.com is common), but there is a limit to the number of hosted zones that
@@ -324,6 +385,12 @@ func (e *DelegationSetNotAvailable) ErrorCode() string {
 }
 func (e *DelegationSetNotAvailable) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *DelegationSetNotAvailable) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // A reusable delegation set with the specified ID does not exist.
 type DelegationSetNotReusable struct {
 	Message *string
@@ -350,6 +417,12 @@ func (e *DelegationSetNotReusable) ErrorCode() string {
 }
 func (e *DelegationSetNotReusable) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *DelegationSetNotReusable) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The hosted zone doesn't have any DNSSEC resources.
 type DNSSECNotFound struct {
 	Message *string
@@ -375,6 +448,12 @@ func (e *DNSSECNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DNSSECNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *DNSSECNotFound) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 //	The health check you're attempting to create already exists. Amazon Route 53
 //
@@ -411,6 +490,12 @@ func (e *HealthCheckAlreadyExists) ErrorCode() string {
 }
 func (e *HealthCheckAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *HealthCheckAlreadyExists) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // This error code is not in use.
 type HealthCheckInUse struct {
 	Message *string
@@ -436,6 +521,12 @@ func (e *HealthCheckInUse) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *HealthCheckInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *HealthCheckInUse) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The value of HealthCheckVersion in the request doesn't match the value of
 // HealthCheckVersion in the health check.
@@ -463,6 +554,12 @@ func (e *HealthCheckVersionMismatch) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *HealthCheckVersionMismatch) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *HealthCheckVersionMismatch) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The hosted zone you're trying to create already exists. Amazon Route 53 returns
 // this error when a hosted zone has already been created with the specified
@@ -492,6 +589,12 @@ func (e *HostedZoneAlreadyExists) ErrorCode() string {
 }
 func (e *HostedZoneAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *HostedZoneAlreadyExists) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The hosted zone contains resource records that are not SOA or NS records.
 type HostedZoneNotEmpty struct {
 	Message *string
@@ -517,6 +620,12 @@ func (e *HostedZoneNotEmpty) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *HostedZoneNotEmpty) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *HostedZoneNotEmpty) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The specified HostedZone can't be found.
 type HostedZoneNotFound struct {
@@ -544,6 +653,12 @@ func (e *HostedZoneNotFound) ErrorCode() string {
 }
 func (e *HostedZoneNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *HostedZoneNotFound) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The specified hosted zone is a public hosted zone, not a private hosted zone.
 type HostedZoneNotPrivate struct {
 	Message *string
@@ -569,6 +684,12 @@ func (e *HostedZoneNotPrivate) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *HostedZoneNotPrivate) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *HostedZoneNotPrivate) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The hosted zone nameservers don't match the parent nameservers. The hosted zone
 // and parent must have the same nameservers.
@@ -597,6 +718,12 @@ func (e *HostedZonePartiallyDelegated) ErrorCode() string {
 }
 func (e *HostedZonePartiallyDelegated) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *HostedZonePartiallyDelegated) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The resource you're trying to access is unsupported on this Amazon Route 53
 // endpoint.
 type IncompatibleVersion struct {
@@ -623,6 +750,12 @@ func (e *IncompatibleVersion) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *IncompatibleVersion) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *IncompatibleVersion) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // Amazon Route 53 doesn't have the permissions required to create log streams and
 // send query logs to log streams. Possible causes include the following:
@@ -669,6 +802,12 @@ func (e *InsufficientCloudWatchLogsResourcePolicy) ErrorFault() smithy.ErrorFaul
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InsufficientCloudWatchLogsResourcePolicy) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // Parameter name is not valid.
 type InvalidArgument struct {
 	Message *string
@@ -694,6 +833,12 @@ func (e *InvalidArgument) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidArgument) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidArgument) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // This exception contains a list of messages that might contain one or more error
 // messages. Each error message indicates one error in the change batch.
@@ -724,6 +869,12 @@ func (e *InvalidChangeBatch) ErrorCode() string {
 }
 func (e *InvalidChangeBatch) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidChangeBatch) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The specified domain name is not valid.
 type InvalidDomainName struct {
 	Message *string
@@ -749,6 +900,12 @@ func (e *InvalidDomainName) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidDomainName) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidDomainName) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The input is not valid.
 type InvalidInput struct {
@@ -776,6 +933,12 @@ func (e *InvalidInput) ErrorCode() string {
 }
 func (e *InvalidInput) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidInput) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The key-signing key (KSK) name that you specified isn't a valid name.
 type InvalidKeySigningKeyName struct {
 	Message *string
@@ -801,6 +964,12 @@ func (e *InvalidKeySigningKeyName) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidKeySigningKeyName) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidKeySigningKeyName) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The key-signing key (KSK) status isn't valid or another KSK has the status
 // INTERNAL_FAILURE .
@@ -829,6 +998,12 @@ func (e *InvalidKeySigningKeyStatus) ErrorCode() string {
 }
 func (e *InvalidKeySigningKeyStatus) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidKeySigningKeyStatus) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The KeyManagementServiceArn that you specified isn't valid to use with DNSSEC
 // signing.
 type InvalidKMSArn struct {
@@ -855,6 +1030,12 @@ func (e *InvalidKMSArn) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidKMSArn) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidKMSArn) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The value that you specified to get the second or subsequent page of results is
 // invalid.
@@ -883,6 +1064,12 @@ func (e *InvalidPaginationToken) ErrorCode() string {
 }
 func (e *InvalidPaginationToken) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidPaginationToken) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // Your hosted zone status isn't valid for this operation. In the hosted zone,
 // change the status to enable DNSSEC or disable DNSSEC .
 type InvalidSigningStatus struct {
@@ -909,6 +1096,12 @@ func (e *InvalidSigningStatus) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidSigningStatus) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidSigningStatus) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The format of the traffic policy document that you specified in the Document
 // element is not valid.
@@ -937,6 +1130,12 @@ func (e *InvalidTrafficPolicyDocument) ErrorCode() string {
 }
 func (e *InvalidTrafficPolicyDocument) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidTrafficPolicyDocument) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The VPC ID that you specified either isn't a valid ID or the current account is
 // not authorized to access this VPC.
 type InvalidVPCId struct {
@@ -963,6 +1162,12 @@ func (e *InvalidVPCId) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidVPCId) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidVPCId) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // You've already created a key-signing key (KSK) with this name or with the same
 // customer managed key ARN.
@@ -991,6 +1196,12 @@ func (e *KeySigningKeyAlreadyExists) ErrorCode() string {
 }
 func (e *KeySigningKeyAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *KeySigningKeyAlreadyExists) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The key-signing key (KSK) is specified in a parent DS record.
 type KeySigningKeyInParentDSRecord struct {
 	Message *string
@@ -1016,6 +1227,12 @@ func (e *KeySigningKeyInParentDSRecord) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *KeySigningKeyInParentDSRecord) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *KeySigningKeyInParentDSRecord) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The key-signing key (KSK) that you specified can't be deactivated because it's
 // the only KSK for a currently-enabled DNSSEC. Disable DNSSEC signing, or add or
@@ -1045,6 +1262,12 @@ func (e *KeySigningKeyInUse) ErrorCode() string {
 }
 func (e *KeySigningKeyInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *KeySigningKeyInUse) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // A key-signing key (KSK) with ACTIVE status wasn't found.
 type KeySigningKeyWithActiveStatusNotFound struct {
 	Message *string
@@ -1071,6 +1294,12 @@ func (e *KeySigningKeyWithActiveStatusNotFound) ErrorCode() string {
 }
 func (e *KeySigningKeyWithActiveStatusNotFound) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *KeySigningKeyWithActiveStatusNotFound) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
 }
 
 // The VPC that you're trying to disassociate from the private hosted zone is the
@@ -1100,6 +1329,12 @@ func (e *LastVPCAssociation) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LastVPCAssociation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *LastVPCAssociation) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // This operation can't be completed because the current account has reached the
 // limit on the resource you are trying to create. To request a higher limit, [create a case]with
@@ -1131,6 +1366,12 @@ func (e *LimitsExceeded) ErrorCode() string {
 }
 func (e *LimitsExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *LimitsExceeded) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // A change with the specified change ID does not exist.
 type NoSuchChange struct {
 	Message *string
@@ -1156,6 +1397,12 @@ func (e *NoSuchChange) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NoSuchChange) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchChange) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The CIDR collection you specified, doesn't exist.
 type NoSuchCidrCollectionException struct {
@@ -1183,6 +1430,12 @@ func (e *NoSuchCidrCollectionException) ErrorCode() string {
 }
 func (e *NoSuchCidrCollectionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchCidrCollectionException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The CIDR collection location doesn't match any locations in your account.
 type NoSuchCidrLocationException struct {
 	Message *string
@@ -1208,6 +1461,12 @@ func (e *NoSuchCidrLocationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NoSuchCidrLocationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchCidrLocationException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // There is no CloudWatch Logs log group with the specified ARN.
 type NoSuchCloudWatchLogsLogGroup struct {
@@ -1235,6 +1494,12 @@ func (e *NoSuchCloudWatchLogsLogGroup) ErrorCode() string {
 }
 func (e *NoSuchCloudWatchLogsLogGroup) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchCloudWatchLogsLogGroup) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // A reusable delegation set with the specified ID does not exist.
 type NoSuchDelegationSet struct {
 	Message *string
@@ -1260,6 +1525,12 @@ func (e *NoSuchDelegationSet) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NoSuchDelegationSet) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchDelegationSet) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // Amazon Route 53 doesn't support the specified geographic location. For a list
 // of supported geolocation codes, see the [GeoLocation]data type.
@@ -1290,6 +1561,12 @@ func (e *NoSuchGeoLocation) ErrorCode() string {
 }
 func (e *NoSuchGeoLocation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchGeoLocation) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // No health check exists with the specified ID.
 type NoSuchHealthCheck struct {
 	Message *string
@@ -1315,6 +1592,12 @@ func (e *NoSuchHealthCheck) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NoSuchHealthCheck) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchHealthCheck) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // No hosted zone exists with the ID that you specified.
 type NoSuchHostedZone struct {
@@ -1342,6 +1625,12 @@ func (e *NoSuchHostedZone) ErrorCode() string {
 }
 func (e *NoSuchHostedZone) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchHostedZone) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The specified key-signing key (KSK) doesn't exist.
 type NoSuchKeySigningKey struct {
 	Message *string
@@ -1367,6 +1656,12 @@ func (e *NoSuchKeySigningKey) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NoSuchKeySigningKey) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchKeySigningKey) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // There is no DNS query logging configuration with the specified ID.
 type NoSuchQueryLoggingConfig struct {
@@ -1394,6 +1689,12 @@ func (e *NoSuchQueryLoggingConfig) ErrorCode() string {
 }
 func (e *NoSuchQueryLoggingConfig) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchQueryLoggingConfig) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // No traffic policy exists with the specified ID.
 type NoSuchTrafficPolicy struct {
 	Message *string
@@ -1419,6 +1720,12 @@ func (e *NoSuchTrafficPolicy) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NoSuchTrafficPolicy) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchTrafficPolicy) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // No traffic policy instance exists with the specified ID.
 type NoSuchTrafficPolicyInstance struct {
@@ -1446,6 +1753,12 @@ func (e *NoSuchTrafficPolicyInstance) ErrorCode() string {
 }
 func (e *NoSuchTrafficPolicyInstance) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchTrafficPolicyInstance) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // Associating the specified VPC with the specified hosted zone has not been
 // authorized.
 type NotAuthorizedException struct {
@@ -1472,6 +1785,12 @@ func (e *NotAuthorizedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NotAuthorizedException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // If Amazon Route 53 can't process a request before the next request arrives, it
 // will reject subsequent requests for the same hosted zone and return an HTTP 400
@@ -1503,6 +1822,12 @@ func (e *PriorRequestNotComplete) ErrorCode() string {
 }
 func (e *PriorRequestNotComplete) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *PriorRequestNotComplete) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // You're trying to associate a VPC with a public hosted zone. Amazon Route 53
 // doesn't support associating a VPC with a public hosted zone.
 type PublicZoneVPCAssociation struct {
@@ -1529,6 +1854,12 @@ func (e *PublicZoneVPCAssociation) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PublicZoneVPCAssociation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *PublicZoneVPCAssociation) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // You can create only one query logging configuration for a hosted zone, and a
 // query logging configuration already exists for this hosted zone.
@@ -1557,6 +1888,12 @@ func (e *QueryLoggingConfigAlreadyExists) ErrorCode() string {
 }
 func (e *QueryLoggingConfigAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *QueryLoggingConfigAlreadyExists) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The limit on the number of requests per second was exceeded.
 type ThrottlingException struct {
 	Message *string
@@ -1582,6 +1919,12 @@ func (e *ThrottlingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ThrottlingException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // This health check can't be created because the current account has reached the
 // limit on the number of active health checks.
@@ -1623,6 +1966,12 @@ func (e *TooManyHealthChecks) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyHealthChecks) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyHealthChecks) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // This operation can't be completed either because the current account has
 // reached the limit on the number of hosted zones or because you've reached the
@@ -1669,6 +2018,12 @@ func (e *TooManyHostedZones) ErrorCode() string {
 }
 func (e *TooManyHostedZones) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyHostedZones) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // You've reached the limit for the number of key-signing keys (KSKs). Remove at
 // least one KSK, and then try again.
 type TooManyKeySigningKeys struct {
@@ -1695,6 +2050,12 @@ func (e *TooManyKeySigningKeys) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyKeySigningKeys) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyKeySigningKeys) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // This traffic policy can't be created because the current account has reached
 // the limit on the number of traffic policies.
@@ -1734,6 +2095,12 @@ func (e *TooManyTrafficPolicies) ErrorCode() string {
 }
 func (e *TooManyTrafficPolicies) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyTrafficPolicies) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // This traffic policy instance can't be created because the current account has
 // reached the limit on the number of traffic policy instances.
 //
@@ -1772,6 +2139,12 @@ func (e *TooManyTrafficPolicyInstances) ErrorCode() string {
 }
 func (e *TooManyTrafficPolicyInstances) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyTrafficPolicyInstances) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // This traffic policy version can't be created because you've reached the limit
 // of 1000 on the number of versions that you can create for the current traffic
 // policy.
@@ -1809,6 +2182,12 @@ func (e *TooManyTrafficPolicyVersionsForCurrentPolicy) ErrorFault() smithy.Error
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyTrafficPolicyVersionsForCurrentPolicy) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // You've created the maximum number of authorizations that can be created for the
 // specified hosted zone. To authorize another VPC to be associated with the hosted
 // zone, submit a DeleteVPCAssociationAuthorization request to remove an existing
@@ -1841,6 +2220,12 @@ func (e *TooManyVPCAssociationAuthorizations) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyVPCAssociationAuthorizations) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // A traffic policy that has the same value for Name already exists.
 type TrafficPolicyAlreadyExists struct {
 	Message *string
@@ -1866,6 +2251,12 @@ func (e *TrafficPolicyAlreadyExists) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TrafficPolicyAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TrafficPolicyAlreadyExists) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // There is already a traffic policy instance with the specified ID.
 type TrafficPolicyInstanceAlreadyExists struct {
@@ -1895,6 +2286,12 @@ func (e *TrafficPolicyInstanceAlreadyExists) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TrafficPolicyInstanceAlreadyExists) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // One or more traffic policy instances were created by using the specified
 // traffic policy.
 type TrafficPolicyInUse struct {
@@ -1921,6 +2318,12 @@ func (e *TrafficPolicyInUse) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TrafficPolicyInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TrafficPolicyInUse) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The VPC that you specified is not authorized to be associated with the hosted
 // zone.
@@ -1951,6 +2354,12 @@ func (e *VPCAssociationAuthorizationNotFound) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *VPCAssociationAuthorizationNotFound) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The specified VPC and hosted zone are not currently associated.
 type VPCAssociationNotFound struct {
 	Message *string
@@ -1976,3 +2385,9 @@ func (e *VPCAssociationNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *VPCAssociationNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *VPCAssociationNotFound) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}

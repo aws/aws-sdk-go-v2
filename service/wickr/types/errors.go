@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 // The request was invalid or malformed. This error occurs when the request
@@ -35,6 +36,13 @@ func (e *BadRequestError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BadRequestError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *BadRequestError) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *BadRequestError) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.BadRequestError)
 	v.SerializeMembers(s)
@@ -84,6 +92,13 @@ func (e *ForbiddenError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ForbiddenError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ForbiddenError) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ForbiddenError) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ForbiddenError)
 	v.SerializeMembers(s)
@@ -133,6 +148,13 @@ func (e *InternalServerError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InternalServerError) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *InternalServerError) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.InternalServerError)
 	v.SerializeMembers(s)
@@ -182,6 +204,13 @@ func (e *RateLimitError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *RateLimitError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *RateLimitError) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *RateLimitError) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.RateLimitError)
 	v.SerializeMembers(s)
@@ -231,6 +260,13 @@ func (e *ResourceNotFoundError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ResourceNotFoundError) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ResourceNotFoundError) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ResourceNotFoundError)
 	v.SerializeMembers(s)
@@ -280,6 +316,13 @@ func (e *UnauthorizedError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnauthorizedError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *UnauthorizedError) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *UnauthorizedError) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.UnauthorizedError)
 	v.SerializeMembers(s)
@@ -331,6 +374,13 @@ func (e *ValidationError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ValidationError) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ValidationError) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ValidationError)
 	v.SerializeMembers(s)
